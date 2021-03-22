@@ -7,7 +7,7 @@ package gomoku;
 
 /**
  *
- * @author wabderrahman
+ * @author Arthur & Wijdan 
  */
 public class Gomoku {
 
