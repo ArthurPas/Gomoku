@@ -7,14 +7,8 @@ package gomoku;
 
 /**
  *
- * @author Arthur & Wijdan
+ * @author apascal002
  */
-public class Position {
-    final int row;
-    final int col;
-    
-    public Position (int theRow, int theCol) {
-    this.row = theRow;
-    this.col = theCol;
-    } 
+public interface Joueur {
+    Position choix (Plateau p);
 }

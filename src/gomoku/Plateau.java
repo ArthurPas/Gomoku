@@ -9,6 +9,12 @@ package gomoku;
  *
  * @author Arthur & Wijdan 
  */
-public class partie {
-    
+public class Plateau {
+    public void set (Position p, Couleur c){
+        //TODO
+    }
+    public Couleur get(Position p){
+        return null;
+        //TODO
+    }
 }
