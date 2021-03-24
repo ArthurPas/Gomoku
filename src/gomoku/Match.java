@@ -9,6 +9,6 @@ package gomoku;
  *
  * @author Arthur & Wijdan 
  */
-public class plateau {
+public class Match {
     
 }
