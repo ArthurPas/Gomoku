@@ -7,10 +7,8 @@ package gomoku;
 
 /**
  *
- * @author Arthur & Wijdan  
+ * @author apascal002
  */
-public enum Couleur {
-    BLANC,
-    NOIR,
-    RIEN,
+public class UtilsGomo {
+    
 }
