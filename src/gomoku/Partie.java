@@ -13,9 +13,7 @@ import java.util.ArrayList;
  */
 public class Partie {
     final Couleur prochainJoueur;
-    final Plateau plateau;
-    final int tailleX;
-    final int tailleY;
+    
     ArrayList listeCoup;
     Couleur PremierJoueur;
     /**
@@ -27,20 +25,10 @@ public class Partie {
     */
     public Partie(Couleur prochainJoueur, Plateau plateau, int X, int Y) {
         this.prochainJoueur = prochainJoueur;
-        this.plateau = plateau;
-        this.tailleX = X;
-        this.tailleY = Y;
+        
     }
     
-    /**
-     * Methode qui permet de dire si il est possible de jouer (si un pion n'est 
-     * pas présent sur la position)
-     * @param p la position
-     * @return true si aucun pion n'est présent
-     */
-    public boolean jouer(Position p){
-        return !p.pionPresent;
-    }
+    
     /**
      * Methode qui actualise le plateau 
      * @param p la position dernierement jouée
@@ -50,16 +38,20 @@ public class Partie {
      */
     public void actualiser(Position p, Couleur joueurPrecedent, Plateau plateau,
             Couleur joueurSuivant){
-        if(this.jouer(p) && joueurPrecedent == Couleur.NOIR ){
+        if(Match.jouer(p) && joueurPrecedent == Couleur.NOIR ){
             joueurSuivant = Couleur.BLANC;
         }
-        else if(this.jouer(p) && joueurPrecedent == Couleur.BLANC ){
+        else if(Match.jouer(p) && joueurPrecedent == Couleur.BLANC ){
             joueurSuivant = Couleur.NOIR;
         }
-        else if(this.jouer(p) && joueurPrecedent == Couleur.RIEN){
+        else if(Match.jouer(p) && joueurPrecedent == Couleur.RIEN){
             joueurSuivant = PremierJoueur;
         }
         //TODO Exception if jouer = false
+    }
+    public void AjouterTour(ArrayList listeCoup, Position p){
+        listeCoup.add("col =" + p.colonne + " lig = " + p.ligne + "couleur = " +
+                p.couleur);
     }
     
 }
