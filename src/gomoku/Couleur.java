@@ -10,7 +10,7 @@ package gomoku;
  * @author Arthur & Wijdan  
  */
 public enum Couleur {
-    BLACK,
-    WHITE,
-    NONE,
+    NOIR,
+    BLANC,
+    RIEN,
 }

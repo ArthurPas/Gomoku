@@ -10,11 +10,23 @@ package gomoku;
  * @author Arthur & Wijdan
  */
 public class Position {
-    final int row;
-    final int col;
+    final char ligne;
+    final int colonne;
+    boolean pionPresent;
+    Couleur couleur;
     
-    public Position (int theRow, int theCol) {
-    this.row = theRow;
-    this.col = theCol;
-    } 
+    /**
+     * Constructeur de la classe Positon
+     * @param laLigne correspond a la ligne concérnée 
+     * @param laColonne correspond a la colonne concérnée 
+     * @param pion nous indique si un pion est présent sur la position
+     * @param laCouleur couleur de la positon
+     */
+    
+    public Position (char laLigne, int laColonne, boolean pion, Couleur laCouleur) {
+    this.ligne = laLigne;
+    this.colonne = laColonne;
+    this.pionPresent = pion;
+    this.couleur = laCouleur;
+    }  
 }
