@@ -20,7 +20,7 @@ public class Gomoku {
         System.out.println("----------------------------------"); 
         System.out.println("              Bienvenue           "); 
         //joueur.joueur
-        Plateau.plateau();
+        //Plateau.plateau();
     }
 
      public static void x(){
