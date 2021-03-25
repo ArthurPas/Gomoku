@@ -4,22 +4,22 @@
  * and open the template in the editor.
  */
 
+import gomoku.Position;
 import gomoku.UtilsGomo;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import gomoku.Position;
+import gomoku.UtilsGomo;
+import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author arthur
  */
-public class testGomo {
+public class Tests {
     // Tests de la classe utils
+    
      @Test
-     public void TestHexaVersInt(){
+     public void testHexaVersInt(){
         char a = 'a';
         char b = 'b';
         char A = 'A';
@@ -32,7 +32,13 @@ public class testGomo {
         assertEquals(1,j);    
         assertEquals(0, I);  
         assertEquals(1, J);  
-        
+     }
+     @Test
+     public void testStringversPos(){
+         String coorda="a0";
+         String coordb = "B1";
+         assertEquals(new Position('a',0),UtilsGomo.stringversPos(coorda));
      }
 }
+
 

@@ -4,19 +4,24 @@
  * and open the template in the editor.
  */
 package gomoku;
-
+import java.util.Scanner;
+import gomoku.UtilsGomo;
 /**
  *
  * @author arthur
  */
 public class JoueurHumain implements Joueur{
     final String nom;
-
-    public JoueurHumain(String nomJoueur) {
+    final Couleur couleur;
+    Scanner in = new Scanner(System.in);
+    public JoueurHumain(String nomJoueur, Couleur saCouleur) {
         this.nom = nomJoueur;
+        this.couleur = saCouleur;
     }
     public Position choix(Plateau p){
-        Position pos = new Position('B',10,false,Couleur.BLANC);
+        String posString;
+        posString = in.nextLine();
+        Position pos = UtilsGomo.stringversPos(posString);
         return pos;
     }
 }

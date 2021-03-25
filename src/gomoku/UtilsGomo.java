@@ -29,4 +29,8 @@ public class UtilsGomo {
              return (int)lettre - constanteAsciiMaj;
         }
     }
+    public static Position stringversPos(String stringPos){
+        Position pos = new Position (stringPos.charAt(0), (int) stringPos.charAt(1));
+        return pos;
+    }
 }

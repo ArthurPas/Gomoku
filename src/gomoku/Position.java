@@ -23,10 +23,9 @@ public class Position {
      * @param laCouleur couleur de la positon
      */
     
-    public Position (char laLigne, int laColonne, boolean pion, Couleur laCouleur) {
+    public Position (char laLigne, int laColonne) {
     this.ligne = laLigne;
     this.colonne = laColonne;
-    this.pionPresent = pion;
-    this.couleur = laCouleur;
+    
     }  
 }
