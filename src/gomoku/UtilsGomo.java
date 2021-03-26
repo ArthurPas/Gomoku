@@ -29,8 +29,14 @@ public class UtilsGomo {
              return (int)lettre - constanteAsciiMaj;
         }
     }
+
+    /**
+     * Converti un String vers une Position
+     * @param stringPos le string à convertir
+     * @return la position 
+     */
     public static Position stringversPos(String stringPos){
-        Position pos = new Position (stringPos.charAt(0), (int) stringPos.charAt(1));
+        Position pos = new Position (stringPos.charAt(0), Integer.parseInt(stringPos.substring(1)));
         return pos;
     }
 }

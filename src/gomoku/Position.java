@@ -28,4 +28,14 @@ public class Position {
     this.colonne = laColonne;
     
     }  
+    @Override
+    /**
+     *
+     * @param autre
+     * @return
+     */
+    public boolean equals(Object autre){
+        Position aCompare = (Position) autre;
+        return this.ligne == aCompare.ligne && this.colonne == aCompare.colonne;
+    }
 }
