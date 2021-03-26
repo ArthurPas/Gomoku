@@ -34,18 +34,18 @@ public class Partie {
      * @param joueurSuivant la couleur du joueur qui s'appréte a jouer
      */
     public void Actualiser(Position p, Couleur joueurPrecedent, Plateau plateau,
-            Couleur joueurSuivant, Joueur joueur){
-        if(Match.jouer(p) && joueurPrecedent == Couleur.NOIR ){
+            Couleur joueurSuivant, Joueur joueur, Match match){
+        if(Match.jouer(p, match) && joueurPrecedent == Couleur.NOIR ){
             joueurSuivant = Couleur.BLANC;
-            Plateau.set(joueur.choix(plateau), joueurPrecedent);
+            Plateau.set(p, joueurPrecedent);
         }
-        else if(Match.jouer(p) && joueurPrecedent == Couleur.BLANC ){
+        else if(Match.jouer(p, match) && joueurPrecedent == Couleur.BLANC ){
             joueurSuivant = Couleur.NOIR;
-            Plateau.set(joueur.choix(plateau), joueurPrecedent);
+            Plateau.set(p, joueurPrecedent);
         }
-        else if(Match.jouer(p) && joueurPrecedent == Couleur.RIEN){
+        else if(Match.jouer(p, match) && joueurPrecedent == Couleur.RIEN){
             joueurSuivant = PremierJoueur;
-            Plateau.set(joueur.choix(plateau), PremierJoueur);
+            Plateau.set(p, PremierJoueur);
         }
         //TODO Exception if jouer = false
     }

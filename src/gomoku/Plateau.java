@@ -17,7 +17,7 @@ public class Plateau {
      * @param c la couleur
      */
     public static void set (Position p, Couleur c){
-        p.couleur = c;       
+        p.couleur = c;
     }
     /**
      * Méthode qui permet de recuperer la couleur d'une position

@@ -10,9 +10,9 @@ package gomoku;
  * @author Arthur & Wijdan
  */
 public class Position {
-    final char ligne;
+    final int ligne;
     final int colonne;
-    boolean pionPresent;
+    boolean pionPresent = false;
     Couleur couleur;
     
     /**
@@ -22,7 +22,7 @@ public class Position {
      */
     
     public Position (char laLigne, int laColonne) {
-    this.ligne = laLigne;
+    this.ligne = UtilsGomo.hexaVersInt(laLigne);
     this.colonne = laColonne;
     
     }  

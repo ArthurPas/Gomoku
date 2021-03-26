@@ -42,14 +42,16 @@ public class UtilsGomo {
     }
     
     public static String couleurVersString(Couleur col){
-        if (col == Couleur.BLANC){
-            return "BLANC";
+        if (null == col){
+            return "test";
         }
-        else if (col == Couleur.NOIR){
-            return "NOIR";
-        }
-        else{
-            return "RIEN";
+        else switch (col) {
+            case BLANC:
+                return "BLANC";
+            case NOIR:
+                return "NOIR";
+            default:
+                return "RIEN";
         }
     }
 }
