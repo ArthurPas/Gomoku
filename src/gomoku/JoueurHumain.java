@@ -21,7 +21,7 @@ public class JoueurHumain implements Joueur{
     public Position choix(Plateau p){
         String posString;
         posString = in.nextLine();
-        Position pos = UtilsGomo.stringversPos(posString);
+        Position pos = UtilsGomo.stringVersPos(posString);
         return pos;
     }
 }

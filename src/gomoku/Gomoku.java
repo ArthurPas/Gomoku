@@ -10,12 +10,24 @@ package gomoku;
  * @author Arthur & Wijdan 
  */
 public class Gomoku {
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        final Couleur premierJoueur = Couleur.BLANC;
+        final Couleur deuxiemeJoueur = Couleur.NOIR;
+        final String nom = "bob";
+        Plateau plateau = new Plateau();
+        Partie partie = new Partie(premierJoueur,plateau);
+        
+        Joueur joueurUn = new JoueurHumain(nom, premierJoueur);
+        System.out.println("Choisir votre coup : ");
+        Position choixJoueur = joueurUn.choix(plateau);
+        partie.Actualiser(choixJoueur,premierJoueur,plateau,deuxiemeJoueur, joueurUn);
+        Couleur a = Plateau.get(choixJoueur);
+        String test = UtilsGomo.couleurVersString(a);
+        System.out.println(test);
     }
     
     public static void plateau() {

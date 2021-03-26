@@ -13,21 +13,18 @@ import java.util.ArrayList;
  */
 public class Partie {
     final Couleur prochainJoueur;
-    
+    Plateau plateau;
     ArrayList listeCoup;
     Couleur PremierJoueur;
     /**
     * Constructeur de la partie
     * @param prochainJoueur couleur du prochain joueur
     * @param plateau le plateau
-    * @param X le nombre de cases sur les abscisees 
-    * @param Y le nombre de cases sur les ordonnées 
     */
-    public Partie(Couleur prochainJoueur, Plateau plateau, int X, int Y) {
+    public Partie(Couleur prochainJoueur, Plateau plateau) {
         this.prochainJoueur = prochainJoueur;
-        
+        this.plateau = plateau;
     }
-    
     
     /**
      * Methode qui actualise le plateau 
@@ -36,21 +33,24 @@ public class Partie {
      * @param plateau la plateau
      * @param joueurSuivant la couleur du joueur qui s'appréte a jouer
      */
-    public void actualiser(Position p, Couleur joueurPrecedent, Plateau plateau,
-            Couleur joueurSuivant){
+    public void Actualiser(Position p, Couleur joueurPrecedent, Plateau plateau,
+            Couleur joueurSuivant, Joueur joueur){
         if(Match.jouer(p) && joueurPrecedent == Couleur.NOIR ){
             joueurSuivant = Couleur.BLANC;
+            Plateau.set(joueur.choix(plateau), joueurPrecedent);
         }
         else if(Match.jouer(p) && joueurPrecedent == Couleur.BLANC ){
             joueurSuivant = Couleur.NOIR;
+            Plateau.set(joueur.choix(plateau), joueurPrecedent);
         }
         else if(Match.jouer(p) && joueurPrecedent == Couleur.RIEN){
             joueurSuivant = PremierJoueur;
+            Plateau.set(joueur.choix(plateau), PremierJoueur);
         }
         //TODO Exception if jouer = false
     }
     public void AjouterTour(ArrayList listeCoup, Position p){
-        listeCoup.add("col =" + p.colonne + " lig = " + p.ligne + "couleur = " +
+        listeCoup.add("col = " + p.colonne + " lig = " + p.ligne + "couleur = " +
                 p.couleur);
     }
     

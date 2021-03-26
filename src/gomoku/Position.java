@@ -19,8 +19,6 @@ public class Position {
      * Constructeur de la classe Positon
      * @param laLigne correspond a la ligne concérnée 
      * @param laColonne correspond a la colonne concérnée 
-     * @param pion nous indique si un pion est présent sur la position
-     * @param laCouleur couleur de la positon
      */
     
     public Position (char laLigne, int laColonne) {
@@ -28,12 +26,13 @@ public class Position {
     this.colonne = laColonne;
     
     }  
-    @Override
+    
     /**
-     *
-     * @param autre
-     * @return
+     * Methode qui nous permet de comparer deux position 
+     * @param autre l'autre poisiton
+     * @return true si les deux position sont égales
      */
+    @Override
     public boolean equals(Object autre){
         Position aCompare = (Position) autre;
         return this.ligne == aCompare.ligne && this.colonne == aCompare.colonne;

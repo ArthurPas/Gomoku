@@ -43,8 +43,8 @@ public class Tests {
      public void testStringversPos(){
          String coorda="a0";
          String coordb = "B1";
-         assertEquals(new Position('a',0),UtilsGomo.stringversPos(coorda));
-         assertEquals(new Position('B',1),UtilsGomo.stringversPos(coordb));
+         assertEquals(new Position('A',0),UtilsGomo.stringVersPos(coorda));
+         assertEquals(new Position('B',1),UtilsGomo.stringVersPos(coordb));
      }
 }
 

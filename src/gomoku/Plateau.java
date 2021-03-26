@@ -16,7 +16,7 @@ public class Plateau {
      * @param p la position
      * @param c la couleur
      */
-    public void set (Position p, Couleur c){
+    public static void set (Position p, Couleur c){
         p.couleur = c;       
     }
     /**
@@ -24,7 +24,7 @@ public class Plateau {
      * @param p la position
      * @return la couleur de la position
      */
-    public Couleur get(Position p){
+    public static Couleur get(Position p){
         return p.couleur;
     }
 }

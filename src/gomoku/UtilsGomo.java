@@ -35,8 +35,21 @@ public class UtilsGomo {
      * @param stringPos le string à convertir
      * @return la position 
      */
-    public static Position stringversPos(String stringPos){
-        Position pos = new Position (stringPos.charAt(0), Integer.parseInt(stringPos.substring(1)));
+    public static Position stringVersPos(String stringPos){
+        Position pos = new Position (stringPos.toUpperCase().charAt(0), 
+                Integer.parseInt(stringPos.substring(1)));
         return pos;
+    }
+    
+    public static String couleurVersString(Couleur col){
+        if (col == Couleur.BLANC){
+            return "BLANC";
+        }
+        else if (col == Couleur.NOIR){
+            return "NOIR";
+        }
+        else{
+            return "RIEN";
+        }
     }
 }
