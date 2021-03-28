@@ -5,6 +5,8 @@
  */
 package gomoku;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Arthur & Wijdan 
@@ -18,13 +20,15 @@ public class Gomoku {
         final Couleur premierJoueur = Couleur.BLANC;
         final Couleur deuxiemeJoueur = Couleur.NOIR;
         final String nom = "bob";
+        Scanner in = new Scanner(System.in);
         Plateau plateau = new Plateau();
         Partie partie = new Partie(premierJoueur,plateau);
         Match match = new Match(20,20);
         
         Joueur joueurUn = new JoueurHumain(nom, premierJoueur);
         System.out.println("Choisir votre coup : ");
-        Position choixJoueur = joueurUn.choix(plateau);
+        String choix = in.nextLine();
+        Position choixJoueur = joueurUn.choix(plateau,choix);
         partie.Actualiser(choixJoueur,premierJoueur,plateau,deuxiemeJoueur, joueurUn, match);
         Couleur a = Plateau.get(choixJoueur);
         String test = UtilsGomo.couleurVersString(a);

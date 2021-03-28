@@ -13,15 +13,13 @@ import gomoku.UtilsGomo;
 public class JoueurHumain implements Joueur{
     final String nom;
     final Couleur couleur;
-    Scanner in = new Scanner(System.in);
+    
     public JoueurHumain(String nomJoueur, Couleur saCouleur) {
         this.nom = nomJoueur;
         this.couleur = saCouleur;
     }
-    public Position choix(Plateau p){
-        String posString;
-        posString = in.nextLine();
-        Position pos = UtilsGomo.stringVersPos(posString);
-        return pos;
+    public Position choix(Plateau p, String choixJoueur){
+        return UtilsGomo.stringVersPos(choixJoueur);
+
     }
 }

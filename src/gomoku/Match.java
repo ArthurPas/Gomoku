@@ -21,7 +21,6 @@ public class Match {
     public Match(int X, int Y){
         this.tailleX = X;
         this.tailleY = Y;
-        System.out.println(tailleX);
     }
     /**
      * Retourne si la position p est bien dans le plateau
