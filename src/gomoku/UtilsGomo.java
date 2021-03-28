@@ -6,6 +6,8 @@
 package gomoku;
 
 import static java.lang.Character.isUpperCase;
+import static java.lang.System.in;
+import java.util.Scanner;
 
 /**
  *
@@ -14,6 +16,7 @@ import static java.lang.Character.isUpperCase;
 public class UtilsGomo {
     final static int constanteAsciimMin = 97;
     final static int constanteAsciiMaj = 65;
+    static Scanner in = new Scanner(System.in);
     /**
      * Methode qui permet de transformer une lettre en chiffre (0 pour a,1 pour b
      * etc ...)
@@ -40,6 +43,10 @@ public class UtilsGomo {
                 Integer.parseInt(stringPos.substring(1)));
         return pos;
     }
+    public static String lireLigne() {
+        return in.nextLine().trim();
+    }
+
 //    
     public static String couleurVersString(Couleur col){
         if (null == col){

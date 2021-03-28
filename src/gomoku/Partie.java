@@ -33,10 +33,10 @@ public class Partie {
      * @param couleurPion la couleur du joueur qui vient de jouable
      * @param match le match
      */
-    public void actualiser(Position p, Couleur couleurPion, Match match){
+    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau){
         
         if(Match.jouable(p, match)){ 
-            Plateau.set(p, couleurPion);
+            plateau.set(p, couleurPion);
         }
         if( couleurPion == Couleur.NOIR ){
             this.prochainJoueur = Couleur.BLANC;

@@ -23,30 +23,36 @@ public class Gomoku {
         final String nomJUn = "bob";
         final String nomJDeux = "anna";
         Scanner in = new Scanner(System.in);
-        Plateau plateau = new Plateau();
-        Partie partie = new Partie(premierJoueur,plateau);
-        Match match = new Match(3,3);
+        Match match = new Match(3, 3);
+        Plateau plateau = new Plateau(match);
+        Partie partie = new Partie(premierJoueur, plateau);
         Joueur joueurUn = new JoueurHumain(nomJUn, premierJoueur);
         Joueur joueurDeux = new JoueurHumain(nomJDeux, premierJoueur);
         plateau.init(match);
-        for(Position i : plateau.listePositions ){
-            System.out.println(i +" " +i.pionPresent +" "+ i.couleur);
+        for (int i=0; i<match.tailleX; i++){
+            for(int j = 0; j< match.tailleY; j++){
+                System.out.println(plateau.listePositions[i][j] + " "+ plateau.listePositions[i][j].pionPresent);
+            }
         }
         
         while(!partie.partieFinie()){
         
         System.out.println("Joueur " + nomJUn+ " Choisir votre coup : ");
-        Position choixJoueurUn = joueurUn.choix(in.nextLine());
-        partie.actualiser(choixJoueurUn,premierJoueur,match);
-        for(Position i : plateau.listePositions ){
-            System.out.println(i +" " +i.pionPresent+" "+ i.couleur);
+        Position choixJoueurUn = joueurUn.choix(UtilsGomo.lireLigne());
+        partie.actualiser(choixJoueurUn, premierJoueur, match, plateau);
+        for (int i=0; i<match.tailleX; i++){
+            for(int j = 0; j< match.tailleY; j++){
+                System.out.println(plateau.listePositions[i][j] + " "+ plateau.listePositions[i][j].pionPresent);
+            }
         }
         partie.ajouterTour(choixJoueurUn);
         System.out.println("Joueur " + nomJDeux+ " Choisir votre coup : ");
-        Position choixJoueurDeux= joueurDeux.choix(in.nextLine());
-        partie.actualiser(choixJoueurDeux,deuxiemeJoueur,match);
-        for(Position i : plateau.listePositions ){
-            System.out.println(i +" " +i.pionPresent+" "+ i.couleur);
+        Position choixJoueurDeux= joueurDeux.choix(UtilsGomo.lireLigne());
+        partie.actualiser(choixJoueurDeux, deuxiemeJoueur, match, plateau);
+        for (int i=0; i<match.tailleX; i++){
+            for(int j = 0; j< match.tailleY; j++){
+                System.out.println(plateau.listePositions[i][j] + " "+ plateau.listePositions[i][j].pionPresent);
+            }
         }
         partie.ajouterTour(choixJoueurDeux);
         }

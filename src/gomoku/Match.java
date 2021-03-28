@@ -34,8 +34,9 @@ public class Match {
     
     /**
      * Methode qui permet de dire si il est possible de jouable (si un pion n'est 
- pas présent sur la position)
+     * pas présent sur la position)
      * @param p la position
+     * @param match le match
      * @return true si aucun pion n'est présent et que le la position est dans 
      * le plateau
      */
