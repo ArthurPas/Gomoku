@@ -18,7 +18,14 @@ public class JoueurHumain implements Joueur{
         this.nom = nomJoueur;
         this.couleur = saCouleur;
     }
-    public Position choix(Plateau p, String choixJoueur){
+
+    /**
+     * Renvoie a partir d'une chaine de caractére la position
+     * @param choixJoueur la chaine de caractére
+     * @return la position choisi par le joueur
+     */
+    @Override
+    public Position choix(String choixJoueur){
         return UtilsGomo.stringVersPos(choixJoueur);
 
     }

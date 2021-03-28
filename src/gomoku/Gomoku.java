@@ -5,6 +5,7 @@
  */
 package gomoku;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -19,20 +20,37 @@ public class Gomoku {
     public static void main(String[] args) {
         final Couleur premierJoueur = Couleur.BLANC;
         final Couleur deuxiemeJoueur = Couleur.NOIR;
-        final String nom = "bob";
+        final String nomJUn = "bob";
+        final String nomJDeux = "anna";
         Scanner in = new Scanner(System.in);
         Plateau plateau = new Plateau();
         Partie partie = new Partie(premierJoueur,plateau);
-        Match match = new Match(20,20);
+        Match match = new Match(3,3);
+        Joueur joueurUn = new JoueurHumain(nomJUn, premierJoueur);
+        Joueur joueurDeux = new JoueurHumain(nomJDeux, premierJoueur);
+        plateau.init(match);
+        for(Position i : plateau.listePositions ){
+            System.out.println(i +" " +i.pionPresent +" "+ i.couleur);
+        }
         
-        Joueur joueurUn = new JoueurHumain(nom, premierJoueur);
-        System.out.println("Choisir votre coup : ");
-        String choix = in.nextLine();
-        Position choixJoueur = joueurUn.choix(plateau,choix);
-        partie.Actualiser(choixJoueur,premierJoueur,plateau,deuxiemeJoueur, joueurUn, match);
-        Couleur a = Plateau.get(choixJoueur);
-        String test = UtilsGomo.couleurVersString(a);
-        System.out.println(test);
+        while(!partie.partieFinie()){
+        
+        System.out.println("Joueur " + nomJUn+ " Choisir votre coup : ");
+        Position choixJoueurUn = joueurUn.choix(in.nextLine());
+        partie.actualiser(choixJoueurUn,premierJoueur,match);
+        for(Position i : plateau.listePositions ){
+            System.out.println(i +" " +i.pionPresent+" "+ i.couleur);
+        }
+        partie.ajouterTour(choixJoueurUn);
+        System.out.println("Joueur " + nomJDeux+ " Choisir votre coup : ");
+        Position choixJoueurDeux= joueurDeux.choix(in.nextLine());
+        partie.actualiser(choixJoueurDeux,deuxiemeJoueur,match);
+        for(Position i : plateau.listePositions ){
+            System.out.println(i +" " +i.pionPresent+" "+ i.couleur);
+        }
+        partie.ajouterTour(choixJoueurDeux);
+        }
+
     }
     
     public static void plateau() {

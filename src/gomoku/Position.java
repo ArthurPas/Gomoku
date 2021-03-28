@@ -26,7 +26,11 @@ public class Position {
     this.colonne = laColonne;
     
     }  
-    
+    /*
+    public String posVersString(){
+        return "ligne = " + this.ligne + " colonne =" + this.colonne;
+    }
+    */
     /**
      * Methode qui nous permet de comparer deux position 
      * @param autre l'autre poisiton

@@ -10,5 +10,5 @@ package gomoku;
  * @author apascal002
  */
 public abstract interface Joueur {
-    Position choix (Plateau p, String s);
+    Position choix (String s);
 }

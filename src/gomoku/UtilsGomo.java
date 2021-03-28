@@ -40,7 +40,7 @@ public class UtilsGomo {
                 Integer.parseInt(stringPos.substring(1)));
         return pos;
     }
-    
+//    
     public static String couleurVersString(Couleur col){
         if (null == col){
             return "test";

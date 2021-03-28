@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Arthur & Wijdan 
  */
 public class Partie {
-    final Couleur prochainJoueur;
+    Couleur prochainJoueur;
     Plateau plateau;
     ArrayList listeCoup;
     Couleur PremierJoueur;
@@ -24,34 +24,39 @@ public class Partie {
     public Partie(Couleur prochainJoueur, Plateau plateau) {
         this.prochainJoueur = prochainJoueur;
         this.plateau = plateau;
+        this.listeCoup = new ArrayList<>();
     }
     
     /**
      * Methode qui actualise le plateau 
      * @param p la position dernierement jouée
-     * @param joueurPrecedent la couleur du joueur qui vient de jouer 
-     * @param plateau la plateau
-     * @param joueurSuivant la couleur du joueur qui s'appréte a jouer
+     * @param couleurPion la couleur du joueur qui vient de jouable
+     * @param match le match
      */
-    public void Actualiser(Position p, Couleur joueurPrecedent, Plateau plateau,
-            Couleur joueurSuivant, Joueur joueur, Match match){
-        if(Match.jouer(p, match) && joueurPrecedent == Couleur.NOIR ){
-            joueurSuivant = Couleur.BLANC;
-            Plateau.set(p, joueurPrecedent);
+    public void actualiser(Position p, Couleur couleurPion, Match match){
+        
+        if(Match.jouable(p, match)){ 
+            Plateau.set(p, couleurPion);
         }
-        else if(Match.jouer(p, match) && joueurPrecedent == Couleur.BLANC ){
-            joueurSuivant = Couleur.NOIR;
-            Plateau.set(p, joueurPrecedent);
+        if( couleurPion == Couleur.NOIR ){
+            this.prochainJoueur = Couleur.BLANC;
+            
         }
-        else if(Match.jouer(p, match) && joueurPrecedent == Couleur.RIEN){
-            joueurSuivant = PremierJoueur;
-            Plateau.set(p, PremierJoueur);
+        else if(couleurPion == Couleur.BLANC ){
+            this.prochainJoueur = Couleur.NOIR;
         }
-        //TODO Exception if jouer = false
+        else if(couleurPion == Couleur.RIEN){
+            this.prochainJoueur = PremierJoueur;
+        }
+        else if(!Match.jouable(p, match)){
+            System.out.println("Impossible");
+        }
+        //TODO Exception if jouable = false
     }
-    public void AjouterTour(ArrayList listeCoup, Position p){
-        listeCoup.add("col = " + p.colonne + " lig = " + p.ligne + "couleur = " +
-                p.couleur);
+    public void ajouterTour(Position p){
+        listeCoup.add(p.ligne + p.colonne );
     }
-    
+    public boolean partieFinie(){
+        return false;
+    }
 }
