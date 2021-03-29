@@ -5,6 +5,8 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
+
 /**
  *
  * @author Arthur & Wijdan
@@ -29,8 +31,13 @@ public class Position {
         vide.couleur = Couleur.RIEN;
         return vide;
     }
-    public boolean positionJouable(Position p ){
-        return p.couleur == Couleur.RIEN;
+    public boolean positionJouable(Position p) throws ExceptionPositionDejaPose{
+        if(p.couleur == Couleur.RIEN){
+            return true;
+        }
+        else{
+            throw new ExceptionPositionDejaPose("");                
+        }
     }
     /**
      * Methode qui nous permet de comparer deux position 

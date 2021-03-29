@@ -5,6 +5,7 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -33,13 +34,16 @@ public class Plateau {
      * Méthode set qui permet d'associer une couleur a une position
      * @param p la position
      * @param c la couleur
+     * @throws Exception.ExceptionPositionDejaPose
      */
-    public void set (Position p, Couleur c){
-        if(listePositions[p.ligne][p.colonne].positionJouable(p)){
-            this.listePositions[p.ligne][p.colonne].couleur = c;
+    public void set (Position p, Couleur c) throws ExceptionPositionDejaPose {
+        try{
+            if(p.positionJouable(this.listePositions[p.ligne][p.colonne])){
+                this.listePositions[p.ligne][p.colonne].couleur = c;
+            }
         }
-        else{
-            this.listePositions[p.ligne][p.colonne].couleur = Couleur.ERREUR;
+        catch(ExceptionPositionDejaPose e){
+            System.out.println("Déjà posé");
         }
     }
     /**

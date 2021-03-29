@@ -5,6 +5,8 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
+
 /**
  *
  * @author Arthur & Wijdan 
@@ -39,8 +41,8 @@ public class Match {
      * @param match le match
      * @return true si aucun pion n'est présent et que le la position est dans 
      * le plateau
-     */
-    public static boolean jouable(Position p, Match match){
-        return !(p.couleur == Couleur.RIEN) && match.estDansPlateau(p);
-    }
+     
+    public static boolean jouable(Position p, Match match) throws ExceptionPositionDejaPose{
+        return p.positionJouable(p) && match.estDansPlateau(p);
+    }*/
 }

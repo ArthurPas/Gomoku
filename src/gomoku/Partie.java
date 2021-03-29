@@ -5,6 +5,7 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
 import java.util.ArrayList;
 
 /**
@@ -41,9 +42,8 @@ public class Partie {
      * @param couleurPion la couleur du joueur qui vient de jouable
      * @param match le match
      */
-    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau){
-        
-        if(Match.jouable(p, match)){ 
+    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose{
+        if(match.estDansPlateau(p)){
             plateau.set(p, couleurPion);
         }
         if( couleurPion == Couleur.NOIR ){
@@ -55,9 +55,6 @@ public class Partie {
         }
         else if(couleurPion == Couleur.RIEN){
             this.prochainJoueur = PremierJoueur;
-        }
-        else if(!Match.jouable(p, match)){
-            System.out.println("Impossible");
         }
         //TODO Exception if jouable = false
     }

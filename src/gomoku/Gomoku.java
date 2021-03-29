@@ -5,6 +5,7 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class Gomoku {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExceptionPositionDejaPose {
         final Couleur couleurPremierJoueur = Couleur.BLANC;
         final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
         final String nomJUn = "bob";
@@ -32,7 +33,7 @@ public class Gomoku {
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
                 System.out.println(plateau.listePositions[i][j] + " "
-                + " " + plateau.listePositions[i][j].couleur);
+                + " " + plateau.listePositions[i][j].couleur );
             }
         }
         
@@ -44,7 +45,7 @@ public class Gomoku {
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
                 System.out.println(plateau.listePositions[i][j] + " "
-                + " " + plateau.listePositions[i][j].couleur);
+                + " " + plateau.listePositions[i][j].couleur );
             }
         }
         partie.ajouterTour(choixJoueurUn);
@@ -54,7 +55,7 @@ public class Gomoku {
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
                 System.out.println(plateau.listePositions[i][j] + " "
-                        + " " + plateau.listePositions[i][j].couleur);
+                        + " " + plateau.listePositions[i][j].couleur );
             }
         }
         partie.ajouterTour(choixJoueurDeux);
