@@ -20,8 +20,6 @@ import java.util.ArrayList;
 public class Partie {
     Couleur prochainJoueur;
     final Plateau plateau;
-    final int tailleX;
-    final int tailleY;
     ArrayList listeCoup;
     Couleur PremierJoueur;
     /**
@@ -31,11 +29,9 @@ public class Partie {
     * @param X le nombre de cases sur les abscisees 
     * @param Y le nombre de cases sur les ordonnées 
     */
-    public Partie(Couleur prochainJoueur, Plateau plateau, int X, int Y) {
+    public Partie(Couleur prochainJoueur, Plateau plateau) {
         this.prochainJoueur = prochainJoueur;
         this.plateau = plateau;
-        this.tailleX = X;
-        this.tailleY = Y;
     }
     
     /**
