@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Arthur & Wijdan 
  */
 public class Partie {
-    final Couleur prochainJoueur;
+    Couleur prochainJoueur;
     final Plateau plateau;
     final int tailleX;
     final int tailleY;
@@ -68,4 +68,36 @@ public class Partie {
         //TODO Exception if jouer = false
     }
     
+    /**
+     * Methode qui actualise le plateau 
+     * @param p la position dernierement jouée
+     * @param couleurPion la couleur du joueur qui vient de jouable
+     * @param match le match
+     */
+    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau){
+        
+        if(Match.jouable(p, match)){ 
+            plateau.set(p, couleurPion);
+        }
+        if( couleurPion == Couleur.NOIR ){
+            this.prochainJoueur = Couleur.BLANC;
+            
+        }
+        else if(couleurPion == Couleur.BLANC ){
+            this.prochainJoueur = Couleur.NOIR;
+        }
+        else if(couleurPion == Couleur.RIEN){
+            this.prochainJoueur = PremierJoueur;
+        }
+        else if(!Match.jouable(p, match)){
+            System.out.println("Impossible");
+        }
+        //TODO Exception if jouable = false
+    }
+    public void ajouterTour(Position p){
+        listeCoup.add(p.ligne + p.colonne );
+    }
+    public boolean partieFinie(){
+        return false;
+    }
 }

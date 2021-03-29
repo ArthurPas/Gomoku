@@ -10,7 +10,12 @@ package gomoku;
  * @author Arthur & Wijdan  
  */
 public enum Couleur {
+<<<<<<< HEAD
     BLANC,
     NOIR,
+=======
+    NOIR,
+    BLANC,
+>>>>>>> Arthur
     RIEN,
 }

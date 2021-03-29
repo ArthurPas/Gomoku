@@ -9,6 +9,6 @@ package gomoku;
  *
  * @author apascal002
  */
-public interface Joueur {
-    Position choix (Plateau p);
+public abstract interface Joueur {
+    Position choix (String s);
 }

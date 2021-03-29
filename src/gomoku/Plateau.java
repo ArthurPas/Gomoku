@@ -5,28 +5,61 @@
  */
 package gomoku;
 
+<<<<<<< HEAD
 import java.util.Scanner;
+=======
+import java.util.ArrayList;
+>>>>>>> Arthur
 
 /**
  *
  * @author Arthur & Wijdan 
  */
 public class Plateau {
+<<<<<<< HEAD
     
+=======
+    Position [][] listePositions;
+    
+    
+    public Plateau(Match m){
+        this.listePositions = new Position [m.tailleX][m.tailleY];
+    }
+    
+    public void init(Match m){
+        for(int col =0; col<m.tailleY; col++){
+            for(int lig=0; lig<m.tailleX; lig++){
+                Position p = new Position((char)lig,col);
+                p.pionPresent = false;
+                p.couleur = Couleur.RIEN;
+                this.listePositions[lig][col] = p;
+            }
+        }
+    }
+>>>>>>> Arthur
     /**
      * Méthode set qui permet d'associer une couleur a une position
      * @param p la position
      * @param c la couleur
      */
     public void set (Position p, Couleur c){
+<<<<<<< HEAD
         p.couleur = c;       
+=======
+        this.listePositions[p.ligne][p.colonne].pionPresent = true;
+        this.listePositions[p.ligne][p.colonne].couleur = c;
+>>>>>>> Arthur
     }
     /**
      * Méthode qui permet de recuperer la couleur d'une position
      * @param p la position
      * @return la couleur de la position
      */
+<<<<<<< HEAD
     public Couleur get(Position p){
+=======
+    public static Couleur get(Position p){
+>>>>>>> Arthur
         return p.couleur;
     }
 
