@@ -13,4 +13,5 @@ public enum Couleur {
     BLANC,
     NOIR,
     RIEN,
+    ERREUR,
 }

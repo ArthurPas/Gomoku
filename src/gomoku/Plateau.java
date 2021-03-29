@@ -20,12 +20,12 @@ public class Plateau {
     }
     
     public void init(Match m){
-        for(int col =0; col<m.tailleY; col++){
-            for(int lig=0; lig<m.tailleX; lig++){
+        for(int col = 0; col < m.tailleY; col++){
+            for(int lig= 0; lig < m.tailleX; lig++){
                 Position p = new Position((char)lig,col);
-                p.pionPresent = false;
-                p.couleur = Couleur.RIEN;
+                p = p.positionVide(p);
                 this.listePositions[lig][col] = p;
+                
             }
         }
     }
@@ -35,8 +35,12 @@ public class Plateau {
      * @param c la couleur
      */
     public void set (Position p, Couleur c){
-        this.listePositions[p.ligne][p.colonne].pionPresent = true;
-        this.listePositions[p.ligne][p.colonne].couleur = c;
+        if(listePositions[p.ligne][p.colonne].positionJouable(p)){
+            this.listePositions[p.ligne][p.colonne].couleur = c;
+        }
+        else{
+            this.listePositions[p.ligne][p.colonne].couleur = Couleur.ERREUR;
+        }
     }
     /**
      * Méthode qui permet de recuperer la couleur d'une position

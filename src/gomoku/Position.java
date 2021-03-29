@@ -12,7 +12,6 @@ package gomoku;
 public class Position {
     final int ligne;
     final int colonne;
-    boolean pionPresent = false;
     Couleur couleur;
     
     /**
@@ -25,11 +24,14 @@ public class Position {
     this.colonne = laColonne;
     
     }  
-    /*
-    public String posVersString(){
-        return "ligne = " + this.ligne + " colonne =" + this.colonne;
+    public Position positionVide(Position p ){
+        Position vide = new Position((char) p.ligne, p.colonne);
+        vide.couleur = Couleur.RIEN;
+        return vide;
     }
-    */
+    public boolean positionJouable(Position p ){
+        return p.couleur == Couleur.RIEN;
+    }
     /**
      * Methode qui nous permet de comparer deux position 
      * @param autre l'autre poisiton
