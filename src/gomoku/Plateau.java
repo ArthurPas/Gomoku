@@ -37,13 +37,8 @@ public class Plateau {
      * @throws Exception.ExceptionPositionDejaPose
      */
     public void set (Position p, Couleur c) throws ExceptionPositionDejaPose {
-        try{
-            if(p.positionJouable(this.listePositions[p.ligne][p.colonne])){
-                this.listePositions[p.ligne][p.colonne].couleur = c;
-            }
-        }
-        catch(ExceptionPositionDejaPose e){
-            System.out.println("Déjà posé");
+        if(p.positionJouable(this.listePositions[p.ligne][p.colonne])){
+            this.listePositions[p.ligne][p.colonne].couleur = c;
         }
     }
     /**

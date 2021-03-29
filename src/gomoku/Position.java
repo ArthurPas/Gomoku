@@ -31,12 +31,19 @@ public class Position {
         vide.couleur = Couleur.RIEN;
         return vide;
     }
+
+    /**
+     * Methode qui verifie si la position est jouable 
+     * @param p la positon
+     * @return vrai si il n'y a aucune couleur sur cette case
+     * @throws ExceptionPositionDejaPose
+     */
     public boolean positionJouable(Position p) throws ExceptionPositionDejaPose{
         if(p.couleur == Couleur.RIEN){
             return true;
         }
         else{
-            throw new ExceptionPositionDejaPose("");                
+            throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
         }
     }
     /**
