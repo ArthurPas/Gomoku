@@ -48,26 +48,18 @@ public class Gomoku {
         //partie fictive debug
         while(!partie.partieFinie()){
             partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-                System.out.println("Joueur " + nomJUn+ " Choisir votre coup : ");
-                Position choixJoueurUn = joueurUn.choix(UtilsGomo.lireLigne());
-                partie.actualiser(choixJoueurUn, couleurPremierJoueur, match, plateau);
                 for (int i=0; i<match.tailleX; i++){
                     for(int j = 0; j< match.tailleY; j++){
                         System.out.println(plateau.listePositions[i][j] + " "
                         + " " + plateau.listePositions[i][j].couleur );
                     }
         }
-            partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
-        partie.ajouterTour(choixJoueurUn);
-        System.out.println("Joueur " + nomJDeux+ " Choisir votre coup : ");
-        Position choixJoueurDeux= joueurDeux.choix(UtilsGomo.lireLigne());
-        partie.actualiser(choixJoueurDeux, couleurDeuxiemeJoueur, match, plateau);
+        partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
                 System.out.println(plateau.listePositions[i][j]);
             }
         }
-        partie.ajouterTour(choixJoueurDeux);
         }
     }
     

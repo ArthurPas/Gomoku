@@ -63,9 +63,6 @@ public class Partie {
     public boolean partieFinie(){
         return false;
     }
-    public void ajouterTour(Position p){
-        listeCoup.add(p);
-    }
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau{
         System.out.println("Joueur " + nom+ " Choisir votre coup : ");
         Position choixJoueurUn = joueur.choix(UtilsGomo.lireLigne());
