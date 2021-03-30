@@ -22,8 +22,8 @@ public class Gomoku {
     public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         final Couleur couleurPremierJoueur = Couleur.BLANC;
         final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
-        final String nomJUn = "bob";
-        final String nomJDeux = "anna";
+        final String nomJUn = "blanc";
+        final String nomJDeux = "noir";
         Scanner in = new Scanner(System.in);
         Match match = new Match(3, 3);
         Plateau plateau = new Plateau(match);
@@ -40,6 +40,12 @@ public class Gomoku {
         
         while(!partie.partieFinie()){
             partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+            for (int i=0; i<match.tailleX; i++){
+            for(int j = 0; j< match.tailleY; j++){
+                System.out.println(plateau.listePositions[i][j] + " "
+                + " " + plateau.listePositions[i][j].couleur );
+            }
+        }
             partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
         }
     }

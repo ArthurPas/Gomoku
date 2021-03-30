@@ -19,9 +19,7 @@ import java.util.ArrayList;
  *
  * @author Arthur & Wijdan 
  */
-public class Partie {
-
-    boolean coupInvalide;
+public class Partie {   
     Couleur prochainJoueur;
     final Plateau plateau;
     ArrayList <Position> listeCoup;
@@ -30,8 +28,6 @@ public class Partie {
     * Constructeur de la partie
     * @param prochainJoueur couleur du prochain joueur
     * @param plateau le plateau
-    * @param X le nombre de cases sur les abscisees 
-    * @param Y le nombre de cases sur les ordonnées 
     */
     public Partie(Couleur prochainJoueur, Plateau plateau) {
         this.prochainJoueur = prochainJoueur;

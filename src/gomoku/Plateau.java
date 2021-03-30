@@ -49,4 +49,19 @@ public class Plateau {
     public static Couleur get(Position p){
         return p.couleur;
     }
+      public String affichageGame(Match m) {
+        StringBuilder builder = new StringBuilder("*-----------*").append(System.lineSeparator());
+
+        //boucle avec le nombre de ligne
+        for (int lig=0; lig< m.tailleX ;lig++){
+        builder.append("| ");
+                for (int col=0; col< m.tailleX ;col++){
+                builder.append( "N & B").append(" | ");
+                //
+        builder.append("-----------").append(System.lineSeparator());
+        }
+        builder.append("*-----------*").append(System.lineSeparator());
+
+        return builder.toString();
+    }
 }
