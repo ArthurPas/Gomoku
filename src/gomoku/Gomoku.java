@@ -20,8 +20,8 @@ public class Gomoku {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
-        final Couleur premierJoueur = Couleur.BLANC;
-        final Couleur deuxiemeJoueur = Couleur.NOIR;
+        final Couleur couleurPremierJoueur = Couleur.BLANC;
+        final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
         final String nomJUn = "Blanc";
         final String nomJDeux = "Noir";
         Scanner in = new Scanner(System.in);
@@ -48,10 +48,9 @@ public class Gomoku {
         //partie fictive debug
         while(!partie.partieFinie()){
             partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-            for (int i=0; i<match.tailleX; i++){
                 System.out.println("Joueur " + nomJUn+ " Choisir votre coup : ");
                 Position choixJoueurUn = joueurUn.choix(UtilsGomo.lireLigne());
-                partie.actualiser(choixJoueurUn, premierJoueur, match, plateau);
+                partie.actualiser(choixJoueurUn, couleurPremierJoueur, match, plateau);
                 for (int i=0; i<match.tailleX; i++){
                     for(int j = 0; j< match.tailleY; j++){
                         System.out.println(plateau.listePositions[i][j] + " "
@@ -62,10 +61,10 @@ public class Gomoku {
         partie.ajouterTour(choixJoueurUn);
         System.out.println("Joueur " + nomJDeux+ " Choisir votre coup : ");
         Position choixJoueurDeux= joueurDeux.choix(UtilsGomo.lireLigne());
-        partie.actualiser(choixJoueurDeux, deuxiemeJoueur, match, plateau);
+        partie.actualiser(choixJoueurDeux, couleurDeuxiemeJoueur, match, plateau);
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
-                System.out.println(plateau.listePositions[i][j] + " "+ plateau.listePositions[i][j].pionPresent);
+                System.out.println(plateau.listePositions[i][j]);
             }
         }
         partie.ajouterTour(choixJoueurDeux);

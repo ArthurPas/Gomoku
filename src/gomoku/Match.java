@@ -43,6 +43,7 @@ public class Match {
         else{
             throw new ExceptionHorsDuPlateau("Vous avez choisie une case hors du plateau ");                
         }
+    }
     /**
      * Methode qui permet de dire si il est possible de jouable (si un pion
      * n'est pas présent sur la position)
@@ -52,8 +53,8 @@ public class Match {
      * @return true si aucun pion n'est présent et que le la position est dans
      * le plateau
      */
-    public static boolean jouable(Position p, Match match) {
-        return !(p.pionPresent) && match.estDansPlateau(p);
+    public static boolean jouable(Position p, Match match) throws ExceptionHorsDuPlateau {
+        return match.estDansPlateau(p);
     }
 
 
