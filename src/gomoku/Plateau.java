@@ -11,13 +11,15 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Arthur & Wijdan 
+ * @author Arthur & Wijdan
  */
 public class Plateau {
-    Position [][] listePositions;
-    
-    public Plateau(Match m){
-        this.listePositions = new Position [m.tailleX][m.tailleY];
+
+    Position[][] listePositions;
+  
+
+    public Plateau(Match m) {
+        this.listePositions = new Position[m.tailleX][m.tailleY];
     }
     
     public void init(Match m){
@@ -30,8 +32,10 @@ public class Plateau {
             }
         }
     }
+
     /**
      * Méthode set qui permet d'associer une couleur a une position
+     *
      * @param p la position
      * @param c la couleur
      * @throws Exception.ExceptionPositionDejaPose
@@ -41,27 +45,39 @@ public class Plateau {
             this.listePositions[p.ligne][p.colonne].couleur = c;
         }
     }
+
     /**
      * Méthode qui permet de recuperer la couleur d'une position
+     *
      * @param p la position
      * @return la couleur de la position
      */
-    public static Couleur get(Position p){
+    public static Couleur get(Position p) {
         return p.couleur;
     }
-      public String affichageGame(Match m) {
-        StringBuilder builder = new StringBuilder("*-----------*").append(System.lineSeparator());
+
+
+    
+    
+    /*
+    * Affichage visuel du tableau de jeu
+    *
+    *
+    */
+    public String affichageGame(Match m) {
+        StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
 
         //boucle avec le nombre de ligne
         for (int lig=0; lig< m.tailleX ;lig++){
         builder.append("| ");
-                for (int col=0; col< m.tailleX ;col++){
+                for (int col=0; col< m.tailleY ;col++){
                 builder.append( "N & B").append(" | ");
-                //
-        builder.append("-----------").append(System.lineSeparator());
+                }
+        builder.append(System.lineSeparator());
         }
-        builder.append("*-----------*").append(System.lineSeparator());
+        
 
         return builder.toString();
     }
 }
+
