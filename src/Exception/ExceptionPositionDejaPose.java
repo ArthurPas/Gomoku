@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gomoku;
+package Exception;
 
 /**
  *
- * @author Arthur & Wijdan  
+ * @author apascal002
  */
-public enum Couleur {
-    BLANC,
-    NOIR,
-    RIEN,
-    ERREUR,
+public class ExceptionPositionDejaPose extends Exception {
+
+    public ExceptionPositionDejaPose(String msg) {
+        super(msg);
+    }
 }

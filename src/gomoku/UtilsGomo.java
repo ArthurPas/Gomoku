@@ -33,6 +33,9 @@ public class UtilsGomo {
             return (int) lettre - constanteAsciiMaj;
         }
     }
+    public static char intVersHexa(int chiffre){
+             return (char) (chiffre + constanteAsciiMaj);
+    }
 
     /**
      * Converti un String vers une Position

@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package gomoku;
-
+import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionPositionDejaPose;
 import java.util.Scanner;
 
 /**
@@ -34,11 +35,14 @@ public class Match {
      * @return vrai si elle est comprise entre 0 et la taille maximale du
      * plateau
      */
-    public boolean estDansPlateau(Position p) {
-        return (p.colonne >= 0 && p.ligne >= 0 && p.colonne < tailleX
-                && p.ligne < tailleY);
-    }
-
+    public boolean estDansPlateau(Position p) throws ExceptionHorsDuPlateau{
+        if (p.colonne >= 0 && p.ligne >=0 && p.colonne < tailleX && 
+                p.ligne < tailleY){
+            return true;
+        }
+        else{
+            throw new ExceptionHorsDuPlateau("Vous avez choisie une case hors du plateau ");                
+        }
     /**
      * Methode qui permet de dire si il est possible de jouable (si un pion
      * n'est pas présent sur la position)

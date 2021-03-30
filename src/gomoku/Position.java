@@ -5,6 +5,8 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
+
 /**
  *
  * @author Arthur & Wijdan
@@ -12,7 +14,6 @@ package gomoku;
 public class Position {
     final int ligne;
     final int colonne;
-    boolean pionPresent = false;
     Couleur couleur;
     
     /**
@@ -25,11 +26,26 @@ public class Position {
     this.colonne = laColonne;
     
     }  
-    /*
-    public String posVersString(){
-        return "ligne = " + this.ligne + " colonne =" + this.colonne;
+    public Position positionVide(Position p ){
+        Position vide = new Position((char) p.ligne, p.colonne);
+        vide.couleur = Couleur.RIEN;
+        return vide;
     }
-    */
+
+    /**
+     * Methode qui verifie si la position est jouable 
+     * @param p la positon
+     * @return vrai si il n'y a aucune couleur sur cette case
+     * @throws ExceptionPositionDejaPose
+     */
+    public boolean positionJouable(Position p) throws ExceptionPositionDejaPose{
+        if(p.couleur == Couleur.RIEN){
+            return true;
+        }
+        else{
+            throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
+        }
+    }
     /**
      * Methode qui nous permet de comparer deux position 
      * @param autre l'autre poisiton

@@ -5,6 +5,7 @@
  */
 package gomoku;
 
+import Exception.ExceptionPositionDejaPose;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -20,18 +21,14 @@ public class Plateau {
     public Plateau(Match m) {
         this.listePositions = new Position[m.tailleX][m.tailleY];
     }
-
-    /*
-    *
-    *
-    */
-    public void init(Match m) {
-        for (int col = 0; col < m.tailleY; col++) {
-            for (int lig = 0; lig < m.tailleX; lig++) {
-                Position p = new Position((char) lig, col);
-                p.pionPresent = false;
-                p.couleur = Couleur.RIEN;
+    
+    public void init(Match m){
+        for(int col = 0; col < m.tailleY; col++){
+            for(int lig= 0; lig < m.tailleX; lig++){
+                Position p = new Position((char)lig,col);
+                p = p.positionVide(p);
                 this.listePositions[lig][col] = p;
+                
             }
         }
     }
@@ -41,10 +38,12 @@ public class Plateau {
      *
      * @param p la position
      * @param c la couleur
+     * @throws Exception.ExceptionPositionDejaPose
      */
-    public void set(Position p, Couleur c) {
-        this.listePositions[p.ligne][p.colonne].pionPresent = true;
-        this.listePositions[p.ligne][p.colonne].couleur = c;
+    public void set (Position p, Couleur c) throws ExceptionPositionDejaPose {
+        if(p.positionJouable(this.listePositions[p.ligne][p.colonne])){
+            this.listePositions[p.ligne][p.colonne].couleur = c;
+        }
     }
 
     /**
@@ -81,5 +80,4 @@ public class Plateau {
         return builder.toString();
     }
 }
-
 
