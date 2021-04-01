@@ -41,11 +41,11 @@ public class Match {
             return true;
         }
         else{
-            throw new ExceptionHorsDuPlateau("Vous avez choisie une case hors du plateau ");                
+            throw new ExceptionHorsDuPlateau("case hors du plateau ");                
         }
     }
     /**
-     * Methode qui permet de dire si il est possible de jouable (si un pion
+     * Methode qui permet de dire si il est possible de jouer (si un pion
      * n'est pas présent sur la position)
      *
      * @param p la position
