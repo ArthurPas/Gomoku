@@ -6,6 +6,7 @@
 package gomoku;
 
 import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class Gomoku {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+    public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
         final Couleur couleurPremierJoueur = Couleur.BLANC;
         final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
         final String nomJUn = "Blanc";
@@ -44,26 +45,22 @@ public class Gomoku {
                 + " " + plateau.listePositions[i][j].couleur );
             }
         }
-        
-        //partie fictive debug
+        partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
         while(!partie.partieFinie()){
-            partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+            partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
                 for (int i=0; i<match.tailleX; i++){
                     for(int j = 0; j< match.tailleY; j++){
                         System.out.println(plateau.listePositions[i][j] + " "
                         + " " + plateau.listePositions[i][j].couleur );
                     }
         }
-        partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+        partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
-                System.out.println(plateau.listePositions[i][j]);
+                System.out.println(plateau.listePositions[i][j]+ " " + plateau.listePositions[i][j].couleur);
             }
         }
+            System.out.println(Partie.listeCoup);
         }
-    }
-    
-    public static void plateau() {
-        // TODO code application logic here  
     }
 }

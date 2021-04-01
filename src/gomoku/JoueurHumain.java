@@ -26,7 +26,7 @@ public class JoueurHumain implements Joueur{
      */
     @Override
     public Position choix(String choixJoueur){
-        return UtilsGomo.stringVersPos(choixJoueur);
+        return UtilsGomo.stringVersPos(choixJoueur.toUpperCase());
 
     }
 }

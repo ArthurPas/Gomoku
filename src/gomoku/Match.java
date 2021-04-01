@@ -5,6 +5,7 @@
  */
 package gomoku;
 import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
 import java.util.Scanner;
 
@@ -45,16 +46,18 @@ public class Match {
         }
     }
     /**
-     * Methode qui permet de dire si il est possible de jouer (si un pion
-     * n'est pas présent sur la position)
+     * Methode qui permet de dire si il est possible de jouer (si le coup est 
+     * bien dans le plateau et que l'on pose a cote d'une case déja jouée)
      *
      * @param p la position
      * @param match le match
      * @return true si aucun pion n'est présent et que le la position est dans
      * le plateau
+     * @throws Exception.ExceptionHorsDuPlateau
      */
-    public static boolean jouable(Position p, Match match) throws ExceptionHorsDuPlateau {
-        return match.estDansPlateau(p);
+    public boolean jouable(Position p) throws ExceptionPasVoisin {
+       
+        return Position.estVoisine(p,Partie.listeCoup, this);
     }
 
 

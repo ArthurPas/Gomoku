@@ -6,7 +6,9 @@
 package gomoku;
 
 import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,24 +51,31 @@ public class Position {
             throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
         }
     }
-    public Position[] positionVoisines(Position p, Match m) throws ExceptionHorsDuPlateau{
-        Position[] posVoisine = new Position[8];
+    public static List<Position> positionVoisines(Position p, Match m){
+        List <Position> posVoisine = new ArrayList<>();
         int nbVoisines = 0;
         for (Directions d: Directions.toutes()) {
             Position voisine = new Position((p.ligne + Directions.mvtHoriz(d)), p.colonne + Directions.mvtVertic(d));
-            if(m.estDansPlateau(voisine)) {
-                 posVoisine[nbVoisines]=voisine;
-                 nbVoisines++;
-            }
+                 posVoisine.add(voisine);
         }
         return posVoisine;
     }
-    public boolean estVoisine(Position p, Match m) throws ExceptionHorsDuPlateau{
-        List <Position> listePosVoisine = Arrays.asList(this.positionVoisines(p, m));
-        return listePosVoisine.contains(p);
-    }
+    public static boolean estVoisine(Position p,List<Position> p1, Match m) throws ExceptionPasVoisin{
+        
+        boolean voisinePresente = false;
+        for(int i=0; i<p1.size(); i++){
+            if(positionVoisines(p,m).contains(p1.get(i))){
+                voisinePresente = true;
+            }
+        }
+        if(!voisinePresente){
+            throw new ExceptionPasVoisin("Pas de voisin");
+        }
+        return voisinePresente;
+        }
+   
     /**
-     * Methode qui nous permet de comparer deux position 
+     * Methode qui nous permet de comparer deux positions
      * @param autre l'autre poisiton
      * @return true si les deux position sont égales
      */

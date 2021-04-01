@@ -6,13 +6,15 @@
 package gomoku;
 
 import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionPasVoisin;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
-import Gomoku.Position;
+
 
 /**
  *
@@ -27,20 +29,23 @@ public class PositionTest {
         Position aTeste = new Position(30,30);
         Position voisine = new Position (30,29);
         Match match = new Match(100,100);
-        Position [] test = aTeste.positionVoisines(aTeste, match);
-        List <Position> listePosVoisine = Arrays.asList(test);
+        List listePosVoisine = Position.positionVoisines(aTeste,match);
         assertEquals(listePosVoisine.contains(voisine), true);
         
     }
     @Test
-    public void testEstVoisine() throws ExceptionHorsDuPlateau{
-        Position aTesteVrai = new Position(30,30);
-        Position aTesteFaux = new Position(20,20);
+    public void testEstVoisine() throws ExceptionHorsDuPlateau, ExceptionPasVoisin{
+        Position posFaux= new Position(10,10);
+        Position posVrai= new Position(30,30);
+        List<Position> aTesteFaux = new ArrayList<>();
+        aTesteFaux.add(posFaux);
+        List<Position> aTesteVrai= new ArrayList<>();
+        aTesteVrai.add(posVrai);
         Position voisine = new Position (30,29);
         Match match = new Match(100,100);
-        assertTrue(aTesteVrai.estVoisine(voisine, match));
-        assertFalse(aTesteFaux.estVoisine(voisine,, match));
-        
+        System.out.println(aTesteVrai);
+        assertTrue(Position.estVoisine(voisine,aTesteVrai, match));
+        assertFalse(Position.estVoisine(voisine,aTesteFaux,match));        
     }
     
 }
