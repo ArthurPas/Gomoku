@@ -25,7 +25,7 @@ public class Plateau {
     public void init(Match m){
         for(int col = 0; col < m.tailleY; col++){
             for(int lig= 0; lig < m.tailleX; lig++){
-                Position p = new Position((char)lig,col);
+                Position p = new Position(lig,col);
                 p = p.positionVide(p);
                 this.listePositions[lig][col] = p;
                 

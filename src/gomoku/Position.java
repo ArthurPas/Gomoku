@@ -5,7 +5,10 @@
  */
 package gomoku;
 
+import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPositionDejaPose;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -21,8 +24,8 @@ public class Position {
      * @param laLigne correspond a la ligne concérnée 
      * @param laColonne correspond a la colonne concérnée 
     */
-    public Position (char laLigne, int laColonne) {
-    this.ligne = UtilsGomo.hexaVersInt(laLigne);
+    public Position (int laLigne, int laColonne) {
+    this.ligne = laLigne;
     this.colonne = laColonne;
     
     }  
@@ -45,6 +48,22 @@ public class Position {
         else{
             throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
         }
+    }
+    public Position[] positionVoisines(Position p, Match m) throws ExceptionHorsDuPlateau{
+        Position[] posVoisine = new Position[8];
+        int nbVoisines = 0;
+        for (Directions d: Directions.toutes()) {
+            Position voisine = new Position((p.ligne + Directions.mvtHoriz(d)), p.colonne + Directions.mvtVertic(d));
+            if(m.estDansPlateau(voisine)) {
+                 posVoisine[nbVoisines]=voisine;
+                 nbVoisines++;
+            }
+        }
+        return posVoisine;
+    }
+    public boolean estVoisine(Position p, Match m) throws ExceptionHorsDuPlateau{
+        List <Position> listePosVoisine = Arrays.asList(this.positionVoisines(p, m));
+        return listePosVoisine.contains(p);
     }
     /**
      * Methode qui nous permet de comparer deux position 

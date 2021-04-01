@@ -44,11 +44,15 @@ public class UtilsGomo {
      * @return la position
      */
     public static Position stringVersPos(String stringPos) {
-        Position pos = new Position(stringPos.toUpperCase().charAt(0),
+        Position pos = new Position(UtilsGomo.hexaVersInt(stringPos.toUpperCase().charAt(0)),
                 Integer.parseInt(stringPos.substring(1)));
         return pos;
     }
 
+    /**
+     *
+     * @return
+     */
     public static String lireLigne() {
         return in.nextLine().trim();
     }
