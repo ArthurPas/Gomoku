@@ -28,8 +28,7 @@ public class PositionTest {
     public void testPositionVoisines() throws ExceptionHorsDuPlateau{
         Position aTeste = new Position(30,30);
         Position voisine = new Position (30,29);
-        Match match = new Match(100,100);
-        List listePosVoisine = Position.positionVoisines(aTeste,match);
+        List listePosVoisine = Position.positionVoisinesParDirection(aTeste);
         assertEquals(listePosVoisine.contains(voisine), true);
         
     }
@@ -42,10 +41,9 @@ public class PositionTest {
         List<Position> aTesteVrai= new ArrayList<>();
         aTesteVrai.add(posVrai);
         Position voisine = new Position (30,29);
-        Match match = new Match(100,100);
         System.out.println(aTesteVrai);
-        assertTrue(Position.estVoisine(voisine,aTesteVrai, match));
-        assertFalse(Position.estVoisine(voisine,aTesteFaux,match));        
+        assertTrue(Position.estVoisine(voisine,aTesteVrai));
+        assertFalse(Position.estVoisine(voisine,aTesteFaux));        
     }
     
 }
