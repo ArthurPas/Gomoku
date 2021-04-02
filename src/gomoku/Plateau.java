@@ -25,7 +25,7 @@ public class Plateau {
     public void init(Match m){
         for(int col = 0; col < m.tailleY; col++){
             for(int lig= 0; lig < m.tailleX; lig++){
-                Position p = new Position(lig,col);
+                Position p = new Position((char)lig,col);
                 p = p.positionVide(p);
                 this.listePositions[lig][col] = p;
                 
@@ -71,7 +71,24 @@ public class Plateau {
         for (int lig=0; lig< m.tailleX ;lig++){
         builder.append("| ");
                 for (int col=0; col< m.tailleY ;col++){
-                builder.append( "N & B").append(" | ");
+                builder.append(" . " ).append(" | ");
+                }
+        builder.append(System.lineSeparator());
+        }
+        
+
+        return builder.toString();
+    }
+    
+    
+        public String actualiserGame(Match m, Position p) {
+        StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
+
+        //boucle avec le nombre de ligne
+        for (int lig=0; lig< m.tailleX ;lig++){
+        builder.append("| ");
+                for (int col=0; col< m.tailleY ;col++){
+                builder.append(listePositions[lig][col].couleur).append(" | "); //builder.append(case[col]).append(" | ");
                 }
         builder.append(System.lineSeparator());
         }
@@ -80,4 +97,3 @@ public class Plateau {
         return builder.toString();
     }
 }
-
