@@ -46,8 +46,12 @@ public class Gomoku {
             }
         }
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+        System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+        
         while(!partie.partieFinie()){
             partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+            
+            
                 for (int i=0; i<match.tailleX; i++){
                     for(int j = 0; j< match.tailleY; j++){
                         System.out.println(plateau.listePositions[i][j] + " "
@@ -55,6 +59,8 @@ public class Gomoku {
                     }
         }
         partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+         System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+        
         for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
                 System.out.println(plateau.listePositions[i][j]+ " " + plateau.listePositions[i][j].couleur);
