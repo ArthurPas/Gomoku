@@ -53,14 +53,17 @@ public class Position {
     }
 
     /**
-     * Methode qui renvoie une liste de positions voisine a une position donné
+     * Methode qui renvoie une liste de positions voisine a une position donné et 
+     * dans un tableau de direction donné ainsi qu'une distance a parcourir
      * @param p la position donné
+     * @param direc le tableau de directions
+     * @param dist la distance a parcourir
      * @return la liste des positions voisines
      */
     public static List<Position> posVoisParDirParDistance(Position p, Directions [] direc, int dist){
         List <Position> posVoisine = new ArrayList<>();
         for (Directions d: direc) {
-            Position voisine = new Position((p.ligne + Directions.mvtHoriz(d)*dist), p.colonne + Directions.mvtVertic(d)*dist);
+            Position voisine = new Position((p.ligne + Directions.mvtHoriz(d)*dist), (p.colonne + Directions.mvtVertic(d)*dist));
                  posVoisine.add(voisine);
         }
         return posVoisine;
@@ -86,14 +89,28 @@ public class Position {
         }
         return voisinePresente;
         }
-    public static boolean cinqVoisinsDansDirec(Position p, Directions []direc,List<Position> listeDePositions){
-        boolean victoire = true;
+
+    /**
+     * Compte le nombre de position voisine dans une liste
+     * @param listeDePositions la liste des voisines
+     * @return
+     */
+    public int nombreDeVoisines(List<Position> listeDePositions){
+        return listeDePositions.size();
+    }
+    /**
+     *
+     * @param p
+     * @param direc
+     * @param listeDePositions
+     * @return
+     */
+    public boolean cinqVoisinsDansDirec(Directions[] direc, List<Position> listeDePositions){
+        boolean victoire = false;
         List <Position> posVoisine = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-           posVoisine = posVoisParDirParDistance(p, direc, i);
-           if(!posVoisine.contains(listeDePositions.get(i))){
-               victoire = false;
-           }
+        posVoisine = posVoisParDirParDistance(this, direc, 1);
+        if( this.nombreDeVoisines(listeDePositions) == 5 ){
+            victoire = true;
         }
         return victoire;
     }
