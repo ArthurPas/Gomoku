@@ -19,6 +19,7 @@ import java.util.List;
 public class Position {
     final int ligne;
     final int colonne;
+    
     Couleur couleur;
     
     /**
@@ -51,29 +52,65 @@ public class Position {
             throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
         }
     }
-    public static List<Position> positionVoisines(Position p, Match m){
+     /**
+     * Methode qui renvoie une liste de positions voisine a une position donné et 
+     * dans un tableau de direction donné ainsi qu'une distance a parcourir
+     * @param p la position donné
+     * @param direc le tableau de directions
+     * @param dist la distance a parcourir
+     * @return la liste des positions voisines
+     */
+    public List<Position> posVoisParDirParDistance(Directions d, int dist){
         List <Position> posVoisine = new ArrayList<>();
-        int nbVoisines = 0;
-        for (Directions d: Directions.toutes()) {
-            Position voisine = new Position((p.ligne + Directions.mvtHoriz(d)), p.colonne + Directions.mvtVertic(d));
+        for (int i = 1; i <= dist; i++) {
+            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist),
+                    (this.colonne + Directions.mvtVertic(d)*dist));
+            posVoisine.add(voisine);   
+        }
+        return posVoisine;
+    }
+    /**
+     * Methode qui renvoie une liste de positions voisine a une position donné et 
+     * dans un tableau de direction donné ainsi qu'une distance a parcourir
+     * @param p la position donné
+     * @param direc le tableau de directions
+     * @param dist la distance a parcourir
+     * @return la liste des positions voisines
+     */
+    public List<Position> posVoisParDistance(Directions [] direc, int dist){
+        List <Position> posVoisine = new ArrayList<>();
+        for (Directions d: direc) {
+            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist),
+                    (this.colonne + Directions.mvtVertic(d)*dist));
                  posVoisine.add(voisine);
         }
         return posVoisine;
     }
-    public static boolean estVoisine(Position p,List<Position> p1, Match m) throws ExceptionPasVoisin{
+
+    /**
+     * Boolén qui nous indique si une case a une voisine dans une liste de positions
+     * @param distance
+     * @param direc
+     * @param listeDePositions la liste des positions 
+     * @return true si la liste de position contient p
+     * @throws ExceptionPasVoisin
+     */
+    public boolean estVoisineParDistParDirec(int distance, Directions[] direc, List<Position> listeDePositions) /*throws ExceptionPasVoisin*/{
         
         boolean voisinePresente = false;
-        for(int i=0; i<p1.size(); i++){
-            if(positionVoisines(p,m).contains(p1.get(i))){
-                voisinePresente = true;
+            for(int i=0; i<listeDePositions.size(); i++){
+            if(this.posVoisParDistance(direc, distance).contains(listeDePositions.get(i))){
+                    voisinePresente = true;
+                }/*
+                if(!voisinePresente){
+                    throw new ExceptionPasVoisin("Pas de voisin");
+                }*/
+        
             }
-        }
-        if(!voisinePresente){
-            throw new ExceptionPasVoisin("Pas de voisin");
-        }
         return voisinePresente;
-        }
-   
+    }
+
+    
     /**
      * Methode qui nous permet de comparer deux positions
      * @param autre l'autre poisiton

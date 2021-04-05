@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @author Arthur & Wijdan 
  */
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -60,7 +61,26 @@ public class Partie {
             }
         }   
     }
-    public boolean partieFinie(){
+    public boolean victoire(Match m) {
+        List <Position> listeVoisine = new ArrayList<>();
+        for (int lig = 0; lig < m.tailleY ; lig++) {
+                for (int col = 0; col < m.tailleX; col++) {
+                    Position p = new Position(lig,col);
+                    for (Directions d: Directions.toutes()) {
+                        System.out.println(d);
+                        listeVoisine = p.posVoisParDirParDistance(d, 5);
+                        System.out.println(listeVoisine);
+                        for(Position pos : listeVoisine){
+                            if(pos.couleur == p.couleur && p.couleur != Couleur.RIEN && 
+                                    pos.couleur != Couleur.RIEN && pos.couleur !=null){
+                                System.out.println("true");
+                                return true;
+                            }
+                        }
+                    }   
+                }
+        }
+        System.out.println("false");
         return false;
     }
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin{
