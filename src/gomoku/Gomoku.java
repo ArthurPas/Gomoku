@@ -28,8 +28,8 @@ public class Gomoku {
         Scanner in = new Scanner(System.in);
         
         Match match = new Match(0,0);
-        match.tailleX= 3;//UtilsGomo.SaisieLigne(match);
-        match.tailleY=3;//UtilsGomo.SaisieColonne(match);
+        match.tailleX= 5;//UtilsGomo.SaisieLigne(match);
+        match.tailleY=5;//UtilsGomo.SaisieColonne(match);
         Plateau plateau = new Plateau(match);
         Partie partie = new Partie(couleurPremierJoueur, plateau);
         Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
@@ -39,13 +39,13 @@ public class Gomoku {
         System.out.println(plateau.affichageGame(match));
       
      //debug
-        for (int i=0; i<match.tailleX; i++){
+      /*  for (int i=0; i<match.tailleX; i++){
             for(int j = 0; j< match.tailleY; j++){
                 System.out.println(plateau.listePositions[i][j] + " "
                 + " " + plateau.listePositions[i][j].couleur );
             }
         }
-        
+        */
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
         while(!partie.victoire(match, plateau)){
             partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);

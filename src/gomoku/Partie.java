@@ -63,22 +63,27 @@ public class Partie {
     }
     public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         List <Position> listeVoisine = new ArrayList<>();
+        int cpt = 0;
+        boolean voisinDeMemCouleur = false;
         Position[][] listePositions = pla.listePositions;
         for(int col = 0; col < m.tailleY; col++){
             for(int lig= 0; lig < m.tailleX; lig++){
+                Position p = listePositions[lig][col];
                 for (Directions d: Directions.toutes()) {
-                    listeVoisine = listePositions[lig][col].posVoisParDirParDistance(d, 2, pla, m);
+                    boolean identiques = false;
+                    listeVoisine = p.posVoisParDirParDistance(d, 5, pla, m);
                     for(Position pos : listeVoisine){
                         System.out.println(listeVoisine +" " + listePositions[lig][col].couleur +" " +pos.couleur );
-                        if(pos.couleur == listePositions[lig][col].couleur && pos.couleur != Couleur.RIEN){
-                            System.out.println("true");
-                            return true;
-                        }
+                        identiques =(pos.couleur == p.couleur && pos.couleur != Couleur.RIEN) ;  
                     }
-                }   
-                        System.out.println("fin de boucle direc");}
+                    if(identiques){
+                        return true;
+                    }
+                }
+            }  
         }
-        System.out.println("false");
+
+        //System.out.println("false");
         return false;
     }
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin{
