@@ -63,22 +63,41 @@ public class Partie {
     }
     public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         List <Position> listeVoisine = new ArrayList<>();
-        int cpt = 0;
-        boolean voisinDeMemCouleur = false;
         Position[][] listePositions = pla.listePositions;
-        for(int col = 0; col < m.tailleY; col++){
-            for(int lig= 0; lig < m.tailleX; lig++){
+        for(int col = 0; col < 1/*m.tailleY*/; col++){
+            for(int lig= 0; lig < 1 /*m.tailleX*/; lig++){
                 Position p = listePositions[lig][col];
                 for (Directions d: Directions.toutes()) {
-                    boolean identiques = false;
-                    listeVoisine = p.posVoisParDirParDistance(d, 5, pla, m);
-                    for(Position pos : listeVoisine){
-                        System.out.println(listeVoisine +" " + listePositions[lig][col].couleur +" " +pos.couleur );
-                        identiques =(pos.couleur == p.couleur && pos.couleur != Couleur.RIEN) ;  
+                    //boolean identiques = false;
+                    int identiques = 1;
+                    int ident = 1;
+                    listeVoisine = p.posVoisParDirParDistance(d, 4, pla, m);
+                    if(listeVoisine.isEmpty() ){
+                        identiques=0;
                     }
-                    if(identiques){
+                    for(Position pos : listeVoisine){
+                        System.out.println(pos+" " + p.couleur +" " +pos.couleur );
+                        if(pos.couleur == p.couleur && pos.couleur != Couleur.RIEN){
+                            ident=1;
+                            System.out.println("+1");
+                            int mul = identiques*ident;
+                            System.out.println("mul " + mul);
+                        }
+                        else{
+                            System.out.println("+0");
+                            ident=0;
+                        }
+                        
+                        identiques= identiques*ident;
+                        System.out.println("identiques " +identiques);
+                        //identiques =(pos.couleur == p.couleur) && (pos.couleur != Couleur.RIEN) ;  
+                    }
+                    if(identiques == 1){
                         return true;
                     }
+                    /*if(identiques){
+                        return true;
+                    }*/
                 }
             }  
         }
