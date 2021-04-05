@@ -19,6 +19,7 @@ import java.util.List;
 public class Position {
     final int ligne;
     final int colonne;
+    
     Couleur couleur;
     
     /**
@@ -51,7 +52,23 @@ public class Position {
             throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
         }
     }
-
+     /**
+     * Methode qui renvoie une liste de positions voisine a une position donné et 
+     * dans un tableau de direction donné ainsi qu'une distance a parcourir
+     * @param p la position donné
+     * @param direc le tableau de directions
+     * @param dist la distance a parcourir
+     * @return la liste des positions voisines
+     */
+    public List<Position> posVoisParDirParDistance(Directions d, int dist){
+        List <Position> posVoisine = new ArrayList<>();
+        for (int i = 1; i <= dist; i++) {
+            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist),
+                    (this.colonne + Directions.mvtVertic(d)*dist));
+            posVoisine.add(voisine);   
+        }
+        return posVoisine;
+    }
     /**
      * Methode qui renvoie une liste de positions voisine a une position donné et 
      * dans un tableau de direction donné ainsi qu'une distance a parcourir
@@ -60,10 +77,11 @@ public class Position {
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
      */
-    public List<Position> posVoisParDirParDistance(Directions [] direc, int dist){
+    public List<Position> posVoisParDistance(Directions [] direc, int dist){
         List <Position> posVoisine = new ArrayList<>();
         for (Directions d: direc) {
-            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist), (this.colonne + Directions.mvtVertic(d)*dist));
+            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist),
+                    (this.colonne + Directions.mvtVertic(d)*dist));
                  posVoisine.add(voisine);
         }
         return posVoisine;
@@ -77,48 +95,22 @@ public class Position {
      * @return true si la liste de position contient p
      * @throws ExceptionPasVoisin
      */
-    public boolean estVoisineParDistParDirec(int distance,Directions[] direc, List<Position> listeDePositions) /*throws ExceptionPasVoisin*/{
+    public boolean estVoisineParDistParDirec(int distance, Directions[] direc, List<Position> listeDePositions) /*throws ExceptionPasVoisin*/{
         
         boolean voisinePresente = false;
-        for(int i=0; i<listeDePositions.size(); i++){
-            if(this.posVoisParDirParDistance(direc,distance).contains(listeDePositions.get(i))){
-                voisinePresente = true;
-        }/*
-        if(!voisinePresente){
-            throw new ExceptionPasVoisin("Pas de voisin");
-        }*/
+            for(int i=0; i<listeDePositions.size(); i++){
+            if(this.posVoisParDistance(direc, distance).contains(listeDePositions.get(i))){
+                    voisinePresente = true;
+                }/*
+                if(!voisinePresente){
+                    throw new ExceptionPasVoisin("Pas de voisin");
+                }*/
         
-        }
+            }
         return voisinePresente;
     }
 
-    /**
-     * Compte le nombre de position voisine dans une liste
-     * @param listeDePositions la liste des voisines
-     * @return
-     */
-    public int nombreDeVoisines(List<Position> listeDePositions){
-        return listeDePositions.size();
-    }
-    /**
-     *
-     * @param p
-     * @param direc
-     * @param listeDePositions
-     * @return
-     */
-    public boolean quatreVoisinsDansDirec(Directions[] direc, List<Position> listeDePositions) {
-        int cptVoisines=0;
-        for(Directions d: direc){
-            for (int i = 1; i < 5; i++){
-                if(this.estVoisineParDistParDirec(i,direc,listeDePositions)){
-                        cptVoisines++;
-                    }
-            }
-        }
-        System.out.println(cptVoisines);
-        return cptVoisines>=4;
-    }
+    
     /**
      * Methode qui nous permet de comparer deux positions
      * @param autre l'autre poisiton

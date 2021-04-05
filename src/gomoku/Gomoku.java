@@ -46,7 +46,7 @@ public class Gomoku {
             }
         }
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-        while(!partie.partieFinie()){
+        while(!partie.victoire(match)){
             partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
                 for (int i=0; i<match.tailleX; i++){
                     for(int j = 0; j< match.tailleY; j++){
