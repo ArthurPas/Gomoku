@@ -60,12 +60,17 @@ public class Position {
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
      */
-    public List<Position> posVoisParDirParDistance(Directions d, int dist){
+    public List<Position> posVoisParDirParDistance(Directions d, int dist, Plateau pla, Match m) throws ExceptionHorsDuPlateau{
         List <Position> posVoisine = new ArrayList<>();
+        System.out.println("direction :" + d);
         for (int i = 1; i <= dist; i++) {
-            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist),
-                    (this.colonne + Directions.mvtVertic(d)*dist));
-            posVoisine.add(voisine);   
+            Position p = new Position(this.ligne + Directions.mvtVertic(d)*i,this.colonne + Directions.mvtHoriz(d)*i);
+            if(p.estDansPlateau(pla)){
+            Position voisine = pla.listePositions[this.ligne + Directions.mvtVertic(d)*i]
+                    [this.colonne + Directions.mvtHoriz(d)*i];
+            System.out.println(voisine);
+            posVoisine.add(voisine);
+            }
         }
         return posVoisine;
     }
@@ -112,6 +117,23 @@ public class Position {
 
     
     /**
+     * Retourne si la position p est bien dans le plateau
+     *
+     * @param p la position a verifié
+     * @return vrai si elle est comprise entre 0 et la taille maximale du
+     * plateau
+     */
+    public boolean estDansPlateau(Plateau pla) throws ExceptionHorsDuPlateau{
+        if (this.colonne >= 0 && this.ligne >=0 && this.colonne < pla.match.tailleX && 
+                this.ligne < pla.match.tailleY){
+            return true;
+        }
+        else{
+            return false;
+            //throw new ExceptionHorsDuPlateau("case hors du plateau ");                
+        }
+    }
+    /**
      * Methode qui nous permet de comparer deux positions
      * @param autre l'autre poisiton
      * @return true si les deux position sont égales
@@ -120,5 +142,9 @@ public class Position {
     public boolean equals(Object autre){
         Position aCompare = (Position) autre;
         return this.ligne == aCompare.ligne && this.colonne == aCompare.colonne;
+    }
+    @Override
+    public String toString(){
+        return UtilsGomo.intVersHexa(this.ligne) +" "+this.colonne;
     }
 }

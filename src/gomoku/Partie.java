@@ -44,7 +44,7 @@ public class Partie {
      * @param match le match
      */
     public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin{
-            if(match.estDansPlateau(p) && match.jouable(p)){
+            if(p.estDansPlateau(plateau) && match.jouable(p)){
             plateau.set(p, couleurPion);
             if( null != couleurPion )switch (couleurPion) {
                 case NOIR:
@@ -61,24 +61,22 @@ public class Partie {
             }
         }   
     }
-    public boolean victoire(Match m) {
+    public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         List <Position> listeVoisine = new ArrayList<>();
-        for (int lig = 0; lig < m.tailleY ; lig++) {
-                for (int col = 0; col < m.tailleX; col++) {
-                    Position p = new Position(lig,col);
-                    for (Directions d: Directions.toutes()) {
-                        System.out.println(d);
-                        listeVoisine = p.posVoisParDirParDistance(d, 5);
-                        System.out.println(listeVoisine);
-                        for(Position pos : listeVoisine){
-                            if(pos.couleur == p.couleur && p.couleur != Couleur.RIEN && 
-                                    pos.couleur != Couleur.RIEN && pos.couleur !=null){
-                                System.out.println("true");
-                                return true;
-                            }
+        Position[][] listePositions = pla.listePositions;
+        for(int col = 0; col < m.tailleY; col++){
+            for(int lig= 0; lig < m.tailleX; lig++){
+                for (Directions d: Directions.toutes()) {
+                    listeVoisine = listePositions[lig][col].posVoisParDirParDistance(d, 2, pla, m);
+                    for(Position pos : listeVoisine){
+                        System.out.println(listeVoisine +" " + listePositions[lig][col].couleur +" " +pos.couleur );
+                        if(pos.couleur == listePositions[lig][col].couleur && pos.couleur != Couleur.RIEN){
+                            System.out.println("true");
+                            return true;
                         }
-                    }   
-                }
+                    }
+                }   
+                        System.out.println("fin de boucle direc");}
         }
         System.out.println("false");
         return false;
@@ -107,7 +105,7 @@ public class Partie {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
             try{
-                this.premierTour(choixJoueur, couleurJoueur,match, plateau);
+                this.premierTour(choixJoueur, couleurJoueur, match, plateau);
                 listeCoup.add(choixJoueur);
             }
             catch(ExceptionPositionDejaPose dejaPose){
@@ -126,7 +124,7 @@ public class Partie {
      * @param match le match
      */
     public void premierTour(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau{
-            if(match.estDansPlateau(p)){
+            if(p.estDansPlateau(plateau)){
             plateau.set(p, couleurPion);
             if( null != couleurPion )switch (couleurPion) {
                 case NOIR:

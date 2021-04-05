@@ -29,22 +29,7 @@ public class Match {
         this.tailleY = Y;
     }
 
-    /**
-     * Retourne si la position p est bien dans le plateau
-     *
-     * @param p la position a verifié
-     * @return vrai si elle est comprise entre 0 et la taille maximale du
-     * plateau
-     */
-    public boolean estDansPlateau(Position p) throws ExceptionHorsDuPlateau{
-        if (p.colonne >= 0 && p.ligne >=0 && p.colonne < tailleX && 
-                p.ligne < tailleY){
-            return true;
-        }
-        else{
-            throw new ExceptionHorsDuPlateau("case hors du plateau ");                
-        }
-    }
+    
     /**
      * Methode qui permet de dire si il est possible de jouer (si le coup est 
      * bien dans le plateau et que l'on pose a cote d'une case déja jouée)
