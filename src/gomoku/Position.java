@@ -60,10 +60,10 @@ public class Position {
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
      */
-    public static List<Position> posVoisParDirParDistance(Position p, Directions [] direc, int dist){
+    public List<Position> posVoisParDirParDistance(Directions [] direc, int dist){
         List <Position> posVoisine = new ArrayList<>();
         for (Directions d: direc) {
-            Position voisine = new Position((p.ligne + Directions.mvtHoriz(d)*dist), (p.colonne + Directions.mvtVertic(d)*dist));
+            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist), (this.colonne + Directions.mvtVertic(d)*dist));
                  posVoisine.add(voisine);
         }
         return posVoisine;
@@ -71,24 +71,26 @@ public class Position {
 
     /**
      * Boolén qui nous indique si une case a une voisine dans une liste de positions
-     * @param p la position
+     * @param distance
+     * @param direc
      * @param listeDePositions la liste des positions 
      * @return true si la liste de position contient p
      * @throws ExceptionPasVoisin
      */
-    public static boolean estVoisine(Position p,List<Position> listeDePositions) throws ExceptionPasVoisin{
+    public boolean estVoisineParDistParDirec(int distance,Directions[] direc, List<Position> listeDePositions) /*throws ExceptionPasVoisin*/{
         
         boolean voisinePresente = false;
         for(int i=0; i<listeDePositions.size(); i++){
-            if(posVoisParDirParDistance(p, Directions.toutes(),1).contains(listeDePositions.get(i))){
+            if(this.posVoisParDirParDistance(direc,distance).contains(listeDePositions.get(i))){
                 voisinePresente = true;
-            }
-        }
+        }/*
         if(!voisinePresente){
             throw new ExceptionPasVoisin("Pas de voisin");
+        }*/
+        
         }
         return voisinePresente;
-        }
+    }
 
     /**
      * Compte le nombre de position voisine dans une liste
@@ -105,14 +107,17 @@ public class Position {
      * @param listeDePositions
      * @return
      */
-    public boolean cinqVoisinsDansDirec(Directions[] direc, List<Position> listeDePositions){
-        boolean victoire = false;
-        List <Position> posVoisine = new ArrayList<>();
-        posVoisine = posVoisParDirParDistance(this, direc, 1);
-        if( this.nombreDeVoisines(listeDePositions) == 5 ){
-            victoire = true;
+    public boolean quatreVoisinsDansDirec(Directions[] direc, List<Position> listeDePositions) {
+        int cptVoisines=0;
+        for(Directions d: direc){
+            for (int i = 1; i < 5; i++){
+                if(this.estVoisineParDistParDirec(i,direc,listeDePositions)){
+                        cptVoisines++;
+                    }
+            }
         }
-        return victoire;
+        System.out.println(cptVoisines);
+        return cptVoisines>=4;
     }
     /**
      * Methode qui nous permet de comparer deux positions

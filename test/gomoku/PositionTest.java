@@ -28,8 +28,8 @@ public class PositionTest {
     public void testPositionVoisines() throws ExceptionHorsDuPlateau{
         Position aTeste = new Position(30,30);
         Position voisine = new Position (30,29);
-        List listePosVoisine = Position.posVoisParDirParDistance(aTeste,Directions.toutes(), 1);
-        assertEquals(listePosVoisine.contains(voisine), true);
+        List listePosVoisine = aTeste.posVoisParDirParDistance(Directions.toutes(), 1);
+        assertTrue(listePosVoisine.contains(voisine));
         
     }
     @Test
@@ -41,7 +41,7 @@ public class PositionTest {
         List<Position> aTesteVrai= new ArrayList<>();
         aTesteVrai.add(posVrai);
         Position voisine = new Position (30,29);
-        assertTrue(Position.estVoisine(voisine,aTesteVrai));   
+        assertTrue(voisine.estVoisineParDistParDirec(1,Directions.toutes(),aTesteVrai));   
     }
     @Test
     public void testCinqVoisinsDansDirec(){
@@ -52,9 +52,12 @@ public class PositionTest {
         Position pos5 = new Position(30,34);
         Position pos6 = new Position(0,0);
         List listePosVoisine = new ArrayList<>();
-        listePosVoisine = Position.posVoisParDirParDistance(pos1,Directions.toutes(), 1);
-        assertTrue(pos1.cinqVoisinsDansDirec(Directions.horizontale(),listePosVoisine));
-        assertFalse(pos6.cinqVoisinsDansDirec(Directions.horizontale(),listePosVoisine));
+        listePosVoisine.add(pos5);
+        listePosVoisine.add(pos1);
+        listePosVoisine.add(pos2);
+        listePosVoisine.add(pos3);
+        assertTrue(pos4.quatreVoisinsDansDirec(Directions.verticale(),listePosVoisine));
+        assertFalse(pos6.quatreVoisinsDansDirec(Directions.verticale(),listePosVoisine));
     }
     
 }

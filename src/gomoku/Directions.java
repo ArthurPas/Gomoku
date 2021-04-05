@@ -36,7 +36,7 @@ public enum Directions {
      * @return tableau contenant les quatre directions cardinales.
      */
     static Directions[] verticale() {
-        Directions[] dir = {NORD, SUD};
+        Directions[] dir = {SUD};
         return dir;
     }
     /**

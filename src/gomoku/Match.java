@@ -57,7 +57,7 @@ public class Match {
      */
     public boolean jouable(Position p) throws ExceptionPasVoisin {
        
-    return Position.estVoisine(p,Partie.listeCoup);
+    return p.estVoisineParDistParDirec(1,Directions.toutes(),Partie.listeCoup);
     }
 
 
