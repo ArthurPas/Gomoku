@@ -95,7 +95,6 @@ public class Position {
             }
         
         }
-        System.out.println(cpt);
         return cpt;
     }
     /**

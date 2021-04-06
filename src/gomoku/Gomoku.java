@@ -35,38 +35,14 @@ public class Gomoku {
         Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
         Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurPremierJoueur);
         plateau.init(match);
-        //affiche le tableau visuellement
         System.out.println(plateau.affichageGame(match));
-      
-     //debug
-      /*  for (int i=0; i<match.tailleX; i++){
-            for(int j = 0; j< match.tailleY; j++){
-                System.out.println(plateau.listePositions[i][j] + " "
-                + " " + plateau.listePositions[i][j].couleur );
-            }
-        }
-        */
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+        System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
         while(!partie.victoire(match, plateau)){
             partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
-            /*
-            
-                for (int i=0; i<match.tailleX; i++){
-                    for(int j = 0; j< match.tailleY; j++){
-                        System.out.println(plateau.listePositions[i][j] + " "
-                        + " " + plateau.listePositions[i][j].couleur );
-                    }
-        }
-*/
-        partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-         System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
-        /*
-        for (int i=0; i<match.tailleX; i++){
-            for(int j = 0; j< match.tailleY; j++){
-                System.out.println(plateau.listePositions[i][j]+ " " + plateau.listePositions[i][j].couleur);
-            }
-        }*/
-            System.out.println(Partie.listeCoup);
+            System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+            partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+            System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
         }
     }
 }

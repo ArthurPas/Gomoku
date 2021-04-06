@@ -12,54 +12,60 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Arthur & Wijdan 
+ * @author Arthur & Wijdan
  */
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Arthur & Wijdan 
+ * @author Arthur & Wijdan
  */
-public class Partie {   
+public class Partie {
+
     Couleur prochainJoueur;
     final Plateau plateau;
-    static ArrayList <Position> listeCoup;
+    static ArrayList<Position> listeCoup;
     Couleur PremierJoueur;
+
     /**
-    * Constructeur de la partie
-    * @param prochainJoueur couleur du prochain joueur
-    * @param plateau le plateau
-    */
+     * Constructeur de la partie
+     *
+     * @param prochainJoueur couleur du prochain joueur
+     * @param plateau le plateau
+     */
     public Partie(Couleur prochainJoueur, Plateau plateau) {
         this.prochainJoueur = prochainJoueur;
         this.plateau = plateau;
         this.listeCoup = new ArrayList<>();
     }
-    
+
     /**
-     * Methode qui actualise le plateau 
+     * Methode qui actualise le plateau
+     *
      * @param p la position dernierement jouée
      * @param couleurPion la couleur du joueur qui vient de jouable
      * @param match le match
      */
-    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin{
-            if(p.estDansPlateau(plateau) && match.jouable(p)){
+    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
+        if (p.estDansPlateau(plateau) && match.jouable(p)) {
             plateau.set(p, couleurPion);
-            if( null != couleurPion )switch (couleurPion) {
-                case NOIR:
-                    this.prochainJoueur = Couleur.BLANC;
-                    break;
-                case BLANC:
-                    this.prochainJoueur = Couleur.NOIR;
-                    break;
-                case RIEN:
-                    this.prochainJoueur = PremierJoueur;
-                    break;
-                default:
-                    break;
+            if (null != couleurPion) {
+                switch (couleurPion) {
+                    case NOIR:
+                        this.prochainJoueur = Couleur.BLANC;
+                        break;
+                    case BLANC:
+                        this.prochainJoueur = Couleur.NOIR;
+                        break;
+                    case RIEN:
+                        this.prochainJoueur = PremierJoueur;
+                        break;
+                    default:
+                        break;
+                }
             }
-        }   
+        }
     }/*
     public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         List <Position> listeVoisine = new ArrayList<>();
@@ -105,99 +111,81 @@ public class Partie {
         //System.out.println("false");
         return false;
     }
-*/
-    public boolean victoire(Match m,Plateau pla) throws ExceptionHorsDuPlateau{
+     */
+    public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         int nbAAligner = 3;
-        int cpt=1;
-        int cptDeVoisineN = 0;
-        int cptDeVoisineS = 0;
-        int cptDeVoisineE = 0;
-        int cptDeVoisineW = 0;
-        int cptDeVoisineNE = 0;
-        int cptDeVoisineNW = 0;
-        int cptDeVoisineSE = 0;
-        int cptDeVoisineSW = 0;
-        
-        
-        boolean casePasAllie = false;
-        Position p = this.listeCoup.get(this.listeCoup.size()-1);
-            for (int i = 1; i <= nbAAligner; i++) {
-                //for (Directions d: Directions.toutes()) {
-                    cptDeVoisineN = p.compteurVoisineParDirParDistanceParCouleur(Directions.NORD, i, pla, m);
-                    cptDeVoisineS = p.compteurVoisineParDirParDistanceParCouleur(Directions.SUD, i, pla, m);
-                    cptDeVoisineE = p.compteurVoisineParDirParDistanceParCouleur(Directions.EST, i, pla, m);
-                    cptDeVoisineW = p.compteurVoisineParDirParDistanceParCouleur(Directions.OUEST, i, pla, m);
-                    cptDeVoisineNE = p.compteurVoisineParDirParDistanceParCouleur(Directions.NORD_EST, i, pla, m);
-                    cptDeVoisineNW = p.compteurVoisineParDirParDistanceParCouleur(Directions.NORD_OUEST, i, pla, m);
-                    cptDeVoisineSW = p.compteurVoisineParDirParDistanceParCouleur(Directions.SUD_OUEST, i, pla, m);
-                    cptDeVoisineSE = p.compteurVoisineParDirParDistanceParCouleur(Directions.SUD_EST, i, pla, m);
-                    if(cptDeVoisineN + cptDeVoisineS >=nbAAligner-1 ||cptDeVoisineE +  cptDeVoisineW >= nbAAligner
-                            ||cptDeVoisineNE + cptDeVoisineSW >=nbAAligner-1||cptDeVoisineNW + cptDeVoisineSE >=nbAAligner-1){
+        int cpt = 1;
+        int cptDeVoisine = 0;
+        int cptDeVoisineOp = 0;
+        Position p = this.listeCoup.get(this.listeCoup.size() - 1);
+            for (Directions d : Directions.toutes()) {
+                cptDeVoisine = p.compteurVoisineParDirParDistanceParCouleur(d, nbAAligner, pla, m);
+                cptDeVoisineOp = p.compteurVoisineParDirParDistanceParCouleur(Directions.oppose(d), nbAAligner, pla, m);
+                if (cptDeVoisine + cptDeVoisineOp >= nbAAligner - 1){
                     return true;
-                    }
                 }
-            //}
-            //}
+            }
         return false;
     }
-    public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin{
+
+    public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
-            try{
-                this.actualiser(choixJoueur, couleurJoueur,match, plateau);
-                listeCoup.add(choixJoueur);
-            }
-            catch(ExceptionPositionDejaPose dejaPose){
-                System.out.println("test" + dejaPose.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
-            }
-            catch(ExceptionHorsDuPlateau horsPlateau){
-                System.out.println(horsPlateau.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
-            }
-            catch(ExceptionPasVoisin pasVoisin){
-                System.out.println(pasVoisin.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
-            }
+        try {
+            this.actualiser(choixJoueur, couleurJoueur, match, plateau);
+            listeCoup.add(choixJoueur);
+        } catch (ExceptionPositionDejaPose dejaPose) {
+            System.out.println("test" + dejaPose.getMessage());
+            effectuerTour(nom, joueur, couleurJoueur, match);
+        } catch (ExceptionHorsDuPlateau horsPlateau) {
+            System.out.println(horsPlateau.getMessage());
+            effectuerTour(nom, joueur, couleurJoueur, match);
+        } catch (ExceptionPasVoisin pasVoisin) {
+            System.out.println(pasVoisin.getMessage());
+            effectuerTour(nom, joueur, couleurJoueur, match);
+        }
     }
-    public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau{
+
+    public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
-            try{
-                this.premierTour(choixJoueur, couleurJoueur, match, plateau);
-                listeCoup.add(choixJoueur);
-            }
-            catch(ExceptionPositionDejaPose dejaPose){
-                System.out.println("test" + dejaPose.getMessage());
-                effectuerPremierTour(nom, joueur, couleurJoueur, match);
-            }
-            catch(ExceptionHorsDuPlateau horsPlateau){
-                System.out.println(horsPlateau.getMessage());
-                effectuerPremierTour(nom, joueur, couleurJoueur, match);
-            }
+        try {
+            this.premierTour(choixJoueur, couleurJoueur, match, plateau);
+            listeCoup.add(choixJoueur);
+        } catch (ExceptionPositionDejaPose dejaPose) {
+            System.out.println("test" + dejaPose.getMessage());
+            effectuerPremierTour(nom, joueur, couleurJoueur, match);
+        } catch (ExceptionHorsDuPlateau horsPlateau) {
+            System.out.println(horsPlateau.getMessage());
+            effectuerPremierTour(nom, joueur, couleurJoueur, match);
+        }
     }
+
     /**
-     * Methode qui actualise le plateau 
+     * Methode qui actualise le plateau
+     *
      * @param p la position dernierement jouée
      * @param couleurPion la couleur du joueur qui vient de jouable
      * @param match le match
      */
-    public void premierTour(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau{
-            if(p.estDansPlateau(plateau)){
+    public void premierTour(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+        if (p.estDansPlateau(plateau)) {
             plateau.set(p, couleurPion);
-            if( null != couleurPion )switch (couleurPion) {
-                case NOIR:
-                    this.prochainJoueur = Couleur.BLANC;
-                    break;
-                case BLANC:
-                    this.prochainJoueur = Couleur.NOIR;
-                    break;
-                case RIEN:
-                    this.prochainJoueur = PremierJoueur;
-                    break;
-                default:
-                    break;
+            if (null != couleurPion) {
+                switch (couleurPion) {
+                    case NOIR:
+                        this.prochainJoueur = Couleur.BLANC;
+                        break;
+                    case BLANC:
+                        this.prochainJoueur = Couleur.NOIR;
+                        break;
+                    case RIEN:
+                        this.prochainJoueur = PremierJoueur;
+                        break;
+                    default:
+                        break;
+                }
             }
-        }   
+        }
     }
 }

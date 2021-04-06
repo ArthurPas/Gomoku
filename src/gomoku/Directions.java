@@ -29,7 +29,36 @@ public enum Directions {
                 = {NORD, SUD, EST, OUEST, NORD_EST, NORD_OUEST, SUD_EST, SUD_OUEST};
         return directions;
     }
-
+    static Directions oppose(Directions d){
+        Directions oppose = NORD;
+        switch (d) {
+            case NORD:
+            oppose = SUD;
+            break;
+            case SUD:
+            oppose = NORD;
+            break;
+            case EST:
+            oppose = OUEST;
+            break;
+            case NORD_EST:
+            oppose = SUD_OUEST;
+            break;
+            case SUD_EST:
+            oppose = NORD_OUEST;
+            break;
+            case OUEST:
+            oppose = EST;
+            break;
+            case NORD_OUEST:
+            oppose = SUD_EST;
+            break;
+            case SUD_OUEST:
+            oppose = NORD_EST;
+                break;
+        }
+        return oppose;
+    }
     /**
      * Renvoie les directions verticale dans un tableau.
      *
