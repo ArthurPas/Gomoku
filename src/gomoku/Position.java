@@ -75,6 +75,30 @@ public class Position {
         return posVoisine;
     }
     /**
+     * 
+     * @param p la position donné
+     * @param direc le tableau de directions
+     * @param dist la distance a parcourir
+     * @return la liste des positions voisines
+     */
+    public int compteurVoisineParDirParDistanceParCouleur(Directions d, int dist, Plateau pla, Match m) throws ExceptionHorsDuPlateau{
+        int cpt = 0;
+        for (int i = 1; i <= dist; i++) {
+            Position p = new Position(this.ligne + Directions.mvtVertic(d)*i,this.colonne + Directions.mvtHoriz(d)*i);
+            if(p.estDansPlateau(pla)){
+                Position voisine = pla.listePositions[this.ligne + Directions.mvtVertic(d)*i]
+                        [this.colonne + Directions.mvtHoriz(d)*i];
+                
+                if(voisine.couleur == pla.listePositions[voisine.ligne][voisine.colonne].couleur && voisine.couleur != Couleur.RIEN && voisine.couleur !=null){
+                    cpt++;
+                }
+            }
+        
+        }
+        System.out.println(cpt);
+        return cpt;
+    }
+    /**
      * Methode qui renvoie une liste de positions voisine a une position donné et 
      * dans un tableau de direction donné ainsi qu'une distance a parcourir
      * @param p la position donné

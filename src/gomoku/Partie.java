@@ -60,12 +60,12 @@ public class Partie {
                     break;
             }
         }   
-    }
+    }/*
     public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         List <Position> listeVoisine = new ArrayList<>();
         Position[][] listePositions = pla.listePositions;
-        for(int col = 0; col < 1/*m.tailleY*/; col++){
-            for(int lig= 0; lig < 1 /*m.tailleX*/; lig++){
+        for(int col = 0; col < m.tailleY; col++){
+            for(int lig= 0; lig < m.tailleX; lig++){
                 Position p = listePositions[lig][col];
                 for (Directions d: Directions.toutes()) {
                     //boolean identiques = false;
@@ -95,14 +95,49 @@ public class Partie {
                     if(identiques == 1){
                         return true;
                     }
-                    /*if(identiques){
+                    if(identiques){
                         return true;
-                    }*/
+                    }
                 }
             }  
         }
 
         //System.out.println("false");
+        return false;
+    }
+*/
+    public boolean victoire(Match m,Plateau pla) throws ExceptionHorsDuPlateau{
+        int nbAAligner = 3;
+        int cpt=1;
+        int cptDeVoisineN = 0;
+        int cptDeVoisineS = 0;
+        int cptDeVoisineE = 0;
+        int cptDeVoisineW = 0;
+        int cptDeVoisineNE = 0;
+        int cptDeVoisineNW = 0;
+        int cptDeVoisineSE = 0;
+        int cptDeVoisineSW = 0;
+        
+        
+        boolean casePasAllie = false;
+        Position p = this.listeCoup.get(this.listeCoup.size()-1);
+            for (int i = 1; i <= nbAAligner; i++) {
+                //for (Directions d: Directions.toutes()) {
+                    cptDeVoisineN = p.compteurVoisineParDirParDistanceParCouleur(Directions.NORD, i, pla, m);
+                    cptDeVoisineS = p.compteurVoisineParDirParDistanceParCouleur(Directions.SUD, i, pla, m);
+                    cptDeVoisineE = p.compteurVoisineParDirParDistanceParCouleur(Directions.EST, i, pla, m);
+                    cptDeVoisineW = p.compteurVoisineParDirParDistanceParCouleur(Directions.OUEST, i, pla, m);
+                    cptDeVoisineNE = p.compteurVoisineParDirParDistanceParCouleur(Directions.NORD_EST, i, pla, m);
+                    cptDeVoisineNW = p.compteurVoisineParDirParDistanceParCouleur(Directions.NORD_OUEST, i, pla, m);
+                    cptDeVoisineSW = p.compteurVoisineParDirParDistanceParCouleur(Directions.SUD_OUEST, i, pla, m);
+                    cptDeVoisineSE = p.compteurVoisineParDirParDistanceParCouleur(Directions.SUD_EST, i, pla, m);
+                    if(cptDeVoisineN + cptDeVoisineS >=nbAAligner-1 ||cptDeVoisineE +  cptDeVoisineW >= nbAAligner
+                            ||cptDeVoisineNE + cptDeVoisineSW >=nbAAligner-1||cptDeVoisineNW + cptDeVoisineSE >=nbAAligner-1){
+                    return true;
+                    }
+                }
+            //}
+            //}
         return false;
     }
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin{
