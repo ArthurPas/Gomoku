@@ -62,13 +62,11 @@ public class Position {
      */
     public List<Position> posVoisParDirParDistance(Directions d, int dist, Plateau pla, Match m) throws ExceptionHorsDuPlateau{
         List <Position> posVoisine = new ArrayList<>();
-        System.out.println("direction :" + d);
         for (int i = 1; i <= dist; i++) {
             Position p = new Position(this.ligne + Directions.mvtVertic(d)*i,this.colonne + Directions.mvtHoriz(d)*i);
             if(p.estDansPlateau(pla)){
             Position voisine = pla.listePositions[this.ligne + Directions.mvtVertic(d)*i]
                     [this.colonne + Directions.mvtHoriz(d)*i];
-            System.out.println(voisine);
             posVoisine.add(voisine);
             }
         }
@@ -92,14 +90,15 @@ public class Position {
                 Position voisine = pla.listePositions[this.ligne + Directions.mvtVertic(d)*i]
                         [this.colonne + Directions.mvtHoriz(d)*i];
                 
-                if(voisine.couleur == pla.listePositions[this.ligne][this.colonne].couleur && voisine.couleur != Couleur.RIEN && voisine.couleur !=null){
-                    System.out.println("voisine :" + voisine+ " "+voisine.couleur + " pos :" + pla.listePositions[this.ligne]
-                        [this.colonne].couleur + " " +pla.listePositions[this.ligne]
-                        [this.colonne]);
+                if(voisine.couleur == pla.listePositions[this.ligne][this.colonne].couleur 
+                        && voisine.couleur != Couleur.RIEN && voisine.couleur !=null){
+                    //System.out.println("voisine :" + voisine+ " "+voisine.couleur + " pos :" + pla.listePositions[this.ligne]
+                        //[this.colonne].couleur + " " +pla.listePositions[this.ligne][this.colonne]);
                     cpt++;
                 }
                 else{
-                    System.out.println("test");
+                    //System.out.println(voisine.couleur +" "+ pla.listePositions[this.ligne][this.colonne].couleur);
+                    
                     memeCouleur=false;
                 }
             }
@@ -118,12 +117,15 @@ public class Position {
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
      */
-    public List<Position> posVoisParDistance(Directions [] direc, int dist){
+    public List<Position> posVoisParDistance(Directions [] direc, int dist, Plateau pla) throws ExceptionHorsDuPlateau{
         List <Position> posVoisine = new ArrayList<>();
         for (Directions d: direc) {
-            Position voisine = new Position((this.ligne + Directions.mvtHoriz(d)*dist),
-                    (this.colonne + Directions.mvtVertic(d)*dist));
+            Position p = new Position(this.ligne + Directions.mvtVertic(d)*dist,this.colonne + Directions.mvtHoriz(d)*dist);
+            if(p.estDansPlateau(pla)){
+            Position voisine = pla.listePositions[this.ligne + Directions.mvtVertic(d)*dist]
+                        [this.colonne + Directions.mvtHoriz(d)*dist];
                  posVoisine.add(voisine);
+            }
         }
         return posVoisine;
     }
@@ -136,19 +138,17 @@ public class Position {
      * @return true si la liste de position contient p
      * @throws ExceptionPasVoisin
      */
-    public boolean estVoisineParDistParDirec(int distance, Directions[] direc, List<Position> listeDePositions) /*throws ExceptionPasVoisin*/{
+    public boolean estVoisineParDistParDirec(int distance, Directions[] direc, List<Position> listeDePositions, Plateau pla, Match m) throws ExceptionPasVoisin, ExceptionHorsDuPlateau{
         
         boolean voisinePresente = false;
             for(int i=0; i<listeDePositions.size(); i++){
-            if(this.posVoisParDistance(direc, distance).contains(listeDePositions.get(i))){
+                    if(this.posVoisParDistance(direc, distance, pla).contains(listeDePositions.get(i))){
                     voisinePresente = true;
-                }/*
-                if(!voisinePresente){
-                    throw new ExceptionPasVoisin("Pas de voisin");
-                }*/
-        
             }
-        return voisinePresente;
+        System.out.println(voisinePresente);   
+        
+    }
+            return voisinePresente;
     }
 
     

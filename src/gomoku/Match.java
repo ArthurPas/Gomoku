@@ -39,9 +39,13 @@ public class Match {
      * le plateau
      * @throws Exception.ExceptionPasVoisin
      */
-    public boolean jouable(Position p) throws ExceptionPasVoisin {
-       
-    return p.estVoisineParDistParDirec(1,Directions.toutes(),Partie.listeCoup);
+    public boolean jouable(Position p, Plateau pla) throws ExceptionPasVoisin, ExceptionHorsDuPlateau{
+        if(p.estVoisineParDistParDirec(1,Directions.toutes(),Partie.listeCoup, pla, this)){
+            return true;
+        }
+        else{
+            throw new ExceptionPasVoisin("P de voisin");
+        }
     }
 
 

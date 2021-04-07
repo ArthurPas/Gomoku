@@ -26,7 +26,7 @@ public class Gomoku {
         final String nomJUn = "Blanc";
         final String nomJDeux = "Noir";
         Scanner in = new Scanner(System.in);
-        
+        boolean victoire = false;
         Match match = new Match(0,0);
         match.tailleX=UtilsGomo.SaisieLigne(match);
         match.tailleY=UtilsGomo.SaisieColonne(match);
@@ -38,12 +38,23 @@ public class Gomoku {
         System.out.println(plateau.affichageGame(match));
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
         System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
-        partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+        while(!victoire){
+            if(partie.victoire(match, plateau)){
+                victoire = true;
+            }
+            else{
+                partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                
+            }
             System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
-            while(!partie.victoire(match, plateau)){
-            partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-            System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
-            partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+            if(partie.victoire(match, plateau)){
+                victoire = true;
+            }
+            else{
+                 partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+                
+            }
+           
             System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
         }
     }

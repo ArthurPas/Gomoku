@@ -48,7 +48,7 @@ public class Partie {
      * @param match le match
      */
     public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
-        if (p.estDansPlateau(plateau) && match.jouable(p)) {
+        if (p.estDansPlateau(plateau) && match.jouable(p, this.plateau)) {
             plateau.set(p, couleurPion);
             if (null != couleurPion) {
                 switch (couleurPion) {
@@ -108,7 +108,7 @@ public class Partie {
             this.actualiser(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
         } catch (ExceptionPositionDejaPose dejaPose) {
-            System.out.println("test" + dejaPose.getMessage());
+            System.out.println(dejaPose.getMessage());
             effectuerTour(nom, joueur, couleurJoueur, match);
         } catch (ExceptionHorsDuPlateau horsPlateau) {
             System.out.println(horsPlateau.getMessage());
