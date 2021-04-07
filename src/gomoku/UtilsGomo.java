@@ -88,9 +88,9 @@ public class UtilsGomo {
         System.out.println("Veuillez sélectionner le nombre de lignes de votre tableau");
         if (clavier.hasNextInt()) {
             m.tailleX = clavier.nextInt();
-            System.out.println("Nombre lu: " + m.tailleX);
         } else {
             System.out.println("Vous avez tapé autre chose qu’un entier.");
+            SaisieLigne(m);
         }
         return m.tailleX;
 
@@ -106,9 +106,9 @@ public class UtilsGomo {
         System.out.println("Veuillez sélectionner le nombre de colonnes de votre tableau");
         if (clavier.hasNextInt()) {
             m.tailleY = clavier.nextInt();
-            System.out.println("Nombre lu: " + m.tailleY);
         } else {
             System.out.println("Vous avez tapé autre chose qu’un entier.");
+            SaisieColonne(m);
         }
 
         return m.tailleY;

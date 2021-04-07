@@ -72,7 +72,7 @@ public class Plateau {
         for (int lig=0; lig< m.tailleX ;lig++){
         builder.append("| ");
                 for (int col=0; col< m.tailleY ;col++){
-                builder.append(" . " ).append(" | ");
+                builder.append(" ").append(" | ");
                 }
         builder.append(System.lineSeparator());
         }
@@ -89,7 +89,12 @@ public class Plateau {
         for (int lig=0; lig< m.tailleX ;lig++){
         builder.append("| ");
                 for (int col=0; col< m.tailleY ;col++){
-                builder.append(listePositions[lig][col].couleur).append(" | "); //builder.append(case[col]).append(" | ");
+                    if(listePositions[lig][col].couleur != Couleur.RIEN){
+                        builder.append(listePositions[lig][col].couleur).append(" | ");
+                    }
+                    else{
+                        builder.append(" ").append(" | ");
+                    }
                 }
         builder.append(System.lineSeparator());
         }

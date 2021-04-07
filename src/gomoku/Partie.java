@@ -77,7 +77,7 @@ public class Partie {
      * @throws ExceptionHorsDuPlateau
      */
     public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
-        int nbAAligner = 3;
+        int nbAAligner = 5;
         int cptDeVoisine = 0;
         int cptDeVoisineOp = 0;
         Position p = this.listeCoup.get(this.listeCoup.size() - 1);

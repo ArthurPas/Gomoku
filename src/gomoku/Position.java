@@ -76,24 +76,37 @@ public class Position {
     }
     /**
      * 
-     * @param p la position donné
-     * @param direc le tableau de directions
+     * @param d
+     * @param pla
+     * @param m
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
      */
     public int compteurVoisineParDirParDistanceParCouleur(Directions d, int dist, Plateau pla, Match m) throws ExceptionHorsDuPlateau{
         int cpt = 0;
-        for (int i = 1; i <= dist; i++) {
+        boolean memeCouleur = true;
+        int i=1;
+        while(i<=dist || memeCouleur) {
             Position p = new Position(this.ligne + Directions.mvtVertic(d)*i,this.colonne + Directions.mvtHoriz(d)*i);
             if(p.estDansPlateau(pla)){
                 Position voisine = pla.listePositions[this.ligne + Directions.mvtVertic(d)*i]
                         [this.colonne + Directions.mvtHoriz(d)*i];
                 
-                if(voisine.couleur == pla.listePositions[voisine.ligne][voisine.colonne].couleur && voisine.couleur != Couleur.RIEN && voisine.couleur !=null){
+                if(voisine.couleur == pla.listePositions[this.ligne][this.colonne].couleur && voisine.couleur != Couleur.RIEN && voisine.couleur !=null){
+                    System.out.println("voisine :" + voisine+ " "+voisine.couleur + " pos :" + pla.listePositions[this.ligne]
+                        [this.colonne].couleur + " " +pla.listePositions[this.ligne]
+                        [this.colonne]);
                     cpt++;
                 }
+                else{
+                    System.out.println("test");
+                    memeCouleur=false;
+                }
             }
-        
+            else{
+                memeCouleur= false;
+            }
+        i++;
         }
         return cpt;
     }

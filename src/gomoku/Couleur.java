@@ -12,5 +12,16 @@ package gomoku;
 public enum Couleur {
     BLANC,
     NOIR,
-    RIEN,
+    RIEN;
+    
+    @Override
+    public String toString(){
+        if(this==this.BLANC){
+            return "B";   
+        }
+        if(this==this.NOIR){
+            return "N"; 
+        }
+        return " ";
+    }
 }
