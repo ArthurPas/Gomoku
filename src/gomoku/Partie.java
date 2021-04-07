@@ -83,7 +83,7 @@ public class Partie {
         Position p = this.listeCoup.get(this.listeCoup.size() - 1);
             for (Directions d : Directions.toutes()) {
                 cptDeVoisine = p.compteurVoisineParDirParDistanceParCouleur(d, nbAAligner, pla, m);
-                cptDeVoisineOp = p.compteurVoisineParDirParDistanceParCouleur(Directions.oppose(d), nbAAligner, pla, m);
+                cptDeVoisineOp = p.compteurVoisineParDirParDistanceParCouleur(d.oppose(), nbAAligner, pla, m);
                 if (cptDeVoisine + cptDeVoisineOp >= nbAAligner - 1){
                     return true;
                 }

@@ -35,10 +35,9 @@ public class Match {
      * bien dans le plateau et que l'on pose a cote d'une case déja jouée)
      *
      * @param p la position
-     * @param match le match
      * @return true si aucun pion n'est présent et que le la position est dans
      * le plateau
-     * @throws Exception.ExceptionHorsDuPlateau
+     * @throws Exception.ExceptionPasVoisin
      */
     public boolean jouable(Position p) throws ExceptionPasVoisin {
        

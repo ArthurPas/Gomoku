@@ -50,13 +50,18 @@ public class UtilsGomo {
     }
 
     /**
-     *
+     * Methode qui permet de lire la prochaine ligne saisi par l'utilisateur
      * @return
      */
     public static String lireLigne() {
         return in.nextLine().trim();
     }
 
+    /**
+     * Renvoie le string associé à une couleur
+     * @param col la couleur
+     * @return le string associé à une couleur
+     */
     public static String couleurVersString(Couleur col) {
         if (null == col) {
             return "test";
@@ -72,6 +77,11 @@ public class UtilsGomo {
         }
     }
 
+    /**
+     * Saisi des lignes du match
+     * @param m le match
+     * @return l'entier associé aux X du match
+     */
     public static int SaisieLigne(Match m) {
 
         Scanner clavier = new Scanner(System.in);
@@ -86,6 +96,11 @@ public class UtilsGomo {
 
     }
 
+    /**
+     * Saisi des colonnes du match
+     * @param m le match
+     * @return l'entier associé aux Y du match
+     */
     public static int SaisieColonne(Match m) {
         Scanner clavier = new Scanner(System.in);
         System.out.println("Veuillez sélectionner le nombre de colonnes de votre tableau");

@@ -14,6 +14,11 @@ public class JoueurHumain implements Joueur{
     final String nom;
     final Couleur couleur;
     
+    /**
+     * Constructeur de JoueurHumain
+     * @param nomJoueur le nom du joueur
+     * @param saCouleur la couleur du joueur
+     */
     public JoueurHumain(String nomJoueur, Couleur saCouleur) {
         this.nom = nomJoueur;
         this.couleur = saCouleur;

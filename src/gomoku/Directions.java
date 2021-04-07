@@ -29,9 +29,13 @@ public enum Directions {
                 = {NORD, SUD, EST, OUEST, NORD_EST, NORD_OUEST, SUD_EST, SUD_OUEST};
         return directions;
     }
-    static Directions oppose(Directions d){
+    /**
+     * Direction opposé 
+     * @return la direction opposé 
+     */
+    Directions oppose(){
         Directions oppose = NORD;
-        switch (d) {
+        switch (this) {
             case NORD:
             oppose = SUD;
             break;
