@@ -66,55 +66,18 @@ public class Partie {
                 }
             }
         }
-    }/*
-    public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
-        List <Position> listeVoisine = new ArrayList<>();
-        Position[][] listePositions = pla.listePositions;
-        for(int col = 0; col < m.tailleY; col++){
-            for(int lig= 0; lig < m.tailleX; lig++){
-                Position p = listePositions[lig][col];
-                for (Directions d: Directions.toutes()) {
-                    //boolean identiques = false;
-                    int identiques = 1;
-                    int ident = 1;
-                    listeVoisine = p.posVoisParDirParDistance(d, 4, pla, m);
-                    if(listeVoisine.isEmpty() ){
-                        identiques=0;
-                    }
-                    for(Position pos : listeVoisine){
-                        System.out.println(pos+" " + p.couleur +" " +pos.couleur );
-                        if(pos.couleur == p.couleur && pos.couleur != Couleur.RIEN){
-                            ident=1;
-                            System.out.println("+1");
-                            int mul = identiques*ident;
-                            System.out.println("mul " + mul);
-                        }
-                        else{
-                            System.out.println("+0");
-                            ident=0;
-                        }
-                        
-                        identiques= identiques*ident;
-                        System.out.println("identiques " +identiques);
-                        //identiques =(pos.couleur == p.couleur) && (pos.couleur != Couleur.RIEN) ;  
-                    }
-                    if(identiques == 1){
-                        return true;
-                    }
-                    if(identiques){
-                        return true;
-                    }
-                }
-            }  
-        }
-
-        //System.out.println("false");
-        return false;
     }
+
+    /**
+     * Booléen qui indique si 5 case alignées sont de même couleur
+     * @param m le match
+     * @param pla le plateau
+     * @return true si la derniere position jouée compléte un alignement de 5 pions
+     * de la même couleur
+     * @throws ExceptionHorsDuPlateau
      */
     public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
         int nbAAligner = 3;
-        int cpt = 1;
         int cptDeVoisine = 0;
         int cptDeVoisineOp = 0;
         Position p = this.listeCoup.get(this.listeCoup.size() - 1);
@@ -128,6 +91,16 @@ public class Partie {
         return false;
     }
 
+    /**
+     *
+     * @param nom
+     * @param joueur
+     * @param couleurJoueur
+     * @param match
+     * @throws ExceptionPositionDejaPose
+     * @throws ExceptionHorsDuPlateau
+     * @throws ExceptionPasVoisin
+     */
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
@@ -146,11 +119,20 @@ public class Partie {
         }
     }
 
+    /**
+     * Methode qui effectue un tour particulier car c'est le premier 
+     * @param nom le nom du joueur qui va jouer
+     * @param joueur le joueur qui va jouer 
+     * @param couleurJoueur la couleur du joueur 
+     * @param match le match dans lequel le tour est joué 
+     * @throws ExceptionPositionDejaPose
+     * @throws ExceptionHorsDuPlateau
+     */
     public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
         try {
-            this.premierTour(choixJoueur, couleurJoueur, match, plateau);
+            this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
         } catch (ExceptionPositionDejaPose dejaPose) {
             System.out.println("test" + dejaPose.getMessage());
@@ -162,17 +144,20 @@ public class Partie {
     }
 
     /**
-     * Methode qui actualise le plateau
+     * Methode qui change la couleur du joueur 
      *
      * @param p la position dernierement jouée
-     * @param couleurPion la couleur du joueur qui vient de jouable
-     * @param match le match
+     * @param couleurJoueur la couleur du joueur 
+     * @param match le match 
+     * @param plateau le plateau dans lequel on se situe
+     * @throws Exception.ExceptionPositionDejaPose
+     * @throws Exception.ExceptionHorsDuPlateau
      */
-    public void premierTour(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+    public void changementDeCouleur(Position p, Couleur couleurJoueur, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         if (p.estDansPlateau(plateau)) {
-            plateau.set(p, couleurPion);
-            if (null != couleurPion) {
-                switch (couleurPion) {
+            plateau.set(p, couleurJoueur);
+            if (null != couleurJoueur) {
+                switch (couleurJoueur) {
                     case NOIR:
                         this.prochainJoueur = Couleur.BLANC;
                         break;
