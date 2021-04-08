@@ -1,5 +1,10 @@
 package gomoku;
 
+import utilisateur.Couleur;
+import Coordonnees.Position;
+import Coordonnees.Directions;
+import Grille.Plateau;
+import Grille.Match;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;

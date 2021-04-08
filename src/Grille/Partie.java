@@ -1,8 +1,13 @@
-package gomoku;
+package Grille;
 
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import utilisateur.Couleur;
+import Coordonnees.Directions;
+import utilisateur.Joueur;
+import Coordonnees.Position;
+import Utilitaire.UtilsGomo;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +25,7 @@ public class Partie {
 
     Couleur prochainJoueur;
     final Plateau plateau;
-    static ArrayList<Position> listeCoup;
+    public static ArrayList<Position> listeCoup;
     Couleur PremierJoueur;
 
     /**

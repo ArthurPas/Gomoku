@@ -1,8 +1,13 @@
-package gomoku;
+package Coordonnees;
 
+import Coordonnees.Directions;
+import Grille.Plateau;
+import Grille.Match;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import utilisateur.Couleur;
+import Utilitaire.UtilsGomo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,10 +17,9 @@ import java.util.List;
  * @author Arthur & Wijdan
  */
 public class Position {
-    final int ligne;
-    final int colonne;
-    
-    Couleur couleur;
+    public final int ligne;
+    public final int colonne;
+    public Couleur couleur;
     
     /**
      * Constructeur de la classe Positon

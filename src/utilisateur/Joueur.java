@@ -1,4 +1,6 @@
-package gomoku;
+package utilisateur;
+
+import Coordonnees.Position;
 
 /**
  *

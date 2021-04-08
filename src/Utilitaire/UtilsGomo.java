@@ -1,5 +1,8 @@
-package gomoku;
+package Utilitaire;
 
+import utilisateur.Couleur;
+import Coordonnees.Position;
+import Grille.Match;
 import static java.lang.Character.isUpperCase;
 import static java.lang.System.in;
 import java.util.Scanner;

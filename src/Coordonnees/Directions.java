@@ -1,4 +1,4 @@
-package gomoku;
+package Coordonnees;
 
 /**
  *
@@ -19,7 +19,7 @@ public enum Directions {
      *
      * @return tableau contenant toutes les directions.
      */
-    static Directions[] toutes() {
+    public static Directions[] toutes() {
         Directions[] directions
                 = {NORD, SUD, EST, OUEST, NORD_EST, NORD_OUEST, SUD_EST, SUD_OUEST};
         return directions;
@@ -28,7 +28,7 @@ public enum Directions {
      * Direction opposé 
      * @return la direction opposé 
      */
-    Directions oppose(){
+    public Directions oppose(){
         Directions oppose = NORD;
         switch (this) {
             case NORD:

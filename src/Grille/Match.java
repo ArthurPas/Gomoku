@@ -1,7 +1,10 @@
-package gomoku;
+package Grille;
+import Grille.Partie;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import Coordonnees.Directions;
+import Coordonnees.Position;
 import java.util.Scanner;
 
 /**
@@ -10,8 +13,8 @@ import java.util.Scanner;
  */
 public class Match {
 
-    int tailleX;
-    int tailleY;
+    public int tailleX;
+    public int tailleY;
 
     /**
      * Constructeur du match

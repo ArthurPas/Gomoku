@@ -1,5 +1,12 @@
 package gomoku;
 
+import Utilitaire.UtilsGomo;
+import utilisateur.JoueurHumain;
+import utilisateur.Joueur;
+import utilisateur.Couleur;
+import Grille.Plateau;
+import Grille.Match;
+import Grille.Partie;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;

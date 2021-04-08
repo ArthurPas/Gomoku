@@ -1,6 +1,10 @@
-package gomoku;
+package utilisateur;
+import utilisateur.Joueur;
+import utilisateur.Couleur;
+import Coordonnees.Position;
 import java.util.Scanner;
-import gomoku.UtilsGomo;
+import Utilitaire.UtilsGomo;
+import Utilitaire.UtilsGomo;
 /**
  *
  * @author arthur

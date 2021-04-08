@@ -1,7 +1,14 @@
-package gomoku;
+package Grille;
 
+import Grille.Match;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPositionDejaPose;
+import utilisateur.Couleur;
+import utilisateur.Couleur;
+import Coordonnees.Position;
+import Coordonnees.Position;
+import Utilitaire.UtilsGomo;
+import Utilitaire.UtilsGomo;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,8 +18,8 @@ import java.util.ArrayList;
  */
 public class Plateau {
 
-    Match match;
-    Position[][] listePositions;
+    public Match match;
+    public Position[][] listePositions;
 
     public Plateau(Match m) {
         this.listePositions = new Position[m.tailleX][m.tailleY];
