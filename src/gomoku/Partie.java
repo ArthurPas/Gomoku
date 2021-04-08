@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import Exception.ExceptionHorsDuPlateau;
@@ -144,8 +139,7 @@ public class Partie {
     }
 
     /**
-     * Methode qui change la couleur du joueur 
-     *
+     * Methode qui change la couleur du joueur et ajoute la position au plateau 
      * @param p la position dernierement jouée
      * @param couleurJoueur la couleur du joueur 
      * @param match le match 

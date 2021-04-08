@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import Exception.ExceptionHorsDuPlateau;
@@ -35,9 +30,9 @@ public class Gomoku {
         Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
         Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurPremierJoueur);
         plateau.init(match);
-        System.out.println(plateau.affichageGame(match));
+        System.out.println(plateau.afficherPlateau(match));
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-        System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+        System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
         while(!victoire){
             if(partie.victoire(match, plateau)){
                 victoire = true;
@@ -46,7 +41,7 @@ public class Gomoku {
                 partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
                 
             }
-            System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+            System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
             if(partie.victoire(match, plateau)){
                 victoire = true;
             }
@@ -55,7 +50,7 @@ public class Gomoku {
                 
             }
            
-            System.out.println(plateau.actualiserGame(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+            System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
         }
     }
 }

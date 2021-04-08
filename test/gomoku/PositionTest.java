@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
+import Exception.ExceptionPositionDejaPose;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,39 +21,23 @@ public class PositionTest {
     public PositionTest() {
     }
     @Test
-    public void testPositionVoisines() throws ExceptionHorsDuPlateau{
-        Position aTeste = new Position(30,30);
-        Position voisine = new Position (30,29);
-        List listePosVoisine = aTeste.posVoisParDirParDistance(Directions.SUD, 1);
-        assertTrue(listePosVoisine.contains(voisine));
+    public void testPositionVoisines() throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose{
         
-    }/*
-    @Test
-    public void testEstVoisine() throws ExceptionHorsDuPlateau, ExceptionPasVoisin{
-        Position posFaux= new Position(10,10);
-        Position posVrai= new Position(30,30);
-        List<Position> aTesteFaux = new ArrayList<>();
-        aTesteFaux.add(posFaux);
-        List<Position> aTesteVrai= new ArrayList<>();
-        aTesteVrai.add(posVrai);
-        Position voisine = new Position (30,29);
-        assertTrue(voisine.estVoisineParDistParDirec(1,aTesteVrai));   
+        List <Position> listePosVoisine= new ArrayList<>();
+        Match m = new Match(40,40);
+        Plateau pla = new Plateau(m);
+        pla.init(m);
+        
+        Position aTeste = new Position(30,30);
+        Position voisine = new Position(30,29);
+        Position pasVoisine = new Position(0,9);
+        pla.set(aTeste, Couleur.BLANC);
+        pla.set(voisine, Couleur.BLANC);
+        pla.set(pasVoisine, Couleur.BLANC);
+        listePosVoisine = aTeste.posVoisParDistance(Directions.toutes(), 1, pla);
+        assertTrue(listePosVoisine.contains(voisine));
+        assertFalse(listePosVoisine.contains(pasVoisine));
+        
     }
-    @Test
-    public void testCinqVoisinsDansDirec(){
-        Position pos1 = new Position(30,30);
-        Position pos2 = new Position(30,31);
-        Position pos3 = new Position(30,32);
-        Position pos4 = new Position(30,33);
-        Position pos5 = new Position(30,34);
-        Position pos6 = new Position(0,0);
-        List listePosVoisine = new ArrayList<>();
-        listePosVoisine.add(pos1);
-        listePosVoisine.add(pos4);
-        listePosVoisine.add(pos2);
-        listePosVoisine.add(pos5);
-        assertTrue(pos3.quatreVoisinsDansDirec(Directions.verticale(),listePosVoisine));
-        assertFalse(pos6.quatreVoisinsDansDirec(Directions.verticale(),listePosVoisine));
-    }
-    */
+    
 }
