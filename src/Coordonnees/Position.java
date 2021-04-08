@@ -43,13 +43,14 @@ public class Position {
      * @return vrai si il n'y a aucune couleur sur cette case
      * @throws ExceptionPositionDejaPose
      */
-    public boolean positionJouable(Position p) throws ExceptionPositionDejaPose{
-        if(p.couleur == Couleur.RIEN){
+    public boolean positionJouable() {//throws ExceptionPositionDejaPose{
+        /*if(this.couleur == Couleur.RIEN){
             return true;
         }
         else{
             throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
-        }
+        }*/
+        return this.couleur == Couleur.RIEN;
     }
      /**
      * Methode qui renvoie une liste de positions voisine a une position donné et 
@@ -168,6 +169,29 @@ public class Position {
             //throw new ExceptionHorsDuPlateau("case hors du plateau ");                
         }
     }
+    public static String posPossible(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionHorsDuPlateau{
+        for (int lig = 0; lig < m.tailleX; lig++) {
+            for (int col = 0; col < m.tailleY; col++){
+                Position p = pla.listePositions[lig][col];
+                System.out.println(p);
+                if(p.positionJouable() && m.jouable(p, pla) ){
+                    return p.toString();
+                }
+            }
+            
+        }
+        throw new ExceptionPositionDejaPose("toutes les cases sont utilisées");
+    }
+    public static String posPremierPossible(Plateau pla, Match m) throws ExceptionPositionDejaPose,ExceptionHorsDuPlateau{
+        for (int lig = 0; lig < m.tailleX; lig++) {
+            for (int col = 0; col < m.tailleY; col++){
+                Position p = pla.listePositions[lig][col];
+                System.out.println(p);
+                    return p.toString();
+                }
+            }
+        throw new ExceptionHorsDuPlateau("Case hors du plateau");
+    }
     /**
      * Methode qui nous permet de comparer deux positions
      * @param autre l'autre poisiton
@@ -180,6 +204,6 @@ public class Position {
     }
     @Override
     public String toString(){
-        return UtilsGomo.intVersHexa(this.ligne) +" "+this.colonne;
+        return UtilsGomo.intVersHexa(this.ligne)+String.valueOf(this.colonne);
     }
 }

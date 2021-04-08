@@ -45,8 +45,11 @@ public class Plateau {
      * @throws Exception.ExceptionPositionDejaPose
      */
     public void set(Position p, Couleur c) throws ExceptionPositionDejaPose {
-        if (p.positionJouable(this.listePositions[p.ligne][p.colonne])) {
+        if (this.listePositions[p.ligne][p.colonne].positionJouable()) {
             this.listePositions[p.ligne][p.colonne].couleur = c;
+        }
+        else{
+            throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
         }
     }
 
@@ -111,14 +114,14 @@ public class Plateau {
             if (lig != -1 && lig < 10) {
                 builder.append(UtilsGomo.intVersHexa(lig));
             } else if (lig > -1) {
-                builder.append(lig);
+                builder.append(UtilsGomo.intVersHexa(lig));
             }
             if (lig > -1) {
                 builder.append("|");
             }
             for (int col = 0; col < m.tailleY; col++) {
                 if (lig == -1) {
-                    builder.append(" ");
+                    builder.append("  ");
                     builder.append("0" + col);
                 } else if (lig >= 0 && listePositions[lig][col].couleur != Couleur.RIEN) {
                     builder.append(listePositions[lig][col].couleur).append(" | ");

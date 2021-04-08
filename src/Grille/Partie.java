@@ -105,6 +105,7 @@ public class Partie {
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, 
             Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
+        if(joueur.getClass()==utilisateur.JoueurHumain.class){
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
         try {
             this.actualiser(choixJoueur, couleurJoueur, match, plateau);
@@ -119,6 +120,23 @@ public class Partie {
             System.out.println(pasVoisin.getMessage());
             effectuerTour(nom, joueur, couleurJoueur, match);
         }
+        }
+        else{
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossible(plateau, match));
+        try {
+            this.actualiser(choixJoueur, couleurJoueur, match, plateau);
+            listeCoup.add(choixJoueur);
+        } catch (ExceptionPositionDejaPose dejaPose) {
+            System.out.println(dejaPose.getMessage());
+            effectuerTour(nom, joueur, couleurJoueur, match);
+        } catch (ExceptionHorsDuPlateau horsPlateau) {
+            System.out.println(horsPlateau.getMessage());
+            effectuerTour(nom, joueur, couleurJoueur, match);
+        } catch (ExceptionPasVoisin pasVoisin) {
+            System.out.println(pasVoisin.getMessage());
+            effectuerTour(nom, joueur, couleurJoueur, match);
+        }
+    }
     }
 
     /**
@@ -133,6 +151,7 @@ public class Partie {
     public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur,
             Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
+        if(joueur.getClass()==utilisateur.JoueurHumain.class){
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
         try {
             this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
@@ -145,7 +164,20 @@ public class Partie {
             effectuerPremierTour(nom, joueur, couleurJoueur, match);
         }
     }
-
+        else{
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossible(plateau, match));
+        try {
+            this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
+            listeCoup.add(choixJoueur);
+        } catch (ExceptionPositionDejaPose dejaPose) {
+            System.out.println(dejaPose.getMessage());
+            effectuerPremierTour(nom, joueur, couleurJoueur, match);
+        } catch (ExceptionHorsDuPlateau horsPlateau) {
+            System.out.println(horsPlateau.getMessage());
+            effectuerPremierTour(nom, joueur, couleurJoueur, match);
+        }
+    }
+    }
     /**
      * Methode qui change la couleur du joueur et ajoute la position au plateau 
      * @param p la position dernierement jouée

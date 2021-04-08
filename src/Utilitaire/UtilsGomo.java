@@ -2,7 +2,11 @@ package Utilitaire;
 
 import utilisateur.Couleur;
 import Coordonnees.Position;
+import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionPasVoisin;
+import Exception.ExceptionPositionDejaPose;
 import Grille.Match;
+import Grille.Plateau;
 import static java.lang.Character.isUpperCase;
 import static java.lang.System.in;
 import java.util.Scanner;

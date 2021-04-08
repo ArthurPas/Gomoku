@@ -42,7 +42,7 @@ public class Match {
             return true;
         }
         else{
-            throw new ExceptionPasVoisin("P de voisin");
+            throw new ExceptionPasVoisin("Pas de voisin");
         }
     }
 

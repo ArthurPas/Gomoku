@@ -12,6 +12,7 @@ import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
 import java.util.HashSet;
 import java.util.Scanner;
+import utilisateur.JoueurRobot;
 
 /**
  *
@@ -27,20 +28,22 @@ public class Gomoku {
         final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
         final String nomJUn = "Blanc";
         final String nomJDeux = "Noir";
-        Scanner in = new Scanner(System.in);
         boolean victoire = false;
         Match match = new Match(0,0);
         match.tailleX=UtilsGomo.SaisieLigne(match);
         match.tailleY=UtilsGomo.SaisieColonne(match);
         Plateau plateau = new Plateau(match);
         Partie partie = new Partie(couleurPremierJoueur, plateau);
-        Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
-        Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurPremierJoueur);
+        //Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
+        //Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurDeuxiemeJoueur);
+        Joueur joueurUn = new JoueurRobot(couleurPremierJoueur);
+        Joueur joueurDeux = new JoueurRobot(couleurDeuxiemeJoueur);
         String nomDernierJoueur = nomJUn;
         plateau.init(match);
         System.out.println(plateau.afficherPlateau(match));
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
         System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
+        
         while(!victoire){
             if(partie.victoire(match, plateau)){
                 victoire = true;
