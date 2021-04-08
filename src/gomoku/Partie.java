@@ -42,7 +42,8 @@ public class Partie {
      * @param couleurPion la couleur du joueur qui vient de jouable
      * @param match le match
      */
-    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
+    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau)
+            throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
         if (p.estDansPlateau(plateau) && match.jouable(p, this.plateau)) {
             plateau.set(p, couleurPion);
             if (null != couleurPion) {
@@ -96,7 +97,8 @@ public class Partie {
      * @throws ExceptionHorsDuPlateau
      * @throws ExceptionPasVoisin
      */
-    public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
+    public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, 
+            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
         try {
@@ -123,7 +125,8 @@ public class Partie {
      * @throws ExceptionPositionDejaPose
      * @throws ExceptionHorsDuPlateau
      */
-    public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur, Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+    public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur,
+            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
         try {
@@ -147,7 +150,8 @@ public class Partie {
      * @throws Exception.ExceptionPositionDejaPose
      * @throws Exception.ExceptionHorsDuPlateau
      */
-    public void changementDeCouleur(Position p, Couleur couleurJoueur, Match match, Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+    public void changementDeCouleur(Position p, Couleur couleurJoueur, Match match, 
+            Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         if (p.estDansPlateau(plateau)) {
             plateau.set(p, couleurJoueur);
             if (null != couleurJoueur) {

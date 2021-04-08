@@ -29,6 +29,7 @@ public class Gomoku {
         Partie partie = new Partie(couleurPremierJoueur, plateau);
         Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
         Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurPremierJoueur);
+        String nomDernierJoueur = nomJUn;
         plateau.init(match);
         System.out.println(plateau.afficherPlateau(match));
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
@@ -39,6 +40,7 @@ public class Gomoku {
             }
             else{
                 partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                nomDernierJoueur = nomJDeux;
                 
             }
             System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
@@ -46,11 +48,12 @@ public class Gomoku {
                 victoire = true;
             }
             else{
-                 partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-                
+                partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+                nomDernierJoueur = nomJUn;
             }
            
             System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size()-1)));
         }
+        System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
     }
 }
