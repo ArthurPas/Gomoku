@@ -6,10 +6,12 @@ import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
 import Grille.Match;
+import Grille.Partie;
 import Grille.Plateau;
 import static java.lang.Character.isUpperCase;
 import static java.lang.System.in;
 import java.util.Scanner;
+import utilisateur.Joueur;
 
 /**
  *
@@ -35,8 +37,9 @@ public class UtilsGomo {
             return (int) lettre - constanteAsciiMaj;
         }
     }
-    public static char intVersHexa(int chiffre){
-             return (char) (chiffre + constanteAsciiMaj);
+
+    public static char intVersHexa(int chiffre) {
+        return (char) (chiffre + constanteAsciiMaj);
     }
 
     /**
@@ -53,6 +56,7 @@ public class UtilsGomo {
 
     /**
      * Methode qui permet de lire la prochaine ligne saisi par l'utilisateur
+     *
      * @return
      */
     public static String lireLigne() {
@@ -61,6 +65,7 @@ public class UtilsGomo {
 
     /**
      * Renvoie le string associé à une couleur
+     *
      * @param col la couleur
      * @return le string associé à une couleur
      */
@@ -81,6 +86,7 @@ public class UtilsGomo {
 
     /**
      * Saisi des lignes du match
+     *
      * @param m le match
      * @return l'entier associé aux X du match
      */
@@ -100,6 +106,7 @@ public class UtilsGomo {
 
     /**
      * Saisi des colonnes du match
+     *
      * @param m le match
      * @return l'entier associé aux Y du match
      */
@@ -115,4 +122,36 @@ public class UtilsGomo {
 
         return m.tailleY;
     }
+
+    public static void deroulementPartie(Couleur couleurPremierJoueur, Couleur couleurDeuxiemeJoueur,
+            Joueur joueurUn, Joueur joueurDeux, Match match, Plateau plateau, Partie partie, String nomJUn, String nomJDeux)
+            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin {
+
+        boolean victoire = false;
+        String nomDernierJoueur = nomJUn;
+        plateau.init(match);
+        System.out.println(plateau.afficherPlateau(match));
+        partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+        System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
+
+        while (!victoire) {
+            if (partie.victoire(match, plateau)) {
+                victoire = true;
+            } else {
+                partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                nomDernierJoueur = nomJDeux;
+
+            }
+            System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
+            if (partie.victoire(match, plateau)) {
+                victoire = true;
+            } else {
+                partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+                nomDernierJoueur = nomJUn;
+            }
+
+            System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
+        }
+    }
+
 }
