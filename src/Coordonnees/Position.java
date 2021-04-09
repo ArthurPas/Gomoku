@@ -47,13 +47,7 @@ public class Position {
      * @return vrai si il n'y a aucune couleur sur cette case
      * @throws ExceptionPositionDejaPose
      */
-    public boolean positionJouable() {//throws ExceptionPositionDejaPose{
-        /*if(this.couleur == Couleur.RIEN){
-            return true;
-        }
-        else{
-            throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
-        }*/
+    public boolean positionJouable() {
         return this.couleur == Couleur.RIEN;
     }
 
@@ -166,7 +160,7 @@ public class Position {
                 && this.ligne < pla.match.tailleY);
     }
 
-    public static String posPossible(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionHorsDuPlateau {
+    public static String posPossibleParRobot(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionHorsDuPlateau {
         for (int lig = 0; lig < m.tailleX; lig++) {
             for (int col = 0; col < m.tailleY; col++) {
                 Position p = pla.listePositions[lig][col];
@@ -179,7 +173,7 @@ public class Position {
         throw new ExceptionPositionDejaPose("toutes les cases sont utilisées");
     }
 
-    public static String posPremierPossible(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+    public static String posPremierPossibleParRobot(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         for (int lig = 0; lig < m.tailleX; lig++) {
             for (int col = 0; col < m.tailleY; col++) {
                 Position p = pla.listePositions[lig][col];

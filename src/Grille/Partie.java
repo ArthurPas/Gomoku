@@ -122,7 +122,7 @@ public class Partie {
         }
         }
         else{
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossible(plateau, match));
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossibleParRobot(plateau, match));
         try {
             this.actualiser(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
@@ -165,7 +165,7 @@ public class Partie {
         }
     }
         else{
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossible(plateau, match));
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossibleParRobot(plateau, match));
         try {
             this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
