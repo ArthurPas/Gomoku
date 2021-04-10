@@ -10,6 +10,7 @@ import Grille.Partie;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import Exception.ExceptionQuitter;
 import java.util.HashSet;
 import java.util.Scanner;
 import utilisateur.JoueurRobot;
@@ -23,7 +24,7 @@ public class Gomoku {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
+    public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter {
         final Couleur couleurPremierJoueur = Couleur.BLANC;
         final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
         Match match = new Match(0, 0);

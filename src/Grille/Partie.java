@@ -7,6 +7,7 @@ import utilisateur.Couleur;
 import Coordonnees.Directions;
 import utilisateur.Joueur;
 import Coordonnees.Position;
+import Exception.ExceptionQuitter;
 import Utilitaire.UtilsGomo;
 import java.util.ArrayList;
 
@@ -103,7 +104,7 @@ public class Partie {
      * @throws ExceptionPasVoisin
      */
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, 
-            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
+            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if(joueur.getClass()==utilisateur.JoueurHumain.class){
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
@@ -149,7 +150,7 @@ public class Partie {
      * @throws ExceptionHorsDuPlateau
      */
     public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur,
-            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionQuitter {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if(joueur.getClass()==utilisateur.JoueurHumain.class){
         Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());

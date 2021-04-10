@@ -10,6 +10,11 @@ package Exception;
  * @author arthur
  */
 public class ExceptionHorsDuPlateau extends Exception {
+
+    /**
+     * Constructeur de l'exception qui gére le cas ou la position est hors du plateau
+     * @param msg le message à afficher
+     */
     public ExceptionHorsDuPlateau(String msg) {
         super(msg);
     }

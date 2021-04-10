@@ -5,6 +5,7 @@ import Coordonnees.Position;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import Exception.ExceptionQuitter;
 import Grille.Match;
 import Grille.Partie;
 import Grille.Plateau;
@@ -19,27 +20,27 @@ import utilisateur.Joueur;
  */
 public class UtilsGomo {
 
-    final static int constanteAsciimMin = 97;
+    final static int CONSTANTEASCCIMIN = 97;
     static Scanner in = new Scanner(System.in);
-    final static int constanteAsciiMaj = 65;
+    final static int CONSTANTEASCCIMAJ = 65;
 
     /**
      * Methode qui permet de transformer une lettre en chiffre (0 pour a,1 pour
      * b etc ...)
      *
-     * @param lettreminuscule la lettre
+     * @param lettre la lettre 
      * @return l'entier correspondant
      */
     public static int hexaVersInt(char lettre) {
         if (!isUpperCase(lettre)) {
-            return (int) lettre - constanteAsciimMin;
+            return (int) lettre - CONSTANTEASCCIMIN;
         } else {
-            return (int) lettre - constanteAsciiMaj;
+            return (int) lettre - CONSTANTEASCCIMAJ;
         }
     }
 
     public static char intVersHexa(int chiffre) {
-        return (char) (chiffre + constanteAsciiMaj);
+        return (char) (chiffre + CONSTANTEASCCIMAJ);
     }
 
     /**
@@ -57,10 +58,15 @@ public class UtilsGomo {
     /**
      * Methode qui permet de lire la prochaine ligne saisi par l'utilisateur
      *
-     * @return
+     * @return la ligne lu
+     * @throws Exception.ExceptionQuitter
      */
-    public static String lireLigne() {
-        return in.nextLine().trim();
+    public static String lireLigne() throws ExceptionQuitter {
+        String ligne = in.nextLine().trim();
+        if ("/quit".equals(ligne)){
+            throw new ExceptionQuitter("Au revoir");
+        }
+        return ligne;
     }
 
     /**
@@ -125,7 +131,7 @@ public class UtilsGomo {
 
     public static void deroulementPartie(Couleur couleurPremierJoueur, Couleur couleurDeuxiemeJoueur,
             Joueur joueurUn, Joueur joueurDeux, Match match, Plateau plateau, Partie partie, String nomJUn, String nomJDeux)
-            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin {
+            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter {
 
         boolean victoire = false;
         String nomDernierJoueur = nomJUn;

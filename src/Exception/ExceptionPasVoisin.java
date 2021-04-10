@@ -10,12 +10,10 @@ package Exception;
  * @author arthur
  */
 public class ExceptionPasVoisin extends Exception {
-
+    
     /**
-     * Constructs an instance of <code>ExceptionPasVoisin</code> with the
-     * specified detail message.
-     *
-     * @param msg the detail message.
+     * Constructeur de l'exception qui gère le cas où il n'y a pas de voisins
+     * @param msg le messahee à afficher
      */
     public ExceptionPasVoisin(String msg) {
         super(msg);

@@ -11,6 +11,10 @@ package Exception;
  */
 public class ExceptionPositionDejaPose extends Exception {
 
+    /**
+     * Constructeur de l'exception qui gére le cas ou la position est deja prise
+     * @param msg le message a afficher
+     */
     public ExceptionPositionDejaPose(String msg) {
         super(msg);
     }
