@@ -129,6 +129,10 @@ public class Plateau {
         return builder.toString();
     }
 
+    /**
+     * Methode qui nous dit si le plateau est complet
+     * @return true si le plateau est complet
+     */
     public boolean estComplet(){
         boolean complet = true;
         for (int col = 0; col < this.match.tailleY; col++) {
