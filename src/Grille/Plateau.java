@@ -134,7 +134,6 @@ public class Plateau {
         for (int col = 0; col < this.match.tailleY; col++) {
             for (int lig = 0; lig < this.match.tailleX; lig++) {
                 if(this.listePositions[lig][col].couleur == Couleur.RIEN){
-                    System.out.println(complet);
                     complet = false;
                 }
             }
