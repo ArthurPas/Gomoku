@@ -151,9 +151,10 @@ public class Position {
     /**
      * Retourne si la position p est bien dans le plateau
      *
-     * @param p la position a verifié
+     * @param pla le plateau
      * @return vrai si elle est comprise entre 0 et la taille maximale du
      * plateau
+     * @throws Exception.ExceptionHorsDuPlateau
      */
     public boolean estDansPlateau(Plateau pla) throws ExceptionHorsDuPlateau {
         return(this.colonne >= 0 && this.ligne >= 0 && this.colonne < pla.match.tailleX

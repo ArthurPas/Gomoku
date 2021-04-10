@@ -61,12 +61,12 @@ public class UtilsGomo {
         try{
             int intCol = Integer.parseInt(stringCol);
             if(intCol>= pla.match.tailleX){
-                throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne");
+                throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne (hors du plateau)");
             }
             Position pos = new Position(intLigne, intCol);
             return pos;
         } catch (NumberFormatException e) {
-            throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne");
+            throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne (pas un nombre valide)");
         }
         
         
@@ -169,8 +169,14 @@ public class UtilsGomo {
             } else if (plateau.estComplet(match)) {
                 complet = true;
             } else {
+                try{
                 partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
                 nomDernierJoueur = nomJDeux;
+                }
+                catch (ExceptionMauvaiseEntree e){
+                    e.getMessage();
+                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                }
 
             }
 
@@ -180,8 +186,14 @@ public class UtilsGomo {
             } else if (plateau.estComplet(match)) {
                 complet = true;
             } else {
+                try{
                 partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
                 nomDernierJoueur = nomJUn;
+                }
+                catch (ExceptionMauvaiseEntree e){
+                    e.getMessage();
+                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                }
             }
 
             System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));

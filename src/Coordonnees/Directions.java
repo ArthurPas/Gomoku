@@ -58,33 +58,6 @@ public enum Directions {
         }
         return oppose;
     }
-    /**
-     * Renvoie les directions verticale dans un tableau.
-     *
-     * @return tableau contenant les quatre directions cardinales.
-     */
-    static Directions[] verticale() {
-        Directions[] dir = {SUD};
-        return dir;
-    }
-    /**
-     * Renvoie les directions horizontale dans un tableau.
-     *
-     * @return tableau contenant les quatre directions cardinales.
-     */
-    static Directions[] horizontale() {
-        Directions[] dir = {EST, OUEST};
-        return dir;
-    }
-    /**
-     * Renvoie les quatre directions diagonales dans un tableau.
-     *
-     * @return tableau contenant les quatre directions cardinales.
-     */
-    static Directions[] diagonales() {
-        Directions[] diag = {NORD_EST, NORD_OUEST, SUD_EST, SUD_OUEST};
-        return diag;
-    }
 
     /**
      * Renvoie le nombre de cases parcourues horizontalement lorsqu'on suit
