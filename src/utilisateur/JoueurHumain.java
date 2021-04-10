@@ -2,6 +2,8 @@ package utilisateur;
 import utilisateur.Joueur;
 import utilisateur.Couleur;
 import Coordonnees.Position;
+import Exception.ExceptionMauvaiseEntree;
+import Grille.Plateau;
 import java.util.Scanner;
 import Utilitaire.UtilsGomo;
 import Utilitaire.UtilsGomo;
@@ -27,10 +29,11 @@ public class JoueurHumain implements Joueur{
      * Renvoie a partir d'une chaine de caractére la position
      * @param choixJoueur la chaine de caractére
      * @return la position choisi par le joueur
+     * @throws Exception.ExceptionMauvaiseEntree
      */
     @Override
-    public Position choix(String choixJoueur){
-        return UtilsGomo.stringVersPos(choixJoueur.toUpperCase());
+    public Position choix(String choixJoueur, Plateau plateau) throws ExceptionMauvaiseEntree{
+        return UtilsGomo.stringVersPos(choixJoueur.toUpperCase(), plateau);
 
     }
 }

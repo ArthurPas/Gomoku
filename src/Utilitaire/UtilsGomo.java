@@ -3,6 +3,7 @@ package Utilitaire;
 import utilisateur.Couleur;
 import Coordonnees.Position;
 import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionMauvaiseEntree;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
 import Exception.ExceptionQuitter;
@@ -31,7 +32,7 @@ public class UtilsGomo {
      * @param lettre la lettre
      * @return l'entier correspondant
      */
-    public static int hexaVersInt(char lettre) {
+    public static int lettreVersInt(char lettre) {
         if (!isUpperCase(lettre)) {
             return (int) lettre - CONSTANTEASCCIMIN;
         } else {
@@ -44,15 +45,36 @@ public class UtilsGomo {
     }
 
     /**
-     * Converti un String vers une Position
+     * Converti une entrée (String) vers une Position et vérifie qu'il correspond à une 
+     * position du plateau
      *
      * @param stringPos le string à convertir
      * @return la position
      */
-    public static Position stringVersPos(String stringPos) {
-        Position pos = new Position(UtilsGomo.hexaVersInt(stringPos.toUpperCase().charAt(0)),
+    public static Position stringVersPos(String stringPos, Plateau pla) throws ExceptionMauvaiseEntree{
+        char charLigne = stringPos.charAt(0);
+        int intLigne = lettreVersInt(charLigne);
+        if(intLigne >= pla.match.tailleY){
+            throw new ExceptionMauvaiseEntree("mauvaise entrée de ligne");
+        }
+        String stringCol = stringPos.substring(1);
+        try{
+            int intCol = Integer.parseInt(stringCol);
+            if(intCol>= pla.match.tailleX){
+                throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne");
+            }
+            Position pos = new Position(intLigne, intCol);
+            return pos;
+        } catch (NumberFormatException e) {
+            throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne");
+        }
+        
+        
+        /*
+        Position pos = new Position(UtilsGomo.lettreVersInt(stringPos.toUpperCase().charAt(0)),
                 Integer.parseInt(stringPos.substring(1)));
-        return pos;
+       */
+        
     }
 
     /**
@@ -131,7 +153,7 @@ public class UtilsGomo {
 
     public static void deroulementPartie(Couleur couleurPremierJoueur, Couleur couleurDeuxiemeJoueur,
             Joueur joueurUn, Joueur joueurDeux, Match match, Plateau plateau, Partie partie, String nomJUn, String nomJDeux)
-            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter {
+            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
 
         boolean victoire = false;
         boolean complet = false;

@@ -7,6 +7,7 @@ import utilisateur.Couleur;
 import Coordonnees.Directions;
 import utilisateur.Joueur;
 import Coordonnees.Position;
+import Exception.ExceptionMauvaiseEntree;
 import Exception.ExceptionQuitter;
 import Utilitaire.UtilsGomo;
 import java.util.ArrayList;
@@ -104,10 +105,10 @@ public class Partie {
      * @throws ExceptionPasVoisin
      */
     public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur, 
-            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter {
+            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if(joueur.getClass()==utilisateur.JoueurHumain.class){
-        Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
+        Position choixJoueur = joueur.choix(UtilsGomo.lireLigne(), plateau);
         try {
             this.actualiser(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
@@ -123,7 +124,7 @@ public class Partie {
         }
         }
         else{
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossibleParRobot(plateau, match));
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossibleParRobot(plateau, match), plateau);
         try {
             this.actualiser(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
@@ -150,10 +151,10 @@ public class Partie {
      * @throws ExceptionHorsDuPlateau
      */
     public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur,
-            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionQuitter {
+            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionQuitter, ExceptionMauvaiseEntree {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if(joueur.getClass()==utilisateur.JoueurHumain.class){
-        Position choixJoueur = joueur.choix(UtilsGomo.lireLigne());
+        Position choixJoueur = joueur.choix(UtilsGomo.lireLigne(), plateau);
         try {
             this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);
@@ -166,7 +167,7 @@ public class Partie {
         }
     }
         else{
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossibleParRobot(plateau, match));
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossibleParRobot(plateau, match), plateau);
         try {
             this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
             listeCoup.add(choixJoueur);

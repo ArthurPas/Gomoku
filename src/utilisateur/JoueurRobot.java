@@ -6,6 +6,7 @@
 package utilisateur;
 
 import Coordonnees.Position;
+import Exception.ExceptionMauvaiseEntree;
 import Grille.Match;
 import Grille.Plateau;
 import Utilitaire.UtilsGomo;
@@ -21,7 +22,7 @@ public class JoueurRobot implements Joueur{
         this.couleur = saCouleur;
     }
     @Override
-    public Position choix(String choixJoueur){
-        return UtilsGomo.stringVersPos(choixJoueur);
+    public Position choix(String choixJoueur, Plateau plateau) throws ExceptionMauvaiseEntree{
+        return UtilsGomo.stringVersPos(choixJoueur, plateau);
     }
 }
