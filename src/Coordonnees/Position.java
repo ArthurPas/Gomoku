@@ -55,12 +55,13 @@ public class Position {
      * Methode qui renvoie une liste de positions voisine a une position donné
      * et dans un tableau de direction donné ainsi qu'une distance a parcourir
      *
-     * @param p la position donné
-     * @param direc le tableau de directions
-     * @param dist la distance a parcourir
+     * @param d la direction à suivre
+     * @param dist la distance à parcourir 
+     * @param pla le plateau
      * @return la liste des positions voisines
+     * @throws Exception.ExceptionHorsDuPlateau
      */
-    public List<Position> posVoisParDirParDistance(Directions d, int dist, Plateau pla, Match m) throws ExceptionHorsDuPlateau {
+    public List<Position> posVoisParDirParDistance(Directions d, int dist, Plateau pla) throws ExceptionHorsDuPlateau {
         List<Position> posVoisine = new ArrayList<>();
         for (int i = 1; i <= dist; i++) {
             Position p = new Position(this.ligne + Directions.mvtVertic(d) * i, this.colonne + Directions.mvtHoriz(d) * i);
@@ -73,14 +74,14 @@ public class Position {
     }
 
     /**
-     *
-     * @param d
-     * @param pla
-     * @param m
+     * Méthode qui compte le nombre de voisine dans une direction par une distance
+     * @param d la direction
+     * @param pla le plateau
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
+     * @throws Exception.ExceptionHorsDuPlateau
      */
-    public int compteurVoisineParDirParDistanceParCouleur(Directions d, int dist, Plateau pla, Match m) throws ExceptionHorsDuPlateau {
+    public int compteurVoisineParDirParDistanceParCouleur(Directions d, int dist, Plateau pla) throws ExceptionHorsDuPlateau {
         int cpt = 0;
         boolean memeCouleur = true;
         int i = 1;
@@ -108,11 +109,11 @@ public class Position {
     /**
      * Methode qui renvoie une liste de positions voisine a une position donné
      * et dans un tableau de direction donné ainsi qu'une distance a parcourir
-     *
-     * @param p la position donné
      * @param direc le tableau de directions
+     * @param pla le plateau
      * @param dist la distance a parcourir
      * @return la liste des positions voisines
+     * @throws Exception.ExceptionHorsDuPlateau
      */
     public List<Position> posVoisParDistance(Directions[] direc, int dist, Plateau pla) throws ExceptionHorsDuPlateau {
         List<Position> posVoisine = new ArrayList<>();
@@ -130,13 +131,15 @@ public class Position {
      * Boolén qui nous indique si une case a une voisine dans une liste de
      * positions
      *
-     * @param distance
-     * @param direc
+     * @param distance la distance a parcourir
+     * @param direc le tableau de direction a suivre
      * @param listeDePositions la liste des positions
+     * @param pla le plateau
      * @return true si la liste de position contient p
      * @throws ExceptionPasVoisin
+     * @throws Exception.ExceptionHorsDuPlateau
      */
-    public boolean estVoisineParDistParDirec(int distance, Directions[] direc, List<Position> listeDePositions, Plateau pla, Match m) throws ExceptionPasVoisin, ExceptionHorsDuPlateau {
+    public boolean estVoisineParDistParDirec(int distance, Directions[] direc, List<Position> listeDePositions, Plateau pla) throws ExceptionPasVoisin, ExceptionHorsDuPlateau {
 
         boolean voisinePresente = false;
         for (int i = 0; i < listeDePositions.size(); i++) {
@@ -161,11 +164,19 @@ public class Position {
                 && this.ligne < pla.match.tailleY);
     }
 
-    public static String posPossibleParRobot(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionHorsDuPlateau {
-        for (int lig = 0; lig < m.tailleX; lig++) {
-            for (int col = 0; col < m.tailleY; col++) {
+    /**
+     * Methode qui renvoie le string de la pose par le robot
+     * @param pla le plateau
+     * @return une chaine de caractére correspondant à la position jouée par le robot
+     * @throws ExceptionPositionDejaPose
+     * @throws ExceptionPasVoisin
+     * @throws ExceptionHorsDuPlateau
+     */
+    public static String posPossibleParRobot(Plateau pla) throws ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionHorsDuPlateau {
+        for (int lig = 0; lig < pla.match.tailleX; lig++) {
+            for (int col = 0; col < pla.match.tailleY; col++) {
                 Position p = pla.listePositions[lig][col];
-                if (p.positionJouable() && m.jouable(p, pla)) {
+                if (p.positionJouable() && pla.match.jouable(p, pla)) {
                     return p.toString();
                 }
             }
@@ -174,9 +185,16 @@ public class Position {
         throw new ExceptionPositionDejaPose("toutes les cases sont utilisées");
     }
 
-    public static String posPremierPossibleParRobot(Plateau pla, Match m) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
-        for (int lig = 0; lig < m.tailleX; lig++) {
-            for (int col = 0; col < m.tailleY; col++) {
+    /**
+     * Methode qui renvoie le string de la pose par le robot au premier tour
+     * @param pla le plateau
+     * @return une chaine de caractére correspondant à la position jouée par le robot
+     * @throws ExceptionPositionDejaPose
+     * @throws ExceptionHorsDuPlateau
+     */
+    public static String posPremierPossibleParRobot(Plateau pla) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
+        for (int lig = 0; lig < pla.match.tailleX; lig++) {
+            for (int col = 0; col < pla.match.tailleY; col++) {
                 Position p = pla.listePositions[lig][col];
                 return p.toString();
             }

@@ -118,17 +118,17 @@ public class UtilsGomo {
      * @param m le match
      * @return l'entier associé aux X du match
      */
-    public static int SaisieLigne(Match m) {
-
+    public static int SaisieLigne() {
+        int tailleX = 0;
         Scanner clavier = new Scanner(System.in);
         System.out.println("Veuillez sélectionner le nombre de lignes de votre tableau");
         if (clavier.hasNextInt()) {
-            m.tailleX = clavier.nextInt();
+            tailleX = clavier.nextInt();
         } else {
             System.out.println("Vous avez tapé autre chose qu’un entier.");
-            SaisieLigne(m);
+            SaisieLigne();
         }
-        return m.tailleX;
+        return tailleX;
 
     }
 
@@ -138,67 +138,84 @@ public class UtilsGomo {
      * @param m le match
      * @return l'entier associé aux Y du match
      */
-    public static int SaisieColonne(Match m) {
+    public static int SaisieColonne() {
         Scanner clavier = new Scanner(System.in);
+        int tailleY= 0;
         System.out.println("Veuillez sélectionner le nombre de colonnes de votre tableau");
         if (clavier.hasNextInt()) {
-            m.tailleY = clavier.nextInt();
+            tailleY = clavier.nextInt();
         } else {
             System.out.println("Vous avez tapé autre chose qu’un entier.");
-            SaisieColonne(m);
+            SaisieColonne();
         }
 
-        return m.tailleY;
+        return tailleY;
     }
 
+    /**
+     * Execute le déroulement de la partie
+     * @param couleurPremierJoueur la couleur du premier joueur
+     * @param couleurDeuxiemeJoueur la couleur du deuxieme joueur
+     * @param joueurUn le joueur numéro 1
+     * @param joueurDeux le joueur numéro 2
+     * @param plateau la plateau
+     * @param partie la partie 
+     * @param nomJUn le nom du premier joueur
+     * @param nomJDeux le nom du deuxieme joueur
+     * @throws ExceptionHorsDuPlateau
+     * @throws ExceptionPositionDejaPose
+     * @throws ExceptionPasVoisin
+     * @throws ExceptionQuitter
+     * @throws ExceptionMauvaiseEntree
+     */
     public static void deroulementPartie(Couleur couleurPremierJoueur, Couleur couleurDeuxiemeJoueur,
-            Joueur joueurUn, Joueur joueurDeux, Match match, Plateau plateau, Partie partie, String nomJUn, String nomJDeux)
+            Joueur joueurUn, Joueur joueurDeux, Plateau plateau, Partie partie, String nomJUn, String nomJDeux)
             throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
 
         boolean victoire = false;
         boolean complet = false;
         String nomDernierJoueur = nomJUn;
-        plateau.init(match);
-        System.out.println(plateau.afficherPlateau(match));
-        partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
-        System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
+        plateau.init();
+        System.out.println(plateau.afficherPlateau());
+        partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur);
+        System.out.println(plateau.afficherPlateauActualise( ));
 
         while (!victoire && !complet) {
-            if (partie.victoire(match, plateau)) {
+            if (partie.victoire(plateau)) {
                 victoire = true;
-            } else if (plateau.estComplet(match)) {
+            } else if (plateau.estComplet()) {
                 complet = true;
             } else {
                 try{
-                partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
                 nomDernierJoueur = nomJDeux;
                 }
                 catch (ExceptionMauvaiseEntree e){
                     e.getMessage();
-                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
                 }
 
             }
 
-            System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
-            if (partie.victoire(match, plateau)) {
+            System.out.println(plateau.afficherPlateauActualise());
+            if (partie.victoire(plateau)) {
                 victoire = true;
-            } else if (plateau.estComplet(match)) {
+            } else if (plateau.estComplet()) {
                 complet = true;
             } else {
                 try{
-                partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
+                partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur);
                 nomDernierJoueur = nomJUn;
                 }
                 catch (ExceptionMauvaiseEntree e){
                     e.getMessage();
-                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
+                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
                 }
             }
 
-            System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
+            System.out.println(plateau.afficherPlateauActualise());
         }
-        if (plateau.estComplet(match)) {
+        if (plateau.estComplet()) {
             System.out.println("Partie nulle");
         }
     }

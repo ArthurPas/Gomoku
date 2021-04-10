@@ -8,6 +8,7 @@ import Grille.Plateau;
 import Grille.Match;
 import Grille.Partie;
 import Exception.ExceptionHorsDuPlateau;
+import Exception.ExceptionMauvaiseEntree;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
 import Exception.ExceptionQuitter;
@@ -24,12 +25,12 @@ public class Gomoku {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter {
+    public static void main(String[] args) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
         final Couleur couleurPremierJoueur = Couleur.BLANC;
         final Couleur couleurDeuxiemeJoueur = Couleur.NOIR;
         Match match = new Match(0, 0);
-        match.tailleX = UtilsGomo.SaisieLigne(match);
-        match.tailleY = UtilsGomo.SaisieColonne(match);
+        match.tailleX = UtilsGomo.SaisieLigne();
+        match.tailleY = UtilsGomo.SaisieColonne();
         Plateau plateau = new Plateau(match);
         Partie partie = new Partie(couleurPremierJoueur, plateau);
         System.out.println("Rentrer le nom du premier Joueur");
@@ -52,24 +53,24 @@ public class Gomoku {
             case "1":
                 Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
                 Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurDeuxiemeJoueur);
-                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, joueurUn, joueurDeux, match, plateau, partie, nomJUn, nomJDeux);
-                if(!plateau.estComplet(match)){
+                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, joueurUn, joueurDeux, plateau, partie, nomJUn, nomJDeux);
+                if(!plateau.estComplet()){
                     System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
                 }
                 break;
              case "2":
                 Joueur j1 = new JoueurHumain(nomJUn, couleurPremierJoueur);
                 Joueur j2 = new JoueurRobot(couleurDeuxiemeJoueur);
-                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, j1, j2, match, plateau, partie, nomJUn, nomJDeux);
-                if(!plateau.estComplet(match)){
+                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, j1, j2, plateau, partie, nomJUn, nomJDeux);
+                if(!plateau.estComplet()){
                     System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
                 }
                 break;
             case "3":
                 Joueur joueur = new JoueurRobot(couleurPremierJoueur);
                 Joueur joueurbis = new JoueurRobot(couleurDeuxiemeJoueur);
-                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, joueur, joueurbis, match, plateau, partie, nomJUn, nomJDeux);
-                if(!plateau.estComplet(match)){
+                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, joueur, joueurbis, plateau, partie, nomJUn, nomJDeux);
+                if(!plateau.estComplet()){
                     System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
                 }
                 break;

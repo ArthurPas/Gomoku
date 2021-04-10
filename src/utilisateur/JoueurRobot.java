@@ -18,11 +18,23 @@ import Utilitaire.UtilsGomo;
 public class JoueurRobot implements Joueur{
     Couleur couleur;
     
+    /**
+     * COnstructeur du joueur robot
+     * @param saCouleur
+     */
     public JoueurRobot(Couleur saCouleur){
         this.couleur = saCouleur;
     }
+
+    /**
+     * Methode qui retourne la position jouée par le robot
+     * @param choixPosition la chaine de caractére entrée par le robot
+     * @param plateau le plateau
+     * @return la position jouée par le robot
+     * @throws ExceptionMauvaiseEntree
+     */
     @Override
-    public Position choix(String choixJoueur, Plateau plateau) throws ExceptionMauvaiseEntree{
-        return UtilsGomo.stringVersPos(choixJoueur, plateau);
+    public Position choix(String choixPosition, Plateau plateau) throws ExceptionMauvaiseEntree{
+        return UtilsGomo.stringVersPos(choixPosition, plateau);
     }
 }

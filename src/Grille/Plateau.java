@@ -26,9 +26,9 @@ public class Plateau {
         this.match = m;
     }
 
-    public void init(Match m) {
-        for (int col = 0; col < m.tailleY; col++) {
-            for (int lig = 0; lig < m.tailleX; lig++) {
+    public void init() {
+        for (int col = 0; col < this.match.tailleY; col++) {
+            for (int lig = 0; lig < this.match.tailleX; lig++) {
                 Position p = new Position(lig, col);
                 p = p.positionVide(p);
                 this.listePositions[lig][col] = p;
@@ -63,13 +63,12 @@ public class Plateau {
     }
 
     /**
-     *
-     * @param m
-     * @return
+     * Methode qui affiche le plateau à l'écran
+     * @return la chaine de caractére qui lui correspond
      */
-    public String afficherPlateau(Match m) {
+    public String afficherPlateau() {
         StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
-        for (int lig = -1; lig < m.tailleX; lig++) {
+        for (int lig = -1; lig < this.match.tailleX; lig++) {
 
             if (lig != -1 && lig < 10) {
                 builder.append(UtilsGomo.intVersHexa(lig));
@@ -79,7 +78,7 @@ public class Plateau {
             if (lig > -1) {
                 builder.append("|");
             }
-            for (int col = 0; col < m.tailleY; col++) {
+            for (int col = 0; col < this.match.tailleY; col++) {
                 if (lig == -1 && col < 10) {
                     builder.append("  ");
                     builder.append("0" + col);
@@ -97,16 +96,14 @@ public class Plateau {
     }
 
     /**
-     *
-     * @param m
-     * @param p
+     * Methode qui affiche un plateau actualisé à l'écran
      * @return
      */
-    public String afficherPlateauActualise(Match m, Position p) {
+    public String afficherPlateauActualise() {
         StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
 
         //boucle avec le nombre de ligne
-        for (int lig = -1; lig < m.tailleX; lig++) {
+        for (int lig = -1; lig < this.match.tailleX; lig++) {
 
             if (lig != -1 && lig < 10) {
                 builder.append(UtilsGomo.intVersHexa(lig));
@@ -116,7 +113,7 @@ public class Plateau {
             if (lig > -1) {
                 builder.append("|");
             }
-            for (int col = 0; col < m.tailleY; col++) {
+            for (int col = 0; col < this.match.tailleY; col++) {
                 if (lig == -1) {
                     builder.append("  ");
                     builder.append("0" + col);
@@ -132,10 +129,10 @@ public class Plateau {
         return builder.toString();
     }
 
-    public boolean estComplet(Match m) {
+    public boolean estComplet(){
         boolean complet = true;
-        for (int col = 0; col < m.tailleY; col++) {
-            for (int lig = 0; lig < m.tailleX; lig++) {
+        for (int col = 0; col < this.match.tailleY; col++) {
+            for (int lig = 0; lig < this.match.tailleX; lig++) {
                 if(this.listePositions[lig][col].couleur == Couleur.RIEN){
                     System.out.println(complet);
                     complet = false;

@@ -32,7 +32,7 @@ public class PositionTest {
         List <Position> listePosVoisine= new ArrayList<>();
         Match m = new Match(40,40);
         Plateau pla = new Plateau(m);
-        pla.init(m);
+        pla.init();
         
         Position aTeste = new Position(30,30);
         Position voisine = new Position(30,29);
@@ -49,7 +49,7 @@ public class PositionTest {
     public void testPositionJouable() throws ExceptionPositionDejaPose{
         Match m = new Match(40,40);
         Plateau pla = new Plateau(m);
-        pla.init(m);
+        pla.init();
         Partie p = new Partie(Couleur.BLANC, pla);
         pla.set(new Position(0,0), Couleur.BLANC);
         assertFalse(pla.listePositions[0][0].positionJouable());
@@ -59,7 +59,7 @@ public class PositionTest {
     public void testEstDansPlateau() throws ExceptionHorsDuPlateau{
         Match m = new Match(40,40);
         Plateau pla = new Plateau(m);
-        pla.init(m);
+        pla.init();
         Partie p = new Partie(Couleur.BLANC, pla);
         assertFalse(new Position(30,50).estDansPlateau(pla));
         assertTrue(new Position(30,30).estDansPlateau(pla));

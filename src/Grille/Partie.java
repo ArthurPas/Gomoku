@@ -10,14 +10,12 @@ import Coordonnees.Position;
 import Exception.ExceptionMauvaiseEntree;
 import Exception.ExceptionQuitter;
 import Utilitaire.UtilsGomo;
-import java.util.ArrayList;
 
 /**
  *
  * @author Arthur & Wijdan
  */
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -46,12 +44,12 @@ public class Partie {
      * Methode qui actualise le plateau
      *
      * @param p la position dernierement jouée
-     * @param couleurPion la couleur du joueur qui vient de jouable
-     * @param match le match
+     * @param couleurPion la couleur du joueur qui vient de jouer
+     * @param plateau la plateau
      */
-    public void actualiser(Position p, Couleur couleurPion, Match match, Plateau plateau)
+    public void actualiser(Position p, Couleur couleurPion, Plateau plateau)
             throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
-        if (p.estDansPlateau(plateau) && match.jouable(p, this.plateau)) {
+        if (p.estDansPlateau(plateau) && plateau.match.jouable(p, this.plateau)) {
             plateau.set(p, couleurPion);
             if (null != couleurPion) {
                 switch (couleurPion) {
@@ -74,20 +72,19 @@ public class Partie {
     /**
      * Booléen qui indique si 5 case alignées sont de même couleur
      *
-     * @param m le match
      * @param pla le plateau
      * @return true si la derniere position jouée compléte un alignement de 5
      * pions de la même couleur
      * @throws ExceptionHorsDuPlateau
      */
-    public boolean victoire(Match m, Plateau pla) throws ExceptionHorsDuPlateau {
+    public boolean victoire(Plateau pla) throws ExceptionHorsDuPlateau {
         int nbAAligner = 5;
         int cptDeVoisine = 0;
         int cptDeVoisineOp = 0;
         Position p = this.listeCoup.get(this.listeCoup.size() - 1);
         for (Directions d : Directions.toutes()) {
-            cptDeVoisine = p.compteurVoisineParDirParDistanceParCouleur(d, nbAAligner, pla, m);
-            cptDeVoisineOp = p.compteurVoisineParDirParDistanceParCouleur(d.oppose(), nbAAligner, pla, m);
+            cptDeVoisine = p.compteurVoisineParDirParDistanceParCouleur(d, nbAAligner, pla);
+            cptDeVoisineOp = p.compteurVoisineParDirParDistanceParCouleur(d.oppose(), nbAAligner, pla);
             if (cptDeVoisine + cptDeVoisineOp >= nbAAligner - 1) {
                 return true;
             }
@@ -100,48 +97,47 @@ public class Partie {
      * @param nom le nom du joueur
      * @param joueur le joueur
      * @param couleurJoueur la couleur du joueur
-     * @param match le match 
      * @throws ExceptionPositionDejaPose
      * @throws ExceptionHorsDuPlateau
      * @throws ExceptionPasVoisin
      */
-    public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur,
-            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
+    public void effectuerTour(String nom, Joueur joueur, Couleur couleurJoueur
+   ) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if (joueur.getClass() == utilisateur.JoueurHumain.class) {
             try {
                 Position choixJoueur = joueur.choix(UtilsGomo.lireLigne(), plateau);
                 try {
-                    this.actualiser(choixJoueur, couleurJoueur, match, plateau);
+                    this.actualiser(choixJoueur, couleurJoueur, plateau);
                     listeCoup.add(choixJoueur);
                 } catch (ExceptionPositionDejaPose dejaPose) {
                     System.out.println(dejaPose.getMessage());
-                    effectuerTour(nom, joueur, couleurJoueur, match);
+                    effectuerTour(nom, joueur, couleurJoueur);
                 } catch (ExceptionHorsDuPlateau horsPlateau) {
                     System.out.println(horsPlateau.getMessage());
-                    effectuerTour(nom, joueur, couleurJoueur, match);
+                    effectuerTour(nom, joueur, couleurJoueur);
                 } catch (ExceptionPasVoisin pasVoisin) {
                     System.out.println(pasVoisin.getMessage());
-                    effectuerTour(nom, joueur, couleurJoueur, match);
+                    effectuerTour(nom, joueur, couleurJoueur);
                 }
             } catch (ExceptionMauvaiseEntree e) {
                 System.out.println(e.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
+                effectuerTour(nom, joueur, couleurJoueur);
             }
         } else {
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossibleParRobot(plateau, match), plateau);
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossibleParRobot(plateau), plateau);
             try {
-                this.actualiser(choixJoueur, couleurJoueur, match, plateau);
+                this.actualiser(choixJoueur, couleurJoueur, plateau);
                 listeCoup.add(choixJoueur);
             } catch (ExceptionPositionDejaPose dejaPose) {
                 System.out.println(dejaPose.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
+                effectuerTour(nom, joueur, couleurJoueur);
             } catch (ExceptionHorsDuPlateau horsPlateau) {
                 System.out.println(horsPlateau.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
+                effectuerTour(nom, joueur, couleurJoueur);
             } catch (ExceptionPasVoisin pasVoisin) {
                 System.out.println(pasVoisin.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
+                effectuerTour(nom, joueur, couleurJoueur);
             }
         }
     }
@@ -152,43 +148,42 @@ public class Partie {
      * @param nom le nom du joueur qui va jouer
      * @param joueur le joueur qui va jouer
      * @param couleurJoueur la couleur du joueur
-     * @param match le match dans lequel le tour est joué
      * @throws ExceptionPositionDejaPose
      * @throws ExceptionHorsDuPlateau
      */
-    public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur,
-            Match match) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionQuitter, ExceptionMauvaiseEntree, ExceptionPasVoisin {
+    public void effectuerPremierTour(String nom, Joueur joueur, Couleur couleurJoueur
+            ) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionQuitter, ExceptionMauvaiseEntree, ExceptionPasVoisin {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if (joueur.getClass() == utilisateur.JoueurHumain.class) {
             try {
                 Position choixJoueur = joueur.choix(UtilsGomo.lireLigne(), plateau);
                 try {
-                    this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
+                    this.changementDeCouleur(choixJoueur, couleurJoueur, plateau);
                     listeCoup.add(choixJoueur);
                 } catch (ExceptionPositionDejaPose dejaPose) {
                     System.out.println(dejaPose.getMessage());
-                    effectuerPremierTour(nom, joueur, couleurJoueur, match);
+                    effectuerPremierTour(nom, joueur, couleurJoueur);
                 } catch (ExceptionHorsDuPlateau horsPlateau) {
                     System.out.println(horsPlateau.getMessage());
-                    effectuerPremierTour(nom, joueur, couleurJoueur, match);
+                    effectuerPremierTour(nom, joueur, couleurJoueur);
                 }
             } catch (ExceptionMauvaiseEntree e) {
                 System.out.println(e.getMessage());
-                effectuerTour(nom, joueur, couleurJoueur, match);
+                effectuerTour(nom, joueur, couleurJoueur);
                 
             }
 
         } else {
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossibleParRobot(plateau, match), plateau);
+            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossibleParRobot(plateau), plateau);
             try {
-                this.changementDeCouleur(choixJoueur, couleurJoueur, match, plateau);
+                this.changementDeCouleur(choixJoueur, couleurJoueur, plateau);
                 listeCoup.add(choixJoueur);
             } catch (ExceptionPositionDejaPose dejaPose) {
                 System.out.println(dejaPose.getMessage());
-                effectuerPremierTour(nom, joueur, couleurJoueur, match);
+                effectuerPremierTour(nom, joueur, couleurJoueur);
             } catch (ExceptionHorsDuPlateau horsPlateau) {
                 System.out.println(horsPlateau.getMessage());
-                effectuerPremierTour(nom, joueur, couleurJoueur, match);
+                effectuerPremierTour(nom, joueur, couleurJoueur);
             }
         }
     }
@@ -198,12 +193,11 @@ public class Partie {
      *
      * @param p la position dernierement jouée
      * @param couleurJoueur la couleur du joueur
-     * @param match le match
      * @param plateau le plateau dans lequel on se situe
      * @throws Exception.ExceptionPositionDejaPose
      * @throws Exception.ExceptionHorsDuPlateau
      */
-    public void changementDeCouleur(Position p, Couleur couleurJoueur, Match match,
+    public void changementDeCouleur(Position p, Couleur couleurJoueur,
             Plateau plateau) throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau {
         if (p.estDansPlateau(plateau)) {
             plateau.set(p, couleurJoueur);
@@ -224,4 +218,5 @@ public class Partie {
             }
         }
     }
+    
 }
