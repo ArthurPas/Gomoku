@@ -32,8 +32,8 @@ public class JoueurHumain implements Joueur{
      * @throws Exception.ExceptionMauvaiseEntree
      */
     @Override
-    public Position choix(String choixPosition, Plateau plateau) throws ExceptionMauvaiseEntree{
-        return UtilsGomo.stringVersPos(choixPosition.toUpperCase(), plateau);
+    public Position choix(String choixPosition, Plateau pla) throws ExceptionMauvaiseEntree{
+        return pla.stringVersPos(choixPosition.toUpperCase());
 
     }
 }

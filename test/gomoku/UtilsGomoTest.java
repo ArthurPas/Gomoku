@@ -33,24 +33,12 @@ public class UtilsGomoTest {
         assertEquals(0, I);  
         assertEquals(1, J);  
      }
-     @Test
-     public void testStringversPos() throws ExceptionMauvaiseEntree{
-        Match match = new Match(10,10);
-        Plateau plateau = new Plateau(match);
-        String coorda="a0";
-        String coordb = "B1";
-        assertEquals(new Position(0,0),UtilsGomo.stringVersPos(coorda, plateau));
-        assertEquals(new Position(1,1),UtilsGomo.stringVersPos(coordb, plateau));
-     }
-    /**
-     * Test of intVersHexa method, of class UtilsGomo.
-     */
     @Test
     public void testIntVersHexa() {
         System.out.println("intVersHexa");
         int chiffre = 0;
         char expResult = 'A';
-        char result = UtilsGomo.intVersHexa(chiffre);
+        char result = UtilsGomo.intVersChar(chiffre);
         assertEquals(expResult, result);
     }
 }

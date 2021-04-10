@@ -27,7 +27,8 @@ public class Partie {
     final Plateau plateau;
     public static ArrayList<Position> listeCoup;
     Couleur PremierJoueur;
-
+    final int nbAAligner = 5;
+   
     /**
      * Constructeur de la partie
      *
@@ -45,7 +46,7 @@ public class Partie {
      *
      * @param p la position dernierement jouée
      * @param couleurPion la couleur du joueur qui vient de jouer
-     * @param plateau la plateau
+     * @param plateau le plateau
      */
     public void actualiser(Position p, Couleur couleurPion, Plateau plateau)
             throws ExceptionPositionDejaPose, ExceptionHorsDuPlateau, ExceptionPasVoisin {
@@ -77,8 +78,7 @@ public class Partie {
      * pions de la même couleur
      * @throws ExceptionHorsDuPlateau
      */
-    public boolean victoire(Plateau pla) throws ExceptionHorsDuPlateau {
-        int nbAAligner = 5;
+    public boolean victoire(Plateau pla) throws ExceptionHorsDuPlateau {     
         int cptDeVoisine = 0;
         int cptDeVoisineOp = 0;
         Position p = this.listeCoup.get(this.listeCoup.size() - 1);
@@ -125,7 +125,7 @@ public class Partie {
                 effectuerTour(nom, joueur, couleurJoueur);
             }
         } else {
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPossibleParRobot(plateau), plateau);
+            Position choixJoueur = plateau.stringVersPos(Position.posPossibleParRobot(plateau));
             try {
                 this.actualiser(choixJoueur, couleurJoueur, plateau);
                 listeCoup.add(choixJoueur);
@@ -156,7 +156,7 @@ public class Partie {
         System.out.println("Joueur " + nom + " Choisir votre coup : ");
         if (joueur.getClass() == utilisateur.JoueurHumain.class) {
             try {
-                Position choixJoueur = joueur.choix(UtilsGomo.lireLigne(), plateau);
+                Position choixJoueur = joueur.choix(UtilsGomo.lireLigne(),plateau);
                 try {
                     this.changementDeCouleur(choixJoueur, couleurJoueur, plateau);
                     listeCoup.add(choixJoueur);
@@ -174,7 +174,7 @@ public class Partie {
             }
 
         } else {
-            Position choixJoueur = UtilsGomo.stringVersPos(Position.posPremierPossibleParRobot(plateau), plateau);
+            Position choixJoueur = plateau.stringVersPos(Position.posPremierPossibleParRobot(plateau));
             try {
                 this.changementDeCouleur(choixJoueur, couleurJoueur, plateau);
                 listeCoup.add(choixJoueur);
@@ -216,6 +216,71 @@ public class Partie {
                         break;
                 }
             }
+        }
+    }
+     /**
+     * Execute le déroulement de la partie
+     * @param couleurPremierJoueur la couleur du premier joueur
+     * @param couleurDeuxiemeJoueur la couleur du deuxieme joueur
+     * @param joueurUn le joueur numéro 1
+     * @param joueurDeux le joueur numéro 2
+     * @param nomJUn le nom du premier joueur
+     * @param nomJDeux le nom du deuxieme joueur
+     * @throws ExceptionHorsDuPlateau
+     * @throws ExceptionPositionDejaPose
+     * @throws ExceptionPasVoisin
+     * @throws ExceptionQuitter
+     * @throws ExceptionMauvaiseEntree
+     */
+    public void jouer(Couleur couleurPremierJoueur, Couleur couleurDeuxiemeJoueur,
+            Joueur joueurUn, Joueur joueurDeux, String nomJUn, String nomJDeux)
+            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
+
+        boolean victoire = false;
+        boolean complet = false;
+        String joueurActif = nomJUn;
+        plateau.init();
+        System.out.println(plateau.afficherPlateauVide());
+        this.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur);
+        System.out.println(plateau.afficherPlateau( ));
+
+        while (!victoire && !complet) {
+            if (this.victoire(plateau)) {
+                victoire = true;
+            } else if (plateau.estComplet()) {
+                complet = true;
+            } else {
+                try{
+                this.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
+                joueurActif = nomJDeux;
+                }
+                catch (ExceptionMauvaiseEntree e){
+                    e.getMessage();
+                    this.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
+                }
+
+            }
+
+            System.out.println(plateau.afficherPlateau());
+            if (this.victoire(plateau)) {
+                victoire = true;
+            } else if (plateau.estComplet()) {
+                complet = true;
+            } else {
+                try{
+                this.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur);
+                joueurActif = nomJUn;
+                }
+                catch (ExceptionMauvaiseEntree e){
+                    e.getMessage();
+                    this.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
+                }
+            }
+
+            System.out.println(plateau.afficherPlateau());
+        }
+        if (plateau.estComplet()) {
+            System.out.println("Partie nulle");
         }
     }
     

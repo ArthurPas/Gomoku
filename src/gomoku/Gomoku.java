@@ -53,7 +53,7 @@ public class Gomoku {
             case "1":
                 Joueur joueurUn = new JoueurHumain(nomJUn, couleurPremierJoueur);
                 Joueur joueurDeux = new JoueurHumain(nomJDeux, couleurDeuxiemeJoueur);
-                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, joueurUn, joueurDeux, plateau, partie, nomJUn, nomJDeux);
+                partie.jouer(couleurPremierJoueur, couleurDeuxiemeJoueur, joueurUn, joueurDeux, nomJUn, nomJDeux);
                 if(!plateau.estComplet()){
                     System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
                 }
@@ -61,7 +61,7 @@ public class Gomoku {
              case "2":
                 Joueur j1 = new JoueurHumain(nomJUn, couleurPremierJoueur);
                 Joueur j2 = new JoueurRobot(couleurDeuxiemeJoueur);
-                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, j1, j2, plateau, partie, nomJUn, nomJDeux);
+                partie.jouer(couleurPremierJoueur, couleurDeuxiemeJoueur, j1, j2, nomJUn, nomJDeux);
                 if(!plateau.estComplet()){
                     System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
                 }
@@ -69,7 +69,7 @@ public class Gomoku {
             case "3":
                 Joueur joueur = new JoueurRobot(couleurPremierJoueur);
                 Joueur joueurbis = new JoueurRobot(couleurDeuxiemeJoueur);
-                UtilsGomo.deroulementPartie(couleurPremierJoueur, couleurDeuxiemeJoueur, joueur, joueurbis, plateau, partie, nomJUn, nomJDeux);
+                partie.jouer(couleurPremierJoueur, couleurDeuxiemeJoueur, joueur, joueurbis, nomJUn, nomJDeux);
                 if(!plateau.estComplet()){
                     System.out.println("Bravo au joueur " + nomDernierJoueur + " qui a gagné cette partie !");
                 }

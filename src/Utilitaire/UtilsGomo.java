@@ -40,42 +40,10 @@ public class UtilsGomo {
         }
     }
 
-    public static char intVersHexa(int chiffre) {
+    public static char intVersChar(int chiffre) {
         return (char) (chiffre + CONSTANTEASCCIMAJ);
     }
 
-    /**
-     * Converti une entrée (String) vers une Position et vérifie qu'il correspond à une 
-     * position du plateau
-     *
-     * @param stringPos le string à convertir
-     * @return la position
-     */
-    public static Position stringVersPos(String stringPos, Plateau pla) throws ExceptionMauvaiseEntree{
-        char charLigne = stringPos.charAt(0);
-        int intLigne = lettreVersInt(charLigne);
-        if(intLigne >= pla.match.tailleY){
-            throw new ExceptionMauvaiseEntree("mauvaise entrée de ligne");
-        }
-        String stringCol = stringPos.substring(1);
-        try{
-            int intCol = Integer.parseInt(stringCol);
-            if(intCol>= pla.match.tailleX){
-                throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne (hors du plateau)");
-            }
-            Position pos = new Position(intLigne, intCol);
-            return pos;
-        } catch (NumberFormatException e) {
-            throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne (pas un nombre valide)");
-        }
-        
-        
-        /*
-        Position pos = new Position(UtilsGomo.lettreVersInt(stringPos.toUpperCase().charAt(0)),
-                Integer.parseInt(stringPos.substring(1)));
-       */
-        
-    }
 
     /**
      * Methode qui permet de lire la prochaine ligne saisi par l'utilisateur
@@ -151,73 +119,4 @@ public class UtilsGomo {
 
         return tailleY;
     }
-
-    /**
-     * Execute le déroulement de la partie
-     * @param couleurPremierJoueur la couleur du premier joueur
-     * @param couleurDeuxiemeJoueur la couleur du deuxieme joueur
-     * @param joueurUn le joueur numéro 1
-     * @param joueurDeux le joueur numéro 2
-     * @param plateau la plateau
-     * @param partie la partie 
-     * @param nomJUn le nom du premier joueur
-     * @param nomJDeux le nom du deuxieme joueur
-     * @throws ExceptionHorsDuPlateau
-     * @throws ExceptionPositionDejaPose
-     * @throws ExceptionPasVoisin
-     * @throws ExceptionQuitter
-     * @throws ExceptionMauvaiseEntree
-     */
-    public static void deroulementPartie(Couleur couleurPremierJoueur, Couleur couleurDeuxiemeJoueur,
-            Joueur joueurUn, Joueur joueurDeux, Plateau plateau, Partie partie, String nomJUn, String nomJDeux)
-            throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter, ExceptionMauvaiseEntree {
-
-        boolean victoire = false;
-        boolean complet = false;
-        String nomDernierJoueur = nomJUn;
-        plateau.init();
-        System.out.println(plateau.afficherPlateau());
-        partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur);
-        System.out.println(plateau.afficherPlateauActualise( ));
-
-        while (!victoire && !complet) {
-            if (partie.victoire(plateau)) {
-                victoire = true;
-            } else if (plateau.estComplet()) {
-                complet = true;
-            } else {
-                try{
-                partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
-                nomDernierJoueur = nomJDeux;
-                }
-                catch (ExceptionMauvaiseEntree e){
-                    e.getMessage();
-                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
-                }
-
-            }
-
-            System.out.println(plateau.afficherPlateauActualise());
-            if (partie.victoire(plateau)) {
-                victoire = true;
-            } else if (plateau.estComplet()) {
-                complet = true;
-            } else {
-                try{
-                partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur);
-                nomDernierJoueur = nomJUn;
-                }
-                catch (ExceptionMauvaiseEntree e){
-                    e.getMessage();
-                    partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur);
-                }
-            }
-
-            System.out.println(plateau.afficherPlateauActualise());
-        }
-        if (plateau.estComplet()) {
-            System.out.println("Partie nulle");
-        }
-    }
-
 }

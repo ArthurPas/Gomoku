@@ -9,5 +9,6 @@ import Grille.Plateau;
  * @author apascal002
  */
 public abstract interface Joueur {
-    Position choix (String s, Plateau p)throws ExceptionMauvaiseEntree;
+    Position choix (String s, Plateau pla)throws ExceptionMauvaiseEntree;
 }
+

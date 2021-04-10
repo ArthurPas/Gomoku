@@ -216,6 +216,6 @@ public class Position {
 
     @Override
     public String toString() {
-        return UtilsGomo.intVersHexa(this.ligne) + String.valueOf(this.colonne);
+        return UtilsGomo.intVersChar(this.ligne) + String.valueOf(this.colonne);
     }
 }

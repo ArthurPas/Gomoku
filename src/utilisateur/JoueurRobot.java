@@ -34,7 +34,7 @@ public class JoueurRobot implements Joueur{
      * @throws ExceptionMauvaiseEntree
      */
     @Override
-    public Position choix(String choixPosition, Plateau plateau) throws ExceptionMauvaiseEntree{
-        return UtilsGomo.stringVersPos(choixPosition, plateau);
+    public Position choix(String choixPosition, Plateau pla) throws ExceptionMauvaiseEntree{
+        return pla.stringVersPos(choixPosition);
     }
 }

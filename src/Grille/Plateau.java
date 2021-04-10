@@ -7,8 +7,10 @@ import utilisateur.Couleur;
 import utilisateur.Couleur;
 import Coordonnees.Position;
 import Coordonnees.Position;
+import Exception.ExceptionMauvaiseEntree;
 import Utilitaire.UtilsGomo;
 import Utilitaire.UtilsGomo;
+import static Utilitaire.UtilsGomo.lettreVersInt;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -63,17 +65,17 @@ public class Plateau {
     }
 
     /**
-     * Methode qui affiche le plateau à l'écran
+     * Methode qui affiche le plateau vide à l'écran
      * @return la chaine de caractére qui lui correspond
      */
-    public String afficherPlateau() {
+    public String afficherPlateauVide() {
         StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
         for (int lig = -1; lig < this.match.tailleX; lig++) {
 
             if (lig != -1 && lig < 10) {
-                builder.append(UtilsGomo.intVersHexa(lig));
+                builder.append(UtilsGomo.intVersChar(lig));
             } else if (lig > -1) {
-                builder.append(UtilsGomo.intVersHexa(lig));
+                builder.append(UtilsGomo.intVersChar(lig));
             }
             if (lig > -1) {
                 builder.append("|");
@@ -99,16 +101,16 @@ public class Plateau {
      * Methode qui affiche un plateau actualisé à l'écran
      * @return
      */
-    public String afficherPlateauActualise() {
+    public String afficherPlateau() {
         StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
 
         //boucle avec le nombre de ligne
         for (int lig = -1; lig < this.match.tailleX; lig++) {
 
             if (lig != -1 && lig < 10) {
-                builder.append(UtilsGomo.intVersHexa(lig));
+                builder.append(UtilsGomo.intVersChar(lig));
             } else if (lig > -1) {
-                builder.append(UtilsGomo.intVersHexa(lig));
+                builder.append(UtilsGomo.intVersChar(lig));
             }
             if (lig > -1) {
                 builder.append("|");
@@ -143,5 +145,30 @@ public class Plateau {
             }
         }
         return complet;
+    }
+    /**
+     * Converti une entrée (String) vers une Position et vérifie qu'elle 
+     * correspond à une position du plateau
+     *
+     * @param stringPos le string à convertir
+     * @return la position
+     */
+    public Position stringVersPos(String stringPos) throws ExceptionMauvaiseEntree{
+        char charLigne = stringPos.charAt(0);
+        int intLigne = lettreVersInt(charLigne);
+        if(intLigne >= this.match.tailleY){
+            throw new ExceptionMauvaiseEntree("mauvaise entrée de ligne");
+        }
+        String stringCol = stringPos.substring(1);
+        try{
+            int intCol = Integer.parseInt(stringCol);
+            if(intCol>= this.match.tailleX){
+                throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne (hors du plateau)");
+            }
+            Position pos = new Position(intLigne, intCol);
+            return pos;
+        } catch (NumberFormatException e) {
+            throw new ExceptionMauvaiseEntree("mauvaise entrée de colonne (pas un nombre valide)");
+        }       
     }
 }
