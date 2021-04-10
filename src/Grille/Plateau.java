@@ -47,9 +47,8 @@ public class Plateau {
     public void set(Position p, Couleur c) throws ExceptionPositionDejaPose {
         if (this.listePositions[p.ligne][p.colonne].positionJouable()) {
             this.listePositions[p.ligne][p.colonne].couleur = c;
-        }
-        else{
-            throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");                
+        } else {
+            throw new ExceptionPositionDejaPose("Vous avez déja posé ici ");
         }
     }
 
@@ -70,27 +69,25 @@ public class Plateau {
      */
     public String afficherPlateau(Match m) {
         StringBuilder builder = new StringBuilder("").append(System.lineSeparator());
-        for (int lig=-1; lig< m.tailleX ;lig++){
+        for (int lig = -1; lig < m.tailleX; lig++) {
 
-            if(lig!=-1 && lig<10){
+            if (lig != -1 && lig < 10) {
+                builder.append(UtilsGomo.intVersHexa(lig));
+            } else if (lig > -1) {
                 builder.append(UtilsGomo.intVersHexa(lig));
             }
-            else if(lig>-1){
-                builder.append(UtilsGomo.intVersHexa(lig));
-            }
-            if(lig>-1){
+            if (lig > -1) {
                 builder.append("|");
             }
-            for (int col=0; col< m.tailleY ;col++){
-                if(lig==-1 && col<10){
+            for (int col = 0; col < m.tailleY; col++) {
+                if (lig == -1 && col < 10) {
                     builder.append("  ");
-                    builder.append("0"+col);
-                }
-                else if(lig==-1){
+                    builder.append("0" + col);
+                } else if (lig == -1) {
                     builder.append("  ");
                     builder.append(col);
                 }
-                if(lig>-1){
+                if (lig > -1) {
                     builder.append(" ").append(" | ");
                 }
             }
@@ -133,5 +130,18 @@ public class Plateau {
         }
 
         return builder.toString();
+    }
+
+    public boolean estComplet(Match m) {
+        boolean complet = true;
+        for (int col = 0; col < m.tailleY; col++) {
+            for (int lig = 0; lig < m.tailleX; lig++) {
+                if(this.listePositions[lig][col].couleur == Couleur.RIEN){
+                    System.out.println(complet);
+                    complet = false;
+                }
+            }
+        }
+        return complet;
     }
 }

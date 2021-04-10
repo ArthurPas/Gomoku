@@ -28,7 +28,7 @@ public class UtilsGomo {
      * Methode qui permet de transformer une lettre en chiffre (0 pour a,1 pour
      * b etc ...)
      *
-     * @param lettre la lettre 
+     * @param lettre la lettre
      * @return l'entier correspondant
      */
     public static int hexaVersInt(char lettre) {
@@ -63,7 +63,7 @@ public class UtilsGomo {
      */
     public static String lireLigne() throws ExceptionQuitter {
         String ligne = in.nextLine().trim();
-        if ("/quit".equals(ligne)){
+        if ("/quit".equals(ligne)) {
             throw new ExceptionQuitter("Au revoir");
         }
         return ligne;
@@ -134,29 +134,38 @@ public class UtilsGomo {
             throws ExceptionHorsDuPlateau, ExceptionPositionDejaPose, ExceptionPasVoisin, ExceptionQuitter {
 
         boolean victoire = false;
+        boolean complet = false;
         String nomDernierJoueur = nomJUn;
         plateau.init(match);
         System.out.println(plateau.afficherPlateau(match));
         partie.effectuerPremierTour(nomJUn, joueurUn, couleurPremierJoueur, match);
         System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
 
-        while (!victoire) {
+        while (!victoire && !complet) {
             if (partie.victoire(match, plateau)) {
                 victoire = true;
+            } else if (plateau.estComplet(match)) {
+                complet = true;
             } else {
                 partie.effectuerTour(nomJDeux, joueurDeux, couleurDeuxiemeJoueur, match);
                 nomDernierJoueur = nomJDeux;
 
             }
+
             System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
             if (partie.victoire(match, plateau)) {
                 victoire = true;
+            } else if (plateau.estComplet(match)) {
+                complet = true;
             } else {
                 partie.effectuerTour(nomJUn, joueurUn, couleurPremierJoueur, match);
                 nomDernierJoueur = nomJUn;
             }
 
             System.out.println(plateau.afficherPlateauActualise(match, partie.listeCoup.get(partie.listeCoup.size() - 1)));
+        }
+        if (plateau.estComplet(match)) {
+            System.out.println("Partie nulle");
         }
     }
 
