@@ -39,7 +39,6 @@ public class Gomoku {
         System.out.println("Rentrer le nom du deuxieme Joueur");
         String nomJDeux = UtilsGomo.lireLigne();
         System.out.println("Merci et bienvenue " + nomJDeux);
-
         String nomDernierJoueur = nomJUn;
         System.out.println("Bienvenue dans GOMOKU ");
         System.out.println("Choisir parmi les possiblité : ");
