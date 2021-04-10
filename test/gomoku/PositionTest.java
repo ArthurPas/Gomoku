@@ -8,6 +8,7 @@ import Grille.Match;
 import Exception.ExceptionHorsDuPlateau;
 import Exception.ExceptionPasVoisin;
 import Exception.ExceptionPositionDejaPose;
+import Grille.Partie;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,5 +45,23 @@ public class PositionTest {
         assertFalse(listePosVoisine.contains(pasVoisine));
         
     }
-    
+    @Test
+    public void testPositionJouable() throws ExceptionPositionDejaPose{
+        Match m = new Match(40,40);
+        Plateau pla = new Plateau(m);
+        pla.init(m);
+        Partie p = new Partie(Couleur.BLANC, pla);
+        pla.set(new Position(0,0), Couleur.BLANC);
+        assertFalse(pla.listePositions[0][0].positionJouable());
+        assertTrue(pla.listePositions[0][1].positionJouable());
+    }
+    @Test 
+    public void testEstDansPlateau() throws ExceptionHorsDuPlateau{
+        Match m = new Match(40,40);
+        Plateau pla = new Plateau(m);
+        pla.init(m);
+        Partie p = new Partie(Couleur.BLANC, pla);
+        assertFalse(new Position(30,50).estDansPlateau(pla));
+        assertTrue(new Position(30,30).estDansPlateau(pla));
+    }
 }
